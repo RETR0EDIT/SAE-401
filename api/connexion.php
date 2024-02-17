@@ -16,16 +16,28 @@
         </form>
     </div>
     <?php
-    require_once 'db.php';
+    require_once 'config/database.php';
+    $database = new Database();
+    $conn = $database->getConnection();
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
     if (isset($_POST['email']) && isset($_POST['password'])) {
-        $email = $_POST['email'];
+        $mail = $_POST['email'];
         $password = $_POST['password'];
-        $sql = "SELECT * FROM `users` WHERE `email`='$email' AND `password`='$password'";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            echo "Connexion reussie";
+
+        $sql = "SELECT * FROM `client` WHERE `mail` = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $mail);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $client = $result->fetch_assoc();
+
+        if (password_verify($password, $client['password'])) {
+            echo "Connexion réussie";
         } else {
-            echo "Email ou mot de passe incorrect";
+            echo "Erreur de connexion";
         }
     }
     ?>

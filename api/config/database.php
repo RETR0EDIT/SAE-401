@@ -2,10 +2,9 @@
 class Database
 {
     private $host = "localhost";
-    private $db_name = "sae401.sql";
+    private $db_name = "sae401";
     private $username = "root";
     private $password = "";
-
     public $conn;
 
     public function getConnection()
@@ -20,4 +19,12 @@ class Database
 
         return $this->conn;
     }
+}
+
+$database = new Database();
+$conn = $database->getConnection();
+
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
