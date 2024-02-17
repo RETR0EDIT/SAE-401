@@ -57,6 +57,7 @@
             <input type="submit" value="Inscription">
         </form>
         <a href="connexion.php">connexion</a>
+
         <?php
         require_once 'config/database.php';
         $database = new Database();
@@ -81,6 +82,8 @@
                     echo "Veuillez entrer un prénom.";
                 } elseif (empty($mail)) {
                     echo "Veuillez entrer un email.";
+                } elseif (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+                    echo "Veuillez entrer un email valide.";
                 } elseif (empty($password)) {
                     echo "Veuillez entrer un mot de passe.";
                 } elseif (empty($numero_voie) || empty($rue) || empty($ville)) {
@@ -88,7 +91,6 @@
                 } else {
                     $adresse = $numero_voie . ' ' . $rue . ', ' . $ville;
 
-                    // Vérifier si l'email existe déjà
                     $sql = "SELECT * FROM `client` WHERE `mail` = ?";
                     $stmt = $conn->prepare($sql);
                     $stmt->bind_param("s", $mail);
@@ -98,7 +100,7 @@
                     if ($result->num_rows > 0) {
                         echo "Erreur d'inscription: cet email est déjà utilisé.";
                     } else {
-                        $password = password_hash($password, PASSWORD_DEFAULT); // Hasher le mot de passe
+                        $password = password_hash($password, PASSWORD_DEFAULT);
 
                         $sql = "INSERT INTO `client`(`nom`, `prenom`, `mail`, `password`, `adresse`, `role`) VALUES (?, ?, ?, ?, ?, 'user')";
                         $stmt = $conn->prepare($sql);
