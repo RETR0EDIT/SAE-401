@@ -15,13 +15,11 @@ $white-color: #fff;
 // header styles
 
 .header {
-  position: fixed;
   width: 100%;
-  top: 0;
-  left: 0;
   background-color: transparent;
   z-index: fixed;
   background-color: rgba(255, 255, 255, 0.56);
+  padding: 16px 0px 10px 0px;
 }
 
 .nav {
@@ -30,10 +28,7 @@ $white-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 16px 24px 10px 24px;
+  margin: 0px 24px 0px 24px;
 }
 
 .logo {
@@ -63,12 +58,6 @@ $white-color: #fff;
   font-weight: 500;
 }
 
-.nav__close {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-}
-
 .nav__close,
 .nav__toggle,
 .nav__actions {
@@ -76,6 +65,7 @@ $white-color: #fff;
   font-size: 1.25rem;
   cursor: pointer;
 }
+
 
 .nav__actions {
   column-gap: 10px;
@@ -138,12 +128,11 @@ $white-color: #fff;
     width: 70%;
     height: 100%;
     box-shadow: 2px 0 12px hsla(0, 0%, 0%, 0.2);
+    padding: 6rem 0 0 0;
     transition: right 0.4s;
+    z-index: 1000;
   }
 
-  .nav__menu {
-    padding: 6rem 0 0 0;
-  }
 
   .nav__item {
     padding: 0 3rem;
@@ -159,10 +148,21 @@ $white-color: #fff;
   }
 }
 
+.nav__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+
 .nav__list {
   display: flex;
   flex-direction: column;
   row-gap: 3rem;
+}
+
+.show-menu {
+  right: 0;
 }
 
 /* For large devices */
@@ -192,6 +192,7 @@ $white-color: #fff;
 
   .header {
     background-color: transparent;
+    padding: 0px;
   }
 
   .cart-icons {

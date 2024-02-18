@@ -1,0 +1,187 @@
+// ?VARIABLES
+$font-poppins: "Poppins", sans-serif;
+
+// !COLOR
+$black-color: #000;
+$red-color: #dc2323;
+$white-color: #fff;
+$orange-color: #D9AA52;
+$grey-color: #454545;
+
+
+#section-home {
+    margin-top: 40px;
+}
+
+.right-info-home h1 {
+    font-family: "eugusto_regularregular";
+    font-size: 48px;
+    color: $black-color;
+    line-height: 63px;
+    padding-left: 24px;
+    font-weight: 400;
+    max-width: 649px;
+}
+
+.savourez-txt {
+    color: $orange-color;
+}
+
+.chez-nous-txt {
+    color: $red-color;
+    position: relative;
+    display: inline-block;
+}
+
+.chez-nous-txt::after {
+    content: "";
+    width: 100%;
+    height: 6px;
+    background-image: url("../../../assets/ressources/icons/underline-mobile.png");
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-repeat: no-repeat;
+}
+
+.right-info-home p {
+    color: $grey-color;
+    font-family: $font-poppins;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0px 24px;
+    margin-top: 27px;
+    max-width: 570px;
+}
+
+.right-info-home a {
+    border-radius: 60px 0px 39px 60px;
+    background: $black-color;
+    color: $white-color;
+    font-family: $font-poppins;
+    font-size: 17px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 25px;
+    gap: 17px;
+    max-width: 325px;
+    margin: 42px auto 0px auto;
+}
+
+.left-img-home{
+    display: none;
+}
+
+@media (min-width: 331px) {
+    .right-info-home h1 {
+        font-size: 57px;
+    }
+
+    .right-info-home a {
+        padding: 20px 35px;
+    }
+}
+
+@media (min-width: 531px) {
+    .right-info-home a {
+        margin: 36px 0px 0px 24px;
+    }
+}
+
+@media (min-width: 900px) {
+    .right-info-home h1 {
+        font-size: 66px;
+        line-height: auto;
+        padding: 0px;
+        margin-top: 100px;
+    }
+
+    .right-info-home p {
+        padding: 0px;
+        margin-top: 29px;
+    }
+
+    .right-info-home a {
+        margin: 36px 0px 0px;
+    }
+
+    .right-info-home {
+        margin-left: 50px;
+    }
+
+    .chez-nous-txt::after {
+        background-image: url("../../../assets/ressources/icons/underline-tablette.png");
+    }
+}
+
+
+@media (min-width: 1100px) {
+ .left-img-home {
+    display: block;
+ }
+
+ .left-img-home img {
+    height: 500px;
+ }
+
+ #section-home{
+    display: flex;
+    justify-content: center;
+ }
+
+ .chez-nous-txt::after {
+    background-image: url("../../../assets/ressources/icons/underline-pc-port.png");
+}
+
+.right-info-home {
+    margin-left: 0px;
+}
+}
+
+@media (min-width: 1300px) {
+    .left-img-home img {
+        height: 553px;
+     }
+}
+
+@media (min-width: 1700px) {
+    .right-info-home  {
+    }
+
+    .right-info-home h1 {
+        font-size: 82px;
+        margin-top: 150px;
+        max-width: 810px;
+        line-height: 90px;
+    }
+
+    .right-info-home p {
+        margin-top: 0px;
+        font-size: 27px;
+    }
+
+    .right-info-home a {
+        font-size: 21px;
+        padding: 27px 45px;
+        margin: 61px 0px 0px 0px;
+        max-width: 396px;
+    }
+
+    .left-img-home img {
+        height: 850px;
+        margin-top: 50px;
+     }
+
+     #section-home{
+        display: flex;
+        // justify-content: space-between;
+        margin-top: 0px;
+     }
+
+     .chez-nous-txt::after {
+        height: 7px;
+        background-image: url("../../../assets/ressources/icons/underline-pc.png");
+    }
+}
