@@ -15,6 +15,9 @@ $grey-color: #7D7D7D;
 $dark-grey: #262626;
 $light-dark-grey: #292929;
 
+#popular{
+    margin-bottom: 68px;
+}
 .container-popular h2 {
     font-family: "eugusto_regularregular";
     color: $black-color;
@@ -167,6 +170,10 @@ $light-dark-grey: #292929;
     .container-popular h2 {
         text-align: left;
     }
+
+    #popular{
+        margin-bottom: 130px;
+    }
 }
 
 @media (min-width: 1272px) {
@@ -223,6 +230,10 @@ $light-dark-grey: #292929;
     }
     .price-cart{
         gap: 95px;
+    }
+
+    #popular{
+        margin-bottom: 100px;
     }
 }
 
@@ -288,5 +299,9 @@ $light-dark-grey: #292929;
         font-size: 21px;
         gap: 17px;
         padding: 27px 45px;
+    }
+
+    #popular{
+        margin-bottom: 341px;
     }
 }

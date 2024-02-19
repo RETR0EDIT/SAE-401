@@ -17,6 +17,7 @@ $grey-color: #454545;
 
 #section-home {
     margin-top: 40px;
+    margin-bottom: 107px;
 }
 
 .right-info-home h1 {
@@ -120,6 +121,11 @@ $grey-color: #454545;
     .chez-nous-txt::after {
         background-image: url("../../../assets/ressources/icons/underline-tablette.png");
     }
+
+    #section-home {
+        margin-top: 40px;
+        margin-bottom: 140px;
+    }
 }
 
 
@@ -150,6 +156,10 @@ $grey-color: #454545;
     .left-img-home img {
         height: 553px;
      }
+     #section-home {
+        margin-top: 40px;
+        margin-bottom: 177px;
+    }
 }
 
 @media (min-width: 1700px) {
@@ -186,5 +196,10 @@ $grey-color: #454545;
      .chez-nous-txt::after {
         height: 7px;
         background-image: url("../../../assets/ressources/icons/underline-pc.png");
+    }
+
+    #section-home {
+        margin-top: 40px;
+        margin-bottom: 107px;
     }
 }
