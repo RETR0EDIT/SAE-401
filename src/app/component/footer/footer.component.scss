@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$black-color: #000000;
+$font-poppins: "Poppins", sans-serif;
+$dark-grey-color: #262626;
+$blue-color: #1E2833;
+$white-color: hsla(0, 0%, 100%, 0.560);
+
+.logo img {
+    height: 53.5px;
+}
+
+.logo h3 {
+    color: $black-color;
+    font-family: $font-poppins;
+    font-size: 21.28px;
+    font-weight: 700;
+}
+
+footer {
+    background-color: $white-color;
+    padding: 32px 0px 34px 24px;
+}
+
+.container-haut {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-links {
+    max-width: 150px;
+    margin-top: 32px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.footer-links ul li a {
+    color: $dark-grey-color;
+    font-family: $font-poppins;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0px;
+}
+
+.footer-links ul {
+    list-style: none;
+    display: flex;
+    gap: 23px;
+    flex-direction: column;
+}
+
+.copyright {
+    color: $blue-color;
+    font-family: $font-poppins;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 29px;
+    letter-spacing: -0.27px;
+    max-width: 277px;
+    margin-top: 38px;
+}
+
+@media (min-width: 900px) {
+    .container-haut {
+        flex-direction: row;
+        align-items: center;
+    }
+    .footer-links ul {
+        display: block;
+    }
+
+    .footer-links {
+        margin: 0;
+        max-width: none;
+        margin-left: 60px;
+    }
+
+    .footer-links ul {
+       columns: 2;
+    }
+
+    footer {
+        background-color: $white-color;
+        padding: 148px 108px 71px 108px;
+    }
+
+    .copyright {
+        text-align: center;
+        font-size: 19px;
+        font-weight: 400;
+        line-height: 29px;
+        letter-spacing: -0.27px;
+        max-width: none;
+        margin-top: 38px;
+    }
+    
+}
+
+
+@media (min-width: 1300px) {
+    .logo img {
+        height: 58px;
+    }
+    
+    .logo h3 {
+        color: $black-color;
+        font-family: $font-poppins;
+        font-size: 23px;
+        font-weight: 700;
+    }
+    
+    .container-haut {
+        display: grid;
+        grid-template-rows: 60px;
+        grid-template-columns: 1fr 3fr 1fr;
+        padding: 0;
+    }
+    
+    .footer-links {
+        margin: auto 0;
+    }
+    
+    .logo {
+        display: flex;
+        align-items: center;
+    }
+    
+    .footer-links ul {
+        list-style: none;
+        display: flex;
+        gap: 40px;
+        justify-content: center;
+        columns: 0;
+        flex-direction: row;
+    }
+
+    footer {
+        padding: 100px 108px 55px 108px;
+    }
+   }
