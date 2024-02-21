@@ -1,0 +1,307 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$font-poppins: "Poppins", sans-serif;
+
+// !COLOR
+$black-color: #000;
+$red-color: #dc2323;
+$white-color: rgba(255, 255, 255, 0.781);
+$orange-color: #FFBE5B;
+$grey-color: #7D7D7D;
+$dark-grey: #262626;
+$light-dark-grey: #292929;
+
+#popular{
+    margin-bottom: 68px;
+}
+.container-popular h2 {
+    font-family: "eugusto_regularregular";
+    color: $black-color;
+    font-size: 34px;
+    font-weight: 400;
+    line-height: 37px;
+    text-align: center;
+}
+
+.container-popular {
+    // margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-div {
+    position: relative;
+}
+
+.all-card {
+    display: flex;
+    align-items: end;
+    height: 348px;
+}
+
+.container-card {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    margin-top: 39px;
+}
+
+.card-img {
+    position: absolute;
+    top: -87px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-img img {
+    height: 189px;
+    box-shadow: 0px 17.87px 27.79px -1.32px rgba(0, 0, 0, 0.31);
+    border-radius: 100%;
+}
+
+.card-bg {
+    border-radius: 55.58px 55.58px 29.78px 29.78px;
+    background: $white-color;
+    padding: 133px 38.38px 23px 38.38px;
+    z-index: 2;
+
+}
+
+.card-bg h3 {
+    color: $dark-grey;
+    font-family: $font-poppins;
+    font-size: 17.2px;
+    font-weight: 700;
+    line-height: 21px;
+    letter-spacing: 4%;
+    margin-bottom: 7.28px;
+}
+
+.card-bg p {
+    color: $grey-color;
+    font-family: $font-poppins;
+    font-size: 12.57px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: -2%;
+    max-width: 130px;
+}
+
+.price-cart {
+    display: flex;
+    justify-content: space-between;
+    // align-items: center;
+    gap: 82px;
+    margin-top: 2.3px;
+}
+
+.price-cart p {
+    color: $light-dark-grey;
+    font-family: $font-poppins;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 20px;
+    margin-top: 5.29px;
+}
+
+.cart {
+    background-color: $black-color;
+    padding: 9px;
+    border-radius: 5.29px 5.29px 15.22px 5.29px;
+}
+
+.cart img {
+    height: 20px;
+    width: 20px;
+    color: white;
+}
+
+.btn {
+    margin-top: 42px;
+}
+
+.btn a {
+    border-radius: 60px 0px 39px 60px;
+    background: $black-color;
+    color: white;
+    font-family: $font-poppins;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 20px 35px;
+}
+
+.quatre {
+    display: none;
+}
+
+@media (min-width: 848px) {
+    .container-popular {
+        display: block;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .container-card {
+        display: flex;
+        flex-direction: row;
+        gap: 34px;
+        margin-top: 39px;
+        justify-content: center;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn a {
+        margin-top: 20px;
+    }
+
+    .container-popular h2 {
+        text-align: left;
+    }
+
+    #popular{
+        margin-bottom: 130px;
+    }
+}
+
+@media (min-width: 1272px) {
+    .card-bg h3 {
+        font-size: 19.80px;
+    }
+
+    .card-bg p {
+        font-size: 14.6px;
+        max-width: 160px;
+        line-height: 30px;
+    }
+
+    .price-cart p {
+        font-size: 18px;
+    }
+
+    .cart img {
+        height: 25px;
+        width: 25px;
+    }
+
+    .cart {
+        padding: 11px;
+        border-radius: 6.15px 6.15px 17.68px 6.15px;
+    }
+
+    .card-bg {
+        padding: 155.25px 44.5px 26.6px 44.5px;
+    }
+
+    .card-img img {
+        height: 220px;
+    }
+
+    .card-img {
+        top: -91px;
+    }
+
+    .container-card {
+        gap: 39px;
+    }
+
+    .quatre {
+        display: flex;
+    }
+
+    .container-popular {
+        max-width: 1272px;
+    }
+
+    .all-card {
+        height: 407.34px;
+    }
+    .price-cart{
+        gap: 95px;
+    }
+
+    #popular{
+        margin-bottom: 100px;
+    }
+}
+
+@media (min-width: 1700px) {
+    .card-bg h3 {
+        font-size: 26px;
+    }
+
+    .card-bg p {
+        font-size: 19px;
+        max-width: 208px;
+    }
+
+    .price-cart p {
+        font-size: 22px;
+    }
+
+    .cart img {
+        height: 25px;
+    }
+
+    .cart {
+        padding: 13px;
+        border-radius: 8px 8px 23px 8px;
+    }
+
+    .card-bg h3{
+        margin-bottom: 11px;
+    }
+
+    .price-cart{
+        margin-top: 4px;
+        gap: 124px;
+    }
+
+    .card-bg{
+        padding: 202px 58px 34.66px 58px;
+        border-radius: 84px 84px 45px 45px;
+        margin-bottom: 13px;
+    }
+    .card-img img {
+        height: 287px;
+    }
+
+    .card-img {
+        top: -140px;
+    }
+
+    .all-card {
+        height: 527px;
+    }
+    
+    .container-card{
+        gap: 51px;
+    }
+
+    .container-popular {
+        max-width: 1630px;
+    }
+
+    .btn a {
+        margin-top: 20px;
+        font-size: 21px;
+        gap: 17px;
+        padding: 27px 45px;
+    }
+
+    #popular{
+        margin-bottom: 341px;
+    }
+}

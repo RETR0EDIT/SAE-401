@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Methods: POST, GET, PUT");
 class Database
 {
     private $host = "localhost";
@@ -12,19 +13,12 @@ class Database
         $this->conn = null;
 
         try {
-            $this->conn = new mysqli($this->host, $this->username, $this->password, $this->db_name);
-        } catch (Exception $exception) {
-            echo "Connection error: " . $exception->getMessage();
+            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $exception) {
+            throw new Exception("Connection error: " . $exception->getMessage());
         }
 
         return $this->conn;
     }
-}
-
-$database = new Database();
-$conn = $database->getConnection();
-
-// Vérifier la connexion
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
 }

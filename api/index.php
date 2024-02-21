@@ -1,15 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 
-<body>
-    <a href="connexion.php">co</a>
-    <a href="inscription.php">ins</a>
-</body>
+use YourNamespace\Controller\BoxeController;
+use YourNamespace\Controller\ClientController;
+// etc. pour vos autres contrôleurs
 
-</html>
+$method = $_SERVER['REQUEST_METHOD'];
+$url = $_SERVER['REQUEST_URI'];
+
+$boxeController = new BoxeController();
+$clientController = new ClientController();
+// etc. pour vos autres contrôleurs
+
+switch ($url) {
+    case '/boxes':
+        if ($method == 'GET') {
+            $boxeController->getAll();
+        } elseif ($method == 'POST') {
+            $boxeController->create();
+        }
+        break;
+    case '/clients':
+        if ($method == 'GET') {
+            $clientController->getAll();
+        } elseif ($method == 'POST') {
+            $clientController->create();
+        }
+        break;
+        // etc. pour vos autres routes
+    default:
+        http_response_code(404);
+        echo json_encode(['error' => 'Route not found']);
+}

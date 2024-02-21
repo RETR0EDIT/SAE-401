@@ -1,0 +1,53 @@
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .form-container {
+    width: 300px;
+    margin: 0 auto;
+    padding-top: 50px;
+  }
+
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .form-container input[type="text"],
+  .form-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .form-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  .form-container input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+</style>
+
+
+
+<div class="form-container">
+  <h2>Inscription</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="nom" placeholder="Nom" required>
+    <input type="text" formControlName="prenom" placeholder="Prénom" required>
+    <input type="text" formControlName="email" placeholder="Email" required>
+    <input type="password" formControlName="password" placeholder="Mot de passe" required>
+    <input type="text" formControlName="numero_voie" placeholder="Numéro de voie" required>
+    <input type="text" formControlName="rue" placeholder="Rue" required>
+    <input type="text" formControlName="ville" placeholder="Ville" required>
+    <input type="submit" value="Inscription">
+  </form>
+</div>
