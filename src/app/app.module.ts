@@ -10,6 +10,8 @@ import { HomePopularComponent } from './component/home-popular/home-popular.comp
 import { HomeAboutComponent } from './component/home-about/home-about.component';
 import { PanierComponent } from './component/panier/panier.component';
 import { ProductPageComponent } from './component/product-page/product-page.component';
+import { SigninComponent } from './component/signin/signin.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ProductPageComponent } from './component/product-page/product-page.comp
     HomePopularComponent,
     HomeAboutComponent,
     PanierComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    SigninComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

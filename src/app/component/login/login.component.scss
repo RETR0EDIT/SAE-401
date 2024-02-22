@@ -1,0 +1,170 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// ?VARIABLES
+$font-poppins: "Poppins", sans-serif;
+
+// !COLOR
+$black-color: #000;
+$red-color: #dc2323;
+$white-color: #fff;
+$orange-color: #D9AA52;
+$grey-color: #454545;
+
+.form-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.form-div input {
+    border: none;
+    padding: 9px;
+    border-radius: 24px 0px 24px 24px;
+    min-width: 230px;
+    font-family: $font-poppins;
+    color: $grey-color;
+}
+
+.form-div input:focus {
+    outline: none;
+}
+
+.div-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-div label {
+    font-family: $font-poppins;
+    color: $grey-color;
+    font-size: 16px;
+    letter-spacing: 2%;
+    font-weight: 400;
+}
+
+
+.form-container {
+    display: inline-block;
+}
+
+.submit-btn {
+    text-align: center;
+    margin-top: 24px;
+}
+
+.submit-btn input {
+    border: none;
+    color: $white-color;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 2%;
+    padding: 14px 75px;
+    background-color: $black-color;
+    border-radius: 24px 0px 24px 24px;
+    cursor: pointer;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 60px 0 0 0;
+}
+
+.title-div {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.title-div h2 {
+    font-size: 40px;
+    font-family: "eugusto_regularregular";
+    font-weight: 400;
+}
+
+.title-div p {
+    font-family: $font-poppins;
+    font-size: 16px;
+    color: $grey-color;
+    letter-spacing: 2%;
+    font-weight: 400;
+    margin-top: 16px;
+}
+
+.logo-div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 24px;
+}
+
+.logo-div img {
+    height: 58px;
+}
+
+
+
+.logo-div h3 {
+    font-size: 23px;
+    font-weight: 700;
+    font-family: $font-poppins;
+}
+
+.img-form {
+    display: none;
+}
+
+@media screen and (min-width: 439px) {
+    .form-div input {
+        min-width: 350px;
+    }
+}
+@media screen and (min-width: 600px) {
+    .form-div {
+        display: flex;
+        gap: 16px;
+        flex-direction: column;
+    }
+    .form-div input{
+        min-width: 436px;
+    }
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 60px 0 0 0;
+    }
+}
+
+
+@media screen and (min-width: 1300px){
+    .img-form {
+        display: block;
+    }
+
+    .container {.img-form img {
+        height: 750px;
+    }
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 60px 10% 0 10%;
+        gap: 30px;
+    }
+    .img-form img {
+        height: 650px;
+    }
+} 
+
+@media screen and (min-width: 1700px){
+    .img-form img {
+        height: 750px;
+    }
+}

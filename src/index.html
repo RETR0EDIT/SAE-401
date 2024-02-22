@@ -28,7 +28,7 @@
 
 </html>
 
-<script>
+<!-- <script>
   window.addEventListener('load', checkHeight);
   window.addEventListener('resize', checkHeight);
 
@@ -36,8 +36,34 @@
     const shapes = document.querySelectorAll('.shapecontainer .home__shape');
 
     shapes.forEach((shape, index) => {
-      const minDisplayHeight = (index + 1) * 900; // Correction here
+      const minDisplayHeight = (index + 1) * 00; // Correction here
       shape.style.display = (document.body.offsetHeight > minDisplayHeight) ? 'block' : 'none';
     });
   }
-</script>
+</script> -->
+
+<script> window.addEventListener('load', checkHeight);
+  window.addEventListener('resize', checkHeight);
+
+  function checkHeight() {
+    const shapes = [
+      { selector: '.home__shape-1', minHeight: 0 },
+      { selector: '.home__shape-2', minHeight: 1100 },
+      { selector: '.home__shape-3', minHeight: 2000 },
+      { selector: '.home__shape-4', minHeight: 3000 },
+      { selector: '.home__shape-5', minHeight: 2800 }
+    ];
+
+    const bodyHeight = document.body.offsetHeight;
+
+    shapes.forEach(shape => {
+      const shapeElement = document.querySelector(shape.selector);
+      if (shapeElement) {
+        if (bodyHeight > shape.minHeight) {
+          shapeElement.style.display = 'block';
+        } else {
+          shapeElement.style.display = 'none';
+        }
+      }
+    });
+  }</script>
