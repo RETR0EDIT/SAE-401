@@ -15,21 +15,21 @@
             <label for="nom">Nom</label>
             <input type="text" formControlName="nom" required>
             <div *ngIf="nom?.invalid && (nom?.dirty || nom?.touched)" class="error">
-              Le champ nom est requis.
+              Veuillez entrer un nom.
             </div>
           </div>
           <div class="div-form email">
             <label for="email">Email</label>
             <input type="text" formControlName="email" required>
             <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
-              Le champ email est requis.
+              Veuillez entrer un email.
             </div>
           </div>
           <div class="div-form rue">
             <label for="rue">Rue</label>
             <input type="text" formControlName="rue" required>
             <div *ngIf="rue?.invalid && (rue?.dirty || rue?.touched)" class="error">
-              Le champ rue est requis.
+              Veuillez entrer une rue.
             </div>
           </div>
           <div class="div-form password">
@@ -45,7 +45,7 @@
             <label for="prenom">Prénom</label>
             <input type="text" formControlName="prenom" required>
             <div *ngIf="prenom?.invalid && (prenom?.dirty || prenom?.touched)" class="error">
-              Le champ prénom est requis.
+              Veuillez entrer une prénom.
             </div>
 
           </div>
@@ -53,14 +53,14 @@
             <label for="numero-voie">Numéro de voie</label>
             <input type="text" formControlName="numero_voie" required>
             <div *ngIf="numero_voie?.invalid && (numero_voie?.dirty || numero_voie?.touched)" class="error">
-              Le champ numéro de voie est requis.
+              Veuillez entrer un numéro de voie.
             </div>
           </div>
           <div class="div-form ville">
             <label for="ville">Ville</label>
             <input type="text" formControlName="ville" required>
             <div *ngIf="ville?.invalid && (ville?.dirty || ville?.touched)" class="error">
-              Le champ ville est requis.
+              Veuillez entrer une ville.
             </div>
           </div>
           <div class="div-form confirm-password">
@@ -69,7 +69,7 @@
             <div
               *ngIf="form.get('verif_password')?.invalid && (form.get('verif_password')?.dirty || form.get('verif_password')?.touched)"
               class="error">
-              Le champ de vérification du mot de passe est requis.
+              Veuillez confirmer le mot de passe.
             </div>
           </div>
         </div>
@@ -77,9 +77,10 @@
         <div *ngIf="form.errors?.['mismatch']" class="error">
           Les mots de passe ne correspondent pas.
         </div>
-        <div class="submit-btn">
-          <input class="submit" type="submit" value="S'inscrire">
-        </div>
+    
+      </div>
+      <div class="submit-btn">
+        <input class="submit" type="submit" value="S'inscrire">
       </div>
     </form>
 
