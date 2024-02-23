@@ -5,7 +5,13 @@ import { Router } from '@angular/router';
 
 interface ApiResponse {
   success?: string;
-  error?: string;
+  id_client?: string;
+  nom?: string;
+  prenom?: string;
+  adresse?: string;
+  email?: string;
+  password?: string;
+  role?: string;
 }
 
 @Component({
@@ -26,7 +32,7 @@ export class LoginComponent {
     console.log('Submitting form...');
     if (this.form && this.form.valid) {
       console.log('Form is valid. Form data:', this.formData);
-      this.http.post<ApiResponse>('http://localhost/sae-401/api/login.php', this.formData).subscribe(
+      this.http.post<ApiResponse>('http://localhost/sae-401/api/login.php', this.formData, { withCredentials: true }).subscribe(
         response => {
           console.log('Received response from server:', response);
           if (response) {
@@ -34,9 +40,9 @@ export class LoginComponent {
               console.log('Login successful. Redirecting...');
               alert(response.success);
               this.router.navigate(['/']); // Redirigez l'utilisateur vers la page d'accueil
-            } else if (response.error) {
-              console.log('Login failed with error:', response.error);
-              alert(response.error);
+            } else {
+              console.log('Login failed.');
+              alert('La connexion a échoué.');
             }
           }
         },
