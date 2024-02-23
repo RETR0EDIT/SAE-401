@@ -7,11 +7,11 @@ import { SigninComponent } from './component/signin/signin.component';
 import { LoginComponent } from './component/login/login.component';
 
 const routes: Routes = [
-  { path: "home", component: HomeComponent},
+  { path: "", component: HomeComponent},
   { path: "panier", component: PanierComponent},
   { path: "product", component: ProductPageComponent},
   { path: "signin", component: SigninComponent},
-  { path: "", component: LoginComponent},
+  { path: "login", component: LoginComponent},
 ];
 
 @NgModule({
