@@ -22,7 +22,9 @@ $pink2-color: #d9b5c4;
 body{
     background: rgba(212, 208, 203, 0.87);
 }
-
+html{
+    scroll-behavior: smooth;
+}
 ul {
     list-style: none;
 }

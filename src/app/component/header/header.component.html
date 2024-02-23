@@ -8,13 +8,13 @@
     <div class="nav__menu" id="nav-menu" [ngClass]="{'show-menu': isMenuOpen}">
       <ul class="nav__list">
         <li class="nav__item">
-          <a routerLink="/" class="nav__link" (click)="closeMenu()">Accueil</a>
+          <a routerLink="" fragment="section-home" class="nav__link" (click)="closeMenu()">Accueil</a>
         </li>
         <li class="nav__item">
-          <a routerLink="/item2" class="nav__link" (click)="closeMenu()">Nos boxes</a>
+          <a routerLink="/product" class="nav__link" (click)="closeMenu()">Nos boxes</a>
         </li>
         <li class="nav__item">
-          <a routerLink="/item3" class="nav__link" (click)="closeMenu()">À propos</a>
+          <a  href="#about" class="nav__link" (click)="closeMenu()">À propos</a>
         </li>
         <a routerLink="/login" id="login-btn" class="nav-connecter2"><i class="ri-login-box-line"></i> Se connecter</a>
       </ul>
@@ -28,8 +28,9 @@
     <div class="nav__actions">
       <div class="cart-icons-div">
         <div class="cart-div">
-          <img class="cart-icons" src="../../../assets/ressources/icons/Shopping_Cart.svg" alt="" />
-
+          <a routerLink="/panier">
+            <img class="cart-icons" src="../../../assets/ressources/icons/Shopping_Cart.svg" alt="" />
+          </a>
           <!-- REMPLACER 1 PAR LE NOMBRE D'ARTICLES DANS LE PANIER -->
           <span class="right-cart-number">1</span>
           <div></div>
