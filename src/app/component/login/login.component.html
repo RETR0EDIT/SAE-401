@@ -1,6 +1,6 @@
 <section id="signin">
   <div class="container">
-    <form (submit)="onSubmit($event)" class="form-container">
+    <form #form="ngForm" (ngSubmit)="onSubmit()" class="form-container">
       <div class="logo-div">
         <img src="../../../assets/ressources/logo/logo.svg" alt="">
         <h3>LOGO</h3>
@@ -13,15 +13,16 @@
 
         <div class="div-form ville">
           <label for="ville">Email</label>
-          <input type="text" name="email" required>
+          <input type="email" name="email" [(ngModel)]="formData.email" required>
         </div>
         <div class="div-form confirm-password">
           <label for="confirm-password">Mot de passe</label>
-          <input type="password" name="password" required>
+          <input type="password" name="password" [(ngModel)]="formData.password" required>
         </div>
 
       </div>
       <div class="submit-btn">
+        <a ng-reflect-router-link="/signin" href="/signin" class="submit">Inscription</a>
         <input class="submit" type="submit" value="Connexion">
       </div>
 

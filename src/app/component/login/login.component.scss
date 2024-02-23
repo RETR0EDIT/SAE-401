@@ -54,12 +54,14 @@ $grey-color: #454545;
   display: inline-block;
 }
 
-.submit-btn {
+.submit-btn,
+.submit-btn a {
   text-align: center;
   margin-top: 24px;
 }
 
-.submit-btn input {
+.submit-btn input,
+.submit-btn a {
   border: none;
   color: $white-color;
   font-size: 17px;

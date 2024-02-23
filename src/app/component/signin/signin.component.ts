@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
+
+
 function passwordMatchValidator(control: AbstractControl) {
   const password = control.get('password');
   const verif_password = control.get('verif_password');
@@ -16,11 +18,12 @@ function passwordMatchValidator(control: AbstractControl) {
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
+
 })
 export class SigninComponent {
   form: FormGroup;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, ) {
     this.form = new FormGroup({
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
@@ -48,6 +51,7 @@ export class SigninComponent {
         response => {
           console.log('Inscription réussie !');
           // Rediriger l'utilisateur
+          window.location.href = 'http://localhost:4200';
         },
         error => {
           console.error('Une erreur est survenue lors de l\'inscription.', error);

@@ -31,6 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             http_response_code(201);
+            echo json_encode(["message" => "Utilisateur créé avec succès."]);
+            session_start();
+            $_SESSION['email'] = $data->email;
         } else {
             http_response_code(503);
             echo json_encode(["message" => "Impossible de créer l'utilisateur."]);
