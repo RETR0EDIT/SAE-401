@@ -24,7 +24,7 @@ export class LoginComponent {
       this.http.post('http://localhost/sae-401/api/login.php', { email, password }).subscribe(
         response => {
           console.log(response);
-          //alert('Connexion réussie !');
+          alert('Connexion réussie !');
           // Redirigez l'utilisateur vers une autre page
           //window.location.href = '/home';
         },

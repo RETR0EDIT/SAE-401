@@ -1,53 +1,90 @@
-<style>
-  body {
-    font-family: Arial, sans-serif;
-  }
+<section id="signin">
+  <div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+      <div class="logo-div">
+        <img src="../../../assets/ressources/logo/logo.svg" alt="">
+        <h3>LOGO</h3>
+      </div>
+      <div class="title-div">
+        <h2>S'inscrire</h2>
+        <p>Crée votre compte</p>
+      </div>
+      <div class="form-div">
+        <div class="left">
+          <div class="div-form nom">
+            <label for="nom">Nom</label>
+            <input type="text" formControlName="nom" required>
+            <div *ngIf="nom?.invalid && (nom?.dirty || nom?.touched)" class="error">
+              Le champ nom est requis.
+            </div>
+          </div>
+          <div class="div-form email">
+            <label for="email">Email</label>
+            <input type="text" formControlName="email" required>
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
+              Le champ email est requis.
+            </div>
+          </div>
+          <div class="div-form rue">
+            <label for="rue">Rue</label>
+            <input type="text" formControlName="rue" required>
+            <div *ngIf="rue?.invalid && (rue?.dirty || rue?.touched)" class="error">
+              Le champ rue est requis.
+            </div>
+          </div>
+          <div class="div-form password">
+            <label for="password">Mot de passe</label>
+            <input type="password" formControlName="password" required>
+            <div *ngIf="form.errors?.['passwordsNotMatching']" class="error">
+              Les mots de passe ne correspondent pas.
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="div-form prenom">
+            <label for="prenom">Prénom</label>
+            <input type="text" formControlName="prenom" required>
+            <div *ngIf="prenom?.invalid && (prenom?.dirty || prenom?.touched)" class="error">
+              Le champ prénom est requis.
+            </div>
 
-  .form-container {
-    width: 300px;
-    margin: 0 auto;
-    padding-top: 50px;
-  }
+          </div>
+          <div class="div-form numero-voie">
+            <label for="numero-voie">Numéro de voie</label>
+            <input type="text" formControlName="numero_voie" required>
+            <div *ngIf="numero_voie?.invalid && (numero_voie?.dirty || numero_voie?.touched)" class="error">
+              Le champ numéro de voie est requis.
+            </div>
+          </div>
+          <div class="div-form ville">
+            <label for="ville">Ville</label>
+            <input type="text" formControlName="ville" required>
+            <div *ngIf="ville?.invalid && (ville?.dirty || ville?.touched)" class="error">
+              Le champ ville est requis.
+            </div>
+          </div>
+          <div class="div-form confirm-password">
+            <label for="confirm-password">Confirm password</label>
+            <input type="password" formControlName="verif_password" required>
+            <div
+              *ngIf="form.get('verif_password')?.invalid && (form.get('verif_password')?.dirty || form.get('verif_password')?.touched)"
+              class="error">
+              Le champ de vérification du mot de passe est requis.
+            </div>
+          </div>
+        </div>
 
-  .form-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+        <div *ngIf="form.errors?.['mismatch']" class="error">
+          Les mots de passe ne correspondent pas.
+        </div>
+        <div class="submit-btn">
+          <input class="submit" type="submit" value="S'inscrire">
+        </div>
+      </div>
+    </form>
 
-  .form-container input[type="text"],
-  .form-container input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-
-  .form-container input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-
-  .form-container input[type="submit"]:hover {
-    background-color: #45a049;
-  }
-
-</style>
-
-
-
-<div class="form-container">
-  <h2>Inscription</h2>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="nom" placeholder="Nom" required>
-    <input type="text" formControlName="prenom" placeholder="Prénom" required>
-    <input type="text" formControlName="email" placeholder="Email" required>
-    <input type="password" formControlName="password" placeholder="Mot de passe" required>
-    <input type="text" formControlName="numero_voie" placeholder="Numéro de voie" required>
-    <input type="text" formControlName="rue" placeholder="Rue" required>
-    <input type="text" formControlName="ville" placeholder="Ville" required>
-    <input type="submit" value="Inscription">
-  </form>
-</div>
+    <div class="img-form">
+      <img src="../../../assets/ressources/images/img_sushi/sushi-circle-sign.png" alt="signin">
+    </div>
+  </div>
+</section>
