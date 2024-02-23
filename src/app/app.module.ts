@@ -12,7 +12,9 @@ import { LoginComponent } from './component/login/login.component';
 import { SigninComponent } from './component/signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
-
+import { BoxDetailsComponent } from './component/box-details/box-details.component';
+import { PanierComponent } from './component/panier/panier.component';
+import { ProductPageComponent } from './component/product-page/product-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,10 @@ import { provideHttpClient } from '@angular/common/http';
     HomePopularComponent,
     HomeAboutComponent,
     LoginComponent,
-    SigninComponent
+    SigninComponent,
+    BoxDetailsComponent,
+    PanierComponent,
+    ProductPageComponent
   ],
   imports: [
     BrowserModule,

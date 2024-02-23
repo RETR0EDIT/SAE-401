@@ -1,0 +1,38 @@
+<section id="product-page">
+  <div class="container">
+    <div class="header-info">
+      <div class="txt">
+        <h1>Une envie subite ? Régalez-vous de suite.</h1>
+        <p>Découvrez nos délices sushi frais, prêts à satisfaire vos envies instantanées. Des saveurs exquises
+          vous attendent pour une expérience culinaire unique.</p>
+      </div>
+
+      <div class="img-header">
+        <img src="../../../assets/ressources/images/chef1.jpg" alt="">
+      </div>
+    </div>
+    <div class="txt-info">
+      <h2>Nos Plats Signature de Sushis</h2>
+    </div>
+
+    <div class="card-div">
+      <div class="item" *ngFor="let box of boxes">
+        <article class="card">
+          <div class="img-card">
+            <!--<img [src]="box.image" alt="">-->
+          </div>
+          <div class="txt-container">
+            <h3>{{ box.nom }}</h3>
+            <p>{{ box.composition }}</p>
+            <div class="price-cart">
+              <p>{{ box.prix }}€</p>
+              <div class="cart">
+                <img src="../../../assets/ressources/icons/Shopping_Cart-card.svg" alt="">
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

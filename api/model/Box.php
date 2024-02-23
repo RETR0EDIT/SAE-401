@@ -2,7 +2,6 @@
 class Box
 {
     private $conn;
-    private $table_name = "boxes";
 
     public function __construct($db)
     {
@@ -11,11 +10,9 @@ class Box
 
     public function getAllBoxes()
     {
-        $query = "SELECT * FROM " . $this->table_name;
-        $stmt = $this->conn->prepare($query);
+        $stmt = $this->conn->prepare("SELECT nom, prix, image, composition FROM boxes");
         $stmt->execute();
-        return $stmt->get_result();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
-
-    // ajouter des methode pour mettre à jour et suppr des boxes
 }

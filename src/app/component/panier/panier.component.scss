@@ -1,0 +1,399 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// ?VARIABLES
+$font-poppins: "Poppins", sans-serif;
+
+// !COLOR
+$black-color: #000;
+$white-color: #fff;
+$white-soft-color: hsla(0, 0%, 100%, 0.65);
+$white-ultra-soft-color: hsla(0, 0%, 100%, 0.50);
+$light-grey-color: #B5B5B5;
+$soft-grey-color: #686868;
+$ultra-soft-grey-color: rgba(217, 217, 217, 0.46);
+$red-color: hsla(0, 73%, 50%, 0.71);
+
+#panier{
+    margin-top: 35px;
+}
+.btn {
+    display: inline-block;
+}
+
+.btn a {
+    color: $white-color;
+    font-family: $font-poppins;
+    font-size: 14.5px;
+    font-weight: 500;
+    letter-spacing: -8%;
+    background-color: $black-color;
+    display: flex;
+    border-radius: 30px;
+    align-items: center;
+    padding: 7px 13px 7px 6px;
+    gap: 2px;
+    margin-bottom: 23px;
+}
+
+.item-panier-div h3 {
+    color: $black-color;
+    font-family: $font-poppins;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    margin-bottom: 18px;
+}
+
+.item-panier-div {
+    border-radius: 32px;
+    background: $white-ultra-soft-color;
+    padding: 24px 8px 15px 8px;
+    margin-top: 21px;
+}
+
+.item-panier {
+    background-color: $white-soft-color;
+    border: 1px solid $light-grey-color;
+    border-radius: 16px;
+    display: flex;
+    padding: 7px 13px;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 400px;
+}
+
+.er-part {
+    display: flex;
+    align-items: center;
+}
+
+.info-item-panier h6 {
+    color: $black-color;
+    font-family: $font-poppins;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -5%;
+}
+
+.info-item-panier h5 {
+    color: $black-color;
+    font-family: $font-poppins;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -5%;
+}
+
+.info-item-panier p {
+    color: $soft-grey-color;
+    font-family: $font-poppins;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -8%;
+}
+
+.saveur {
+    display: none;
+}
+
+.saveur-tel {
+    max-width: 152px;
+}
+
+.img-item-panier {
+    padding-right: 16px;
+}
+
+.img-item-panier img {
+    height: 69px;
+}
+
+.nombre-box-choix h4 {
+    font-family: $font-poppins;
+    font-size: 14px;
+    color: $white-color;
+    background-color: $black-color;
+    border-radius: 50px;
+    padding: 5.5px 8px;
+    text-align: center;
+    margin: 6px 0px;
+}
+
+.nombre-box-choix button svg {
+    color: $black-color;
+    width: 16px;
+}
+
+.nombre-box-choix button {
+    background-color: $ultra-soft-grey-color;
+    padding: 6px 8px;
+    border-radius: 50px;
+    border: none;
+    text-align: center;
+}
+
+.resume-panier {
+    background-color: hsla(0, 0%, 100%, 0.58);
+    border-radius: 40px 40px 30px 30px;
+    padding: 17px 0px 13px 23px;
+    margin: 25px auto 0px auto;
+    max-width: 400px;
+}
+
+.resume-panier h3 {
+    font-family: $font-poppins;
+    color: $black-color;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 7px;
+}
+
+.resume-panier p {
+    font-family: $font-poppins;
+    color: $black-color;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 19px;
+}
+
+.nombre-box-choix {
+    margin-left: auto;
+}
+.resume-panier button {
+    color: $white-color;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -5%;
+    background-color: $black-color;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: none;
+}
+
+.price-indication {
+    display: none;
+}
+
+.composition {
+    display: none;
+}
+
+.select-supr-div {
+    display: none;
+}
+
+.nom-prix {
+    display: flex;
+    flex-direction: column;
+}
+
+button{
+    cursor: pointer;
+}
+.item-panier{
+    margin: 0px auto 13px auto;
+}
+
+@media (min-width: 900px) {
+    .item-panier{
+        margin-bottom: 0px;
+    }
+    .saveur-tel {
+        display: none;
+    }
+
+    .saveur {
+        display: none;
+    }
+
+    .item-panier-div {
+        background-color: transparent;
+        max-width: 926px;
+        padding: 0px;
+    }
+
+    .panier {
+        background-color: $white-ultra-soft-color;
+        padding: 8px 0px 35px 21px;
+        font-size: 24px;
+    }
+
+    .panier-item-container {
+        background-color: $white-ultra-soft-color;
+        padding: 0px 29px;
+    }
+
+    .price-indication {
+        display: block;
+    }
+
+    .price-indication p {
+        text-align: right;
+        font-size: 18px;
+        font-family: $font-poppins;
+        font-weight: 400;
+    }
+
+    hr {
+        border: none;
+        height: 2px;
+        background-color: $soft-grey-color;
+        letter-spacing: -5%;
+    }
+
+    .item-panier {
+        background-color: transparent;
+        border: none;
+        border-radius: 16px;
+        display: flex;
+        padding: 25px 0;
+        align-items: center;
+        justify-content: space-between;
+        max-width: none;
+    }
+
+    .nombre-box-choix {
+        display: none;
+    }
+
+    .img-item-panier img {
+        height: 155px;
+    }
+
+    .info-item-panier h6 {
+        color: $black-color;
+        font-family: $font-poppins;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -5%;
+    }
+
+    .info-item-panier h5 {
+        font-family: 20px;
+    }
+
+    .info-item-panier p {
+        font-size: 18px;
+        max-width: none;
+    }
+
+    .info-item-panier {
+        width: 100%;
+    }
+
+    .Composition {
+        display: block;
+    }
+
+    .select-supr-div {
+        display: flex;
+        align-items: center;
+    }
+
+    .select-choix {
+        display: flex;
+        align-items: center;
+        background-color: $white-soft-color;
+        border-radius: 10px;
+        padding: 2px 6px 2px 9px;
+        width: 89px;
+    }
+
+    .select-choix label {
+        font-family: $font-poppins;
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .select-choix select {
+        font-family: $font-poppins;
+        background-color: transparent;
+        border: none;
+        font-size: 18px;
+        font-weight: 400;
+        margin-left: 4px;
+    }
+
+    .select-choix option {
+        font-family: $font-poppins;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .select-choix select:focus {
+        outline: none;
+    }
+
+    .select-supr-div button {
+        background-color: transparent;
+        border: none;
+        font-size: 13px;
+        font-weight: 400;
+        color: $red-color;
+    }
+
+    .saveur,
+    .composition {
+        display: flex;
+    }
+
+    .composition p:nth-child(1),
+    .saveur p:nth-child(1),
+    .container-select-choix {
+        min-width: 130px;
+    }
+
+    .select-supr-div,
+    .saveur,
+    .composition {
+        gap: 35px;
+    }
+
+
+    .nom-prix {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .er-part {
+        flex-grow: 1;
+    }
+
+    .resume-panier {
+        border-radius: 0px;
+    }
+
+    #panier {
+        display: flex;
+        justify-content: center;
+    }
+
+}
+
+@media (min-width: 1300px) {
+    .container-window {
+        display: flex;
+        justify-content: center;
+        margin-top: 45px;
+    }
+    .resume-panier {
+        border-radius: 0px;
+        align-self: flex-start;
+        margin-top: 0px;
+        padding: 17px 23px 13px 23px;
+    }
+    .item-panier-div{
+        padding: 0px 8px 15px 8px;
+        margin-top: 0px;
+        max-width: 1056px;
+    }
+
+
+    .btn a {
+        margin-bottom: 0;
+    }
+}

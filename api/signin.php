@@ -14,7 +14,7 @@ $role = "user";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"));
-    var_dump($data);
+    echo json_encode($data);
     if (!empty($data->nom) && !empty($data->prenom) && !empty($data->email) && !empty($data->password) && !empty($data->numero_voie) && !empty($data->rue) && !empty($data->ville)) {
         $adresse = $data->numero_voie . ' ' . $data->rue . ', ' . $data->ville;
         $hashedPassword = password_hash($data->password, PASSWORD_BCRYPT);
@@ -31,14 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             http_response_code(201);
-            echo json_encode(["message" => "L'utilisateur a été créé."]);
         } else {
             http_response_code(503);
             echo json_encode(["message" => "Impossible de créer l'utilisateur."]);
         }
     } else {
         http_response_code(400);
-        echo json_encode(["message" => "Impossible de créer l'utilisateur. Les données sont incomplètes."]);
+        echo json_encode(["error" => "Tous les champs sont requis."]);
     }
 } else {
     echo json_encode(["error" => "La méthode de requête n'est pas autorisée."]);

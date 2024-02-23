@@ -25,12 +25,24 @@ export class SigninComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      this.http.post('http://localhost/sae-401/api/signin.php', JSON.stringify(this.form.value)).subscribe(response => {
-      });
+      this.http.post('http://localhost/sae-401/api/signin.php', JSON.stringify(this.form.value)).subscribe(
+        response => {
+          alert('Inscription réussie !');
+          // Rediriger l'utilisateur
+        },
+        error => {
+          alert('Une erreur est survenue lors de l\'inscription.');
+          console.error(error);
+        }
+      );
     } else {
-      alert('Tous les champs du formulaire sont obligatoires.');
-      console.log('Form validity:', this.form.valid);
-console.log('Form errors:', this.form.errors);
+      for (const name in this.form.controls) {
+        if (this.form.controls[name]?.errors?.['required']) {
+          alert(`Le champ ${name} est requis.`);
+        } else if (this.form.controls[name]?.errors?.['email']) {
+          alert('Le format de l\'email est invalide.');
+        }
+        }
+      }
     }
   }
-}  

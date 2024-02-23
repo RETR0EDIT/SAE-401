@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface Box {
@@ -7,13 +7,12 @@ interface Box {
   image: string;
   composition: string;
 }
-
 @Component({
-  selector: 'app-home-popular',
-  templateUrl: './home-popular.component.html',
-  styleUrls: ['./home-popular.component.scss']
+  selector: 'app-product-page',
+  templateUrl: './product-page.component.html',
+  styleUrl: './product-page.component.scss'
 })
-export class HomePopularComponent implements OnInit {
+export class ProductPageComponent {
   boxes: Box[] = [];
   url = 'http://localhost/SAE-401/api/controller/BoxController.php';
 
@@ -21,7 +20,8 @@ export class HomePopularComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get<Box[]>(this.url).subscribe(boxes => {
-      this.boxes = boxes.slice(0, 4);
+      this.boxes = boxes;
     });
   }
 }
+
