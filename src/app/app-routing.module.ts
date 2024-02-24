@@ -6,6 +6,7 @@ import { ProductPageComponent } from './component/product-page/product-page.comp
 import { SigninComponent } from './component/signin/signin.component';
 import { LoginComponent } from './component/login/login.component';
 import { HomeAboutComponent } from './component/home-about/home-about.component';
+import { BoxDetailsComponent } from './component/box-details/box-details.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -14,10 +15,11 @@ const routes: Routes = [
   { path: "signin", component: SigninComponent},
   { path: "login", component: LoginComponent},
   { path: "about", component: HomeAboutComponent},
+  { path: "details", component: BoxDetailsComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { };
