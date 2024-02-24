@@ -2,6 +2,20 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
+interface ApiResponse {
+  user: {
+    nom: string;
+    prenom: string;
+    email: string;
+    password: string;
+    verif_password: string;
+    numero_voie: string;
+    rue: string;
+    ville: string;
+  };
+  response: string;
+}
+
 function passwordMatchValidator(control: AbstractControl) {
   const password = control.get('password');
   const verif_password = control.get('verif_password');
@@ -16,11 +30,12 @@ function passwordMatchValidator(control: AbstractControl) {
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
+
 })
 export class SigninComponent {
   form: FormGroup;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, ) {
     this.form = new FormGroup({
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
@@ -44,10 +59,14 @@ export class SigninComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      this.http.post('http://localhost/sae-401/api/signin.php', JSON.stringify(this.form.value)).subscribe(
+      this.http.post<ApiResponse>('http://localhost/sae-401/api/signin.php', JSON.stringify(this.form.value), { observe: 'response' }).subscribe(
         response => {
-          console.log('Inscription réussie !');
-          // Rediriger l'utilisateur
+          if (response.status === 200 && response.ok) {
+            
+            window.location.href = 'http://localhost:4200';
+          } else {
+            console.error('Une erreur est survenue lors de l\'inscription.', response);
+          }
         },
         error => {
           console.error('Une erreur est survenue lors de l\'inscription.', error);

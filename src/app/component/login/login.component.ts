@@ -1,84 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+interface ApiResponse {
+  success?: string;
+  id_client?: string;
+  nom?: string;
+  prenom?: string;
+  adresse?: string;
+  email?: string;
+  password?: string;
+  role?: string;
+}
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor(private http: HttpClient) { }
+  @ViewChild('form') form!: NgForm;
+  formData = {
+    email: '',
+    password: ''
+  };
 
-  onSubmit(event: Event) {
-    event.preventDefault();
-    
+  constructor(private http: HttpClient, private router: Router) { }
 
-    const target = event.target as HTMLFormElement;
-    const emailElement = target.querySelector('input[name="email"]') as HTMLInputElement;
-    const passwordElement = target.querySelector('input[name="password"]') as HTMLInputElement;
-    
-    if (emailElement && passwordElement) {
-      const email = emailElement.value;
-      const password = passwordElement.value;
-    
-      this.http.post('http://localhost/sae-401/api/login.php', { email, password }).subscribe(
+  onSubmit() {
+    console.log('Submitting form...');
+    if (this.form && this.form.valid) {
+      console.log('Form is valid. Form data:', this.formData);
+      this.http.post<ApiResponse>('http://localhost/sae-401/api/login.php', this.formData, { withCredentials: true }).subscribe(
         response => {
-          console.log(response);
-          alert('Connexion réussie !');
-          // Redirigez l'utilisateur vers une autre page
-          //window.location.href = '/home';
+          console.log('Received response from server:', response);
+          if (response) {
+            if (response.success) {
+              console.log('Login successful. Redirecting...');
+              alert(response.success);
+              this.router.navigate(['/']); // Redirigez l'utilisateur vers la page d'accueil
+            } else {
+              console.log('Login failed.');
+              alert('La connexion a échoué.');
+            }
+          }
         },
         error => {
-          console.error('Une erreur est survenue lors de la connexion :', error);
-          alert('Une erreur est survenue lors de la connexion.');
+          console.log('An error occurred while connecting:', error);
+          console.error('Une erreur est survenue lors de la connexion.', error);
         }
       );
+    } else {
+      console.log('Form is not valid or not present.');
     }
   }
 }
-/*
-import { Component } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
-})
-export class LoginComponent {
-  constructor(private http: HttpClient) { }
-
-  onSubmit(event: Event) {
-    event.preventDefault();
-
-    const target = event.target as HTMLFormElement;
-    const emailElement = target.querySelector('input[name="email"]') as HTMLInputElement;
-    const passwordElement = target.querySelector('input[name="password"]') as HTMLInputElement;
-    
-    if (emailElement && passwordElement) {
-      const email = emailElement.value;
-      const password = passwordElement.value;
-    
-      this.http.post('http://localhost/sae-401/api/login.php', { email, password }).subscribe(
-        response => {
-          console.log(response);
-          //alert('Connexion réussie !');
-          // Redirigez l'utilisateur vers une autre page
-          //window.location.href = '/home';
-        },
-        (error: HttpErrorResponse) => {
-          console.error('Une erreur est survenue lors de la connexion :', error);
-          let errorMessage = 'Une erreur est survenue lors de la connexion.';
-          if (error.status === 0) {
-            errorMessage = 'Impossible de se connecter au serveur.';
-          } else if (error.status >= 400 && error.status < 500) {
-            errorMessage = 'Erreur client, veuillez vérifier vos informations de connexion.';
-          } else if (error.status >= 500) {
-            errorMessage = 'Erreur serveur, veuillez réessayer plus tard.';
-          }
-          alert(errorMessage);
-        }
-      );
-    }
-  }
-}*/

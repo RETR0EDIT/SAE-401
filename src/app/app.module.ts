@@ -15,6 +15,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { BoxDetailsComponent } from './component/box-details/box-details.component';
 import { PanierComponent } from './component/panier/panier.component';
 import { ProductPageComponent } from './component/product-page/product-page.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import { ProductPageComponent } from './component/product-page/product-page.comp
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     provideHttpClient()
