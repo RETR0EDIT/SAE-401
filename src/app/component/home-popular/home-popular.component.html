@@ -6,7 +6,7 @@
       <div class="all-card" *ngFor="let box of boxes; let i = index" [hidden]="i >= 4">
         <div class="card-div">
           <div class="card-img">
-            <img [src]="box.image" alt="">
+            <img [src]="'../../../assets/ressources/images/box-sushi/carée/' + box.image" class="img_popular">
           </div>
           <div class="card-bg">
             <h3>{{ box.nom }}</h3>
@@ -23,7 +23,8 @@
     </div>
 
     <div class="btn">
-      <a routerLink="product">Voire toutes les boxes <img src="../../../assets/ressources/icons/arrow-right.svg" alt=""></a>
+      <a routerLink="product">Voire toutes les boxes <img src="../../../assets/ressources/icons/arrow-right.svg"
+          alt=""></a>
     </div>
   </div>
 </section>

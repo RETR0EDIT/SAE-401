@@ -7,7 +7,8 @@ interface Box {
   prix: number;
   image: string;
   composition: string;
-  id_boxe: number;
+  saveur: string;
+  id_boxe: string;
 }
 
 @Component({
@@ -16,31 +17,43 @@ interface Box {
   styleUrls: ['./box-details.component.scss']
 })
 export class BoxDetailsComponent implements OnInit {
+  
   box: Box | null = null;
   valeur: number = 1;
-  url = 'http://localhost/SAE-401/api/controller/BoxController.php';
+  total: number = 0; // Ajoutez cette ligne
+  url = 'http://localhost/SAE-401/api/controller/DetailsController.php';
 
   constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.http.get<Box>(`${this.url}?id=${id}`).subscribe(box => {
-        this.box = box;
-        console.log('Détails de la boîte récupérés de l\'API :', box);
-      }, error => {
-        console.error('Erreur lors de la récupération des détails de la boîte de l\'API :', error);
-      });
-    }
-  }
-
-  decrement() {
-    if (this.valeur > 1) {
-      this.valeur--;
-    }
+    this.route.queryParams.subscribe(params => {
+      const id_boxe = params['id'];
+      if (id_boxe) {
+        this.http.get<Box>(`${this.url}?id=${id_boxe}`).subscribe(box => {
+          this.box = box;
+          this.total = this.box.prix; // Initialise le total avec le prix de la box
+        });
+      }
+    });
   }
 
   increment() {
     this.valeur++;
+    this.updateTotal();
+  }
+  
+  decrement() {
+    if (this.valeur > 0) {
+      this.valeur--;
+      this.updateTotal();
+    }
+  }
+  
+  updateTotal() {
+    if (this.box && this.box.prix) {
+      this.total = this.valeur * this.box.prix;
+    } else {
+      this.total = 0;
+    }
   }
 }

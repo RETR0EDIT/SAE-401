@@ -16,12 +16,13 @@
     </div>
 
     <div class="card-div">
-      <a routerLink="/details" class="item" *ngFor="let box of boxes" name="{{ box.nom }}">
+      <a [routerLink]="['/details']" [queryParams]="{id: box.id_boxe}" class="item" *ngFor="let box of boxes"
+        name="{{ box.id_boxe }}">
         <article class="card">
           <div class="img-card">
-            <!--<img [src]="box.image" alt="">-->
+            <img [src]="'../../../assets/ressources/images/box-sushi/carée/' + box.image">
           </div>
-          <div class="txt-container">
+          <div class=" txt-container">
             <h3>{{ box.nom }}</h3>
             <p>{{ box.saveur }}</p>
             <div class="price-cart">

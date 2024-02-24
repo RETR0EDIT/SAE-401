@@ -7,29 +7,26 @@ header("Access-Control-Allow-Origin: http://localhost:4200");
 header("Access-Control-Allow-Credentials: true");
 require_once '../config/database.php';
 
-// Récupérez l'ID de la box à partir de l'URL
-$boxId = isset($_GET['id']) ? $_GET['id'] : die();
+class Details
+{
+    private $conn;
 
-// Préparez une requête SQL pour obtenir les détails de la box
-$sql = "SELECT * FROM boxe WHERE id_boxe = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $boxId);
+    public function __construct($db)
+    {
+        $this->conn = $db;
+    }
 
-// Exécutez la requête
-$stmt->execute();
-
-// Récupérez le résultat
-$result = $stmt->get_result();
-
-// Vérifiez si nous avons obtenu un résultat
-if ($result->num_rows > 0) {
-    // Si oui, encodez le premier enregistrement en JSON et imprimez-le
-    $boxDetails = $result->fetch_assoc();
-    echo json_encode($boxDetails);
-} else {
-    // Si non, imprimez un message d'erreur
-    echo json_encode(["error" => "No box found with ID $boxId"]);
+    public function getDetails($id)
+    {
+        $sql = "SELECT * FROM boxes WHERE id_boxe = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(1, $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            return $result;
+        } else {
+            return null;
+        }
+    }
 }
-
-// Fermez la connexion
-$conn->close();

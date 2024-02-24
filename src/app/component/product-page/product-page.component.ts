@@ -7,7 +7,7 @@ interface Box {
   prix: number;
   image: string;
   saveur: string;
-  id_boxe: number;
+  id_boxe: string;
 }
 
 @Component({

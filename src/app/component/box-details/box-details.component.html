@@ -2,27 +2,31 @@
   <div class="btn-box-details">
     <a href="#">
       < Retourner aux boxes</a> </div> <div id="container">
-        <!--  <h1 id="title-box" *ngIf="box">{{ box.nom }}</h1> -->
+        <h1 id="title-box" *ngIf="box">{{ box.nom }}</h1>
         <div class="left-img-box">
-          <!--  <img [src]="box.image" alt="box-details" *ngIf="box" />-->
+          <img [src]="'../../../assets/ressources/images/box-sushi/carée/' + box?.image">
         </div>
         <div class="right-element-box">
           <div id="info-box">
             <div id="composition-container">
               <p class="subtitle-text" id="composition-title">Composition: </p>
-              <!-- <p class="info-text" id="composition-text" *ngIf="box">{{ box.composition }}</p>-->
+              <p class="info-text" id="composition-text" *ngIf="box">{{ box.composition }}</p>
+            </div>
+            <div id="composition-container">
+              <p class="subtitle-text" id="composition-title">Saveur: </p>
+              <p class="info-text" id="composition-text" *ngIf="box">{{ box.saveur }}</p>
             </div>
           </div>
           <div id="achat-box">
             <div id="quantite-container">
               <span>Quantité: </span>
               <button class="btn-achat" (click)="decrement()">-</button>
-              <input type="text" id="valeur" [value]="valeur" readonly>
+              <input type="number" id="valeur" [value]="valeur" readonly>
               <button class="btn-achat" (click)="increment()">+</button>
             </div>
             <div id="total-container">
               <div id="total-container1">
-                <!-- <span id="prix" *ngIf="box">{{ box.prix }}€</span>-->
+                <span id="prix" *ngIf="box">{{ total }}€</span>
                 <p>Total <span id="texte1"> :</span><span id="texte2">du panier</span></p>
               </div>
               <div id="total-container2">
