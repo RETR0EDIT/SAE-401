@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 interface Box {
   nom: string;
   prix: number;
@@ -24,4 +23,6 @@ export class HomePopularComponent implements OnInit {
       this.boxes = boxes.slice(0, 4);
     });
   }
+
+  
 }

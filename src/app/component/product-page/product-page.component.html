@@ -16,7 +16,7 @@
     </div>
 
     <div class="card-div">
-      <a routerLink="details" class="item" *ngFor="let box of boxes" name="{{ box.nom }}">
+      <a routerLink="/details" class="item" *ngFor="let box of boxes" name="{{ box.nom }}">
         <article class="card">
           <div class="img-card">
             <!--<img [src]="box.image" alt="">-->
@@ -26,9 +26,10 @@
             <p>{{ box.saveur }}</p>
             <div class="price-cart">
               <p>{{ box.prix }}€</p>
-              <div class="cart">
+              <!-- AJOUT DANS LE PANIER  -->
+              <a class="cart">
                 <img src="../../../assets/ressources/icons/Shopping_Cart-card.svg" alt="">
-              </div>
+              </a>
             </div>
           </div>
         </article>
