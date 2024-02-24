@@ -22,9 +22,10 @@
   <div class="home__shape-4"></div>
   <div class="home__shape-5"></div>
 
-  <script> window.addEventListener('load', checkHeight);
+  <script>
+    window.addEventListener('load', checkHeight);
     window.addEventListener('resize', checkHeight);
-  
+
     function checkHeight() {
       const shapes = [
         { selector: '.home__shape-1', minHeight: 0 },
@@ -33,20 +34,23 @@
         { selector: '.home__shape-4', minHeight: 4000 },
         { selector: '.home__shape-5', minHeight: 3800 }
       ];
-  
+
       const bodyHeight = document.body.offsetHeight;
-  
+      const footerHeight = document.querySelector('.footer').offsetHeight;
+      const totalHeight = bodyHeight - footerHeight;
+
       shapes.forEach(shape => {
         const shapeElement = document.querySelector(shape.selector);
         if (shapeElement) {
-          if (bodyHeight > shape.minHeight) {
+          if (totalHeight > shape.minHeight) {
             shapeElement.style.display = 'block';
           } else {
             shapeElement.style.display = 'none';
           }
         }
       });
-    }</script>
+    }
+  </script>
 </body>
 
 </html>
