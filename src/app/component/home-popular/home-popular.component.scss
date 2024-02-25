@@ -62,9 +62,8 @@ $light-dark-grey: #292929;
 
 .card-img img {
   height: 189px;
-  width: 189px;
   box-shadow: 0px 17.87px 27.79px -1.32px rgba(0, 0, 0, 0.31);
-  border-radius: 100%;
+  // border-radius: 100%;
 }
 
 .card-bg {
@@ -73,7 +72,6 @@ $light-dark-grey: #292929;
   background: $white-color;
   padding: 133px 38.38px 23px 38.38px;
   z-index: 2;
-
 }
 
 .card-bg h3 {
@@ -91,7 +89,7 @@ $light-dark-grey: #292929;
   font-family: $font-poppins;
   font-size: 12.57px;
   font-weight: 400;
-  line-height: 19px;
+  // line-height: 19px;
   letter-spacing: -2%;
   max-width: 130px;
 }
@@ -190,7 +188,7 @@ $light-dark-grey: #292929;
   .card-bg p {
     font-size: 14.6px;
     max-width: 160px;
-    line-height: 30px;
+    // line-height: 30px;
   }
 
   .price-cart p {
@@ -213,7 +211,7 @@ $light-dark-grey: #292929;
 
   .card-img img {
     height: 220px;
-    width: 220px;
+    // width: 220px;
   }
 
   .card-img {
