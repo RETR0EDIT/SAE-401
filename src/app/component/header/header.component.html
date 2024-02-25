@@ -21,8 +21,8 @@
         <button *ngIf="isLoggedIn" id="logout-btn" class="nav-connecter2" (click)="onLogoutClick()">
           <i class="ri-logout-box-line"></i> Se déconnecter
         </button>
-        <button *ngIf="isLoggedIn" id="logout-btn" class="nav-connecter2" routerLink="profil">
-          <i class="ri-logout-box-line"></i> profil
+        <button *ngIf="isLoggedIn" id="user-btn" class="nav-connecter2" routerLink="profil">
+          <i class="ri-user-line"></i>
         </button>
       </ul>
       <!-- CLOSE BUTTON  -->
@@ -45,11 +45,11 @@
 
         <a *ngIf="!isLoggedIn" routerLink="/login" id="login-btn" class="nav-connecter1"><i
             class="ri-login-box-line"></i> Se connecter</a>
-        <button *ngIf="isLoggedIn" id="logout-btn" class="nav-connecter2" (click)="onLogoutClick()">
+        <button *ngIf="isLoggedIn" id="logout-btn" class="nav-connecter-pc" (click)="onLogoutClick()">
           <i class="ri-logout-box-line"></i> Se déconnecter
         </button>
-        <button *ngIf="isLoggedIn" id="logout-btn" class="nav-connecter2" routerLink="profil">
-          <i class="ri-logout-box-line"></i> profil
+        <button *ngIf="isLoggedIn" id="user-btn" class="nav-connecter-pc" routerLink="profil">
+          <i class="ri-user-line"></i>
         </button>
       </div>
 

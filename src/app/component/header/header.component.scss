@@ -107,7 +107,7 @@ $white-color: #fff;
   padding: 0 2px;
 }
 
-#login-btn {
+#login-btn, #logout-btn {
   color: rgba(255, 255, 255, 0.73);
   font-family: $font-poppins;
   font-size: 19px;
@@ -117,6 +117,25 @@ $white-color: #fff;
   box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.26);
   background: rgb(53, 53, 53);
   padding: 12px 19px;
+  align-self: flex-start;
+}
+#user-btn{
+  background: rgba(255, 255, 255, 0.767);
+  font-size: 28px;
+  width: 45px;
+  height: 45px;
+  border-radius: 20px;
+  // box-shadow: inset 0px 1px 0px 0px rgba(255, 187, 0, 0.26);
+  // border: 1px solid rgb(53, 53, 53);
+  border: none;
+  color:rgb(53, 53, 53);
+}
+
+.nav-connecter-pc{
+  display: none;
+}
+.nav-connecter2{
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 1024px) {
@@ -138,14 +157,12 @@ $white-color: #fff;
     padding: 0 3rem;
   }
 
-  .nav-connecter1 {
-    display: none;
-  }
 
-  .nav-connecter2 {
-    display: block;
-    margin: 0 1rem;
-  }
+
+
+
+
+
 }
 
 .nav__close {
@@ -212,6 +229,10 @@ $white-color: #fff;
 
   .cart-icons-div {
     gap: 17px;
+  }
+
+  .nav-connecter-pc{
+    display: block;
   }
 }
 
