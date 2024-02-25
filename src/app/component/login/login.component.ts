@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth-service.service'; 
 
 interface ApiResponse {
   success?: string;
@@ -26,7 +27,7 @@ export class LoginComponent {
     password: ''
   };
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { } // Injectez AuthService
 
   onSubmit() {
     console.log('Submitting form...');
@@ -39,10 +40,13 @@ export class LoginComponent {
             if (response.success) {
               console.log('Login successful. Redirecting...');
               alert(response.success);
+              if (response.id_client) {
+                this.authService.setToken(response.success, response.id_client);
+              } else {
+                // Gérez l'erreur comme vous le souhaitez, par exemple en affichant un message d'erreur
+                console.error('User ID is undefined');
+              }
               this.router.navigate(['/']); // Redirigez l'utilisateur vers la page d'accueil
-            } else {
-              console.log('Login failed.');
-              alert('La connexion a échoué.');
             }
           }
         },

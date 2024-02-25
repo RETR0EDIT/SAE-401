@@ -16,6 +16,7 @@ import { BoxDetailsComponent } from './component/box-details/box-details.compone
 import { PanierComponent } from './component/panier/panier.component';
 import { ProductPageComponent } from './component/product-page/product-page.component';
 import { FormsModule } from '@angular/forms';
+import { ProfilComponent } from './component/profil/profil.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     SigninComponent,
     BoxDetailsComponent,
     PanierComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,

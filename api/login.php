@@ -34,7 +34,7 @@ if (isset($data['email']) && isset($data['password'])) {
         $client = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($client && password_verify($password, $client['password'])) {
             $_SESSION['is_logged_in'] = true;
-            echo json_encode(["success" => "Connexion réussie"]);
+            echo json_encode(["success" => "Connexion réussie", "id_client" => $client['id_client']]);
         } else {
             echo json_encode(["error" => "Erreur de connexion : email ou mot de passe incorrect."]);
         }
