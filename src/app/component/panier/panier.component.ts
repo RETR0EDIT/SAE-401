@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CartService, Box } from '../../cart.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 interface LoginResponse {
   message: string;
@@ -10,27 +13,36 @@ interface LoginResponse {
   templateUrl: './panier.component.html',
   styleUrls: ['./panier.component.scss']
 })
-export class PanierComponent {
-  constructor(private http: HttpClient) { }
+export class PanierComponent implements OnInit {
+  cart: { box: Box, quantity: number, total: number }[] = [];
+
+  constructor(private location: Location, private http: HttpClient, private cartService: CartService, private router: Router) { }
+
   ngOnInit() {
-    this.http.get<LoginResponse>('http://localhost/sae-401/api/check-login.php', { withCredentials: true }).subscribe(
-      response => {
-        // Si l'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-        if (response && response.message === "Vous n'êtes pas connecté.") {
-          window.location.href = 'http://localhost:4200/login';
+    this.cartService.cart$.subscribe(cart => {
+      this.cart = cart;
+    });
+    this.loadData();
+  }
+  
+  removeFromCart(index: number) {
+    this.cartService.removeFromCart(index);
+  }
+  
+  loadData() {
+    const userId = localStorage.getItem('userId');
+    const authToken = localStorage.getItem('authToken');
+    this.cartService.setUserId(userId);
+    if (!userId || !authToken) {
+      window.location.href = 'http://localhost:4200/login';
+    } else {
+      this.http.get<LoginResponse>('http://localhost/sae-401/api/check-login.php', { withCredentials: true }).subscribe(
+        response => {
+          if (response && response.message === "Vous n'êtes pas connecté.") {
+            window.location.href = 'http://localhost:4200/login';
+          }
         }
-      },
-      (error: HttpErrorResponse) => {
-      
-        if (error.status === 401) {
-          window.location.href = 'http://localhost:4200/login';
-        } else if (error.status === 200) {
-          
-        }
-        else {
-          console.error('Une erreur est survenue lors de la vérification de la connexion.', error);
-        }
-      }
-    );
+      );
+    }
   }
 }

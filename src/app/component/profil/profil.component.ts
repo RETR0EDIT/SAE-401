@@ -6,6 +6,8 @@ interface User {
   nom: string;
   prenom: string;
   email: string;
+  adresse: string;
+  
 }
 
 @Component({
@@ -22,8 +24,8 @@ export class ProfilComponent implements OnInit {
     let id_client = localStorage.getItem('userId');
     if (id_client) {
       this.getProfilInfo(id_client).subscribe(response => {
-        this.user = response; // Affectez la réponse à this.user
-        console.log(this.user); // Affichez les informations du profil dans la console
+        this.user = response;
+       
       });
     } else {
       console.error('User ID is undefined');

@@ -7,6 +7,7 @@ class Profil
     public $nom;
     public $prenom;
     public $email;
+    public $adresse;
 
     public function __construct($db)
     {
@@ -15,7 +16,7 @@ class Profil
 
     public function getUserInfo($id)
     {
-        $query = "SELECT nom, prenom, email FROM " . $this->table_name . " WHERE id_client = ?";
+        $query = "SELECT nom, prenom, email, adresse FROM " . $this->table_name . " WHERE id_client = ?";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(1, $id);
@@ -27,6 +28,7 @@ class Profil
         $this->nom = $row['nom'];
         $this->prenom = $row['prenom'];
         $this->email = $row['email'];
+        $this->adresse = $row['adresse'];
         return $row;
     }
 }
