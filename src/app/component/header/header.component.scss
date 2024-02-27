@@ -131,7 +131,7 @@ $white-color: #fff;
   color:rgb(53, 53, 53);
 }
 
-.nav-connecter-pc{
+.nav-connecter-pc, .nav-connecter1{
   display: none;
 }
 .nav-connecter2{
@@ -231,7 +231,7 @@ $white-color: #fff;
     gap: 17px;
   }
 
-  .nav-connecter-pc{
+  .nav-connecter-pc, .nav-connecter1{
     display: block;
   }
 }
