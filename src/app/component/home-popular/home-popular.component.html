@@ -3,7 +3,9 @@
     <h2>Les plus populaires</h2>
 
     <div class="container-card">
-      <div class="all-card" *ngFor="let box of boxes; let i = index" [hidden]="i >= 4">
+
+      <a [routerLink]="['/details']" [queryParams]="{id: box.id_boxe}" class="all-card"
+        *ngFor="let box of boxes; let i = index" name="{{ box.id_boxe }}" [hidden]="i >= 4">
         <div class="card-div">
           <div class="card-img">
             <img [src]="'../../../assets/ressources/images/box-sushi/carée/' + box.image" class="img_popular">
@@ -19,7 +21,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </a>
     </div>
 
     <div class="btn">
