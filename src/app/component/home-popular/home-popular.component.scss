@@ -4,15 +4,14 @@
   box-sizing: border-box;
 }
 
-$font-poppins: "Poppins",
-sans-serif;
+$font-poppins: "Poppins", sans-serif;
 
 // !COLOR
 $black-color: #000;
 $red-color: #dc2323;
 $white-color: rgba(255, 255, 255, 0.781);
-$orange-color: #FFBE5B;
-$grey-color: #7D7D7D;
+$orange-color: #ffbe5b;
+$grey-color: #7d7d7d;
 $dark-grey: #262626;
 $light-dark-grey: #292929;
 
@@ -67,7 +66,6 @@ $light-dark-grey: #292929;
 }
 
 .card-bg {
-
   border-radius: 55.58px 55.58px 29.78px 29.78px;
   background: $white-color;
   padding: 133px 38.38px 23px 38.38px;
@@ -92,6 +90,7 @@ $light-dark-grey: #292929;
   // line-height: 19px;
   letter-spacing: -2%;
   max-width: 130px;
+  height: 38px;
 }
 
 .price-cart {
@@ -123,8 +122,6 @@ $light-dark-grey: #292929;
   color: white;
 }
 
-
-
 .btn {
   margin-top: 42px;
 }
@@ -147,6 +144,9 @@ $light-dark-grey: #292929;
   display: none;
 }
 
+.container-card div:nth-child(4) {
+  display: none;
+}
 @media (min-width: 848px) {
   .container-popular {
     display: block;
@@ -178,21 +178,27 @@ $light-dark-grey: #292929;
   #popular {
     margin-bottom: 130px;
   }
+
+  .price-cart p {
+    margin-top: 5.29px;
+  }
 }
 
 @media (min-width: 1272px) {
   .card-bg h3 {
-    font-size: 19.80px;
+    font-size: 19.8px;
   }
 
   .card-bg p {
     font-size: 14.6px;
     max-width: 160px;
     // line-height: 30px;
+    height: 44px;
   }
 
   .price-cart p {
     font-size: 18px;
+    margin-top: 6.15px;
   }
 
   .cart img {
@@ -236,10 +242,15 @@ $light-dark-grey: #292929;
 
   .price-cart {
     gap: 95px;
+    margin-top: 2.8px;
   }
 
   #popular {
     margin-bottom: 100px;
+  }
+
+  .container-card div:nth-child(4) {
+    display: flex;
   }
 }
 
@@ -251,10 +262,12 @@ $light-dark-grey: #292929;
   .card-bg p {
     font-size: 19px;
     max-width: 208px;
+    height: 48px;
   }
 
   .price-cart p {
     font-size: 22px;
+    margin-top: 8px;
   }
 
   .cart img {
@@ -273,6 +286,7 @@ $light-dark-grey: #292929;
   .price-cart {
     margin-top: 4px;
     gap: 124px;
+    margin-top: 3px;
   }
 
   .card-bg {

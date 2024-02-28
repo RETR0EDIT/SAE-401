@@ -1,7 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 // ?VARIABLES
@@ -12,246 +12,263 @@ $black-color: #000;
 $red-color: #dc2323;
 $white-color: #fff;
 $white-color-soft: hsla(0, 0%, 100%, 0.78);
-$grey-color: #7D7D7D;
+$grey-color: #7d7d7d;
 $grey-color-light: #262626;
 $grey-color-dark: #292929;
-$txt-grey : #454545;
+$txt-grey: #454545;
 
 #product-page {
-    margin: 67px 0;
+  margin: 67px 0;
 }
 
 h2 {
-    font-family: "eugusto_regularregular";
-    font-size: 26px;
-    text-align: center;
-    font-weight: 400;
+  font-family: "eugusto_regularregular";
+  font-size: 26px;
+  text-align: center;
+  font-weight: 400;
 }
 
 .img-card img {
-    height: 168px;
+  height: 168px;
 }
-
+.txt-container {
+  margin-left: 12.5px;
+}
 .txt-container h3 {
-    color: $grey-color-light;
-    font-family: $font-poppins;
-    font-size: 17.19px;
-    font-weight: 700;
-    line-height: 21px;
-    letter-spacing: 4%;
-    margin-top: 13px;
+  color: $grey-color-light;
+  font-family: $font-poppins;
+  font-size: 17.19px;
+  font-weight: 700;
+  line-height: 21px;
+  letter-spacing: 4%;
+  margin-top: 13px;
+  max-width: 158px;
 }
 
 .txt-container p {
-    color: $grey-color;
-    font-family: $font-poppins;
-    font-size: 12.56px;
-    font-weight: 400;
-    max-width: 150px;
-    margin-top: 6px;
+  color: $grey-color;
+  font-family: $font-poppins;
+  font-size: 12.56px;
+  font-weight: 400;
+  //   max-width: 150px;
+  margin-top: 6px;
 }
 
+.saveur {
+  height: 57px;
+  width: 174px;
+}
 .price-cart {
-    display: flex;
-    justify-content: space-between;
-    // gap: 75px;
-    margin-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  // gap: 75px;
+  margin-top: 6.2px;
 }
 
 .price-cart p {
-    color: $grey-color-dark;
-    font-family: $font-poppins;
-    font-size: 15.87px;
-    font-weight: 600;
-    line-height: 24px;
-    margin-top: 5px;
+  color: $grey-color-dark;
+  font-family: $font-poppins;
+  font-size: 15.87px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-top: 5px;
 }
 
 .cart {
-    background-color: $black-color;
-    padding: 9.92px;
-    border-radius: 5.29px 5.29px 15.21px 5.29px;
-    margin-right: 12px;
-    cursor: text;
+  background-color: $black-color;
+  padding: 9.92px;
+  border-radius: 5.29px 5.29px 15.21px 5.29px;
+  margin-right: 12px;
+  cursor: text;
 }
 
 .card {
-    background-color: $white-color-soft;
-    border-radius: 0 0 29.75px 29.75px;
-    display: inline-block;
-    padding: 25.50px 25.50px 23px 25.50px;
+  background-color: $white-color-soft;
+  border-radius: 0 0 29.75px 29.75px;
+  display: inline-block;
+  padding: 25.5px 25.5px 23px 25.5px;
 }
 
 h1 {
-    color: $black-color;
-    font-family: "eugusto_regularregular";
-    font-size: 41px;
-    font-weight: 400;
-    line-height: 50px;
-    letter-spacing: 5%;
-    max-width: 400px;
+  color: $black-color;
+  font-family: "eugusto_regularregular";
+  font-size: 41px;
+  font-weight: 400;
+  line-height: 50px;
+  letter-spacing: 5%;
+  max-width: 400px;
 }
 
 .header-info p {
-    color: $txt-grey;
-    font-family: $font-poppins;
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 26px;
-    max-width: 450px;
+  color: $txt-grey;
+  font-family: $font-poppins;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 26px;
+  max-width: 450px;
 }
 
 .header-info {
-    display: none;
+  display: none;
 }
 
 .container {
-    margin: 0px auto;
+  margin: 0px auto;
 }
 
 .card-div {
-    margin: 40px auto 0;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 243px);
-    grid-gap: 20px;
-    justify-content: center;
+  margin: 40px auto 0;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 243px);
+  grid-gap: 20px;
+  justify-content: center;
 }
 
-.item{
-    display: inline-grid;
+.item {
+  display: inline-grid;
 }
-
 
 @media screen and (min-width: 1100px) {
+  #product-page {
+    margin: 120px 0;
+  }
+  h2 {
+    font-size: 30px;
+    margin-top: 125px;
+  }
 
+  .img-header img {
+    max-width: 375px;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 35px;
+  }
 
-    #product-page {
-        margin: 120px 0;
-    }
-    h2 {
-        font-size: 30px;
-        margin-top: 125px;
-    }
+  .header-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1020px;
+    margin: 0 auto;
+  }
 
-    .img-header img {
-        max-width: 375px;
-        max-height: 250px;
-        object-fit: cover;
-        border-radius: 35px;
-    }
+  .img-card img {
+    height: 196px;
+  }
 
-    .header-info {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        max-width: 1020px;
-        margin: 0 auto;
-    }
+  .txt-container {
+    margin-left: 15.6px;
+  }
+  .txt-container h3 {
+    font-size: 20.08px;
+    margin-top: 15.45px;
+    max-width: 178px;
+  }
 
-    .img-card img {
-        height: 196px;
-    }
+  .txt-container p {
+    font-size: 15px;
+    margin-top: 7.7px;
+  }
+  .saveur {
+    height: 66px;
+    width: 204px;
+  }
+  .price-cart p {
+    font-size: 18.5px;
+  }
 
-    .txt-container h3 {
-        font-size: 20.08px;
-        margin-top: 15.45px;
-    }
+  .price-cart {
+    margin-top: 5.8px;
+  }
 
-    .txt-container p {
-        font-size: 15px;
-        margin-top: 7.7px;
-    }
+  .card {
+    border-radius: 0 0 34.75px 34.75px;
+    padding: 30.3px 30.3px 26.7px 30.3px;
+  }
 
-    .price-cart p {
-        font-size: 18.5px;
-    }
+  .cart {
+    padding: 11.5px;
+    border-radius: 6.18px 6.18px 17.76px 6.18px;
+    margin-right: 14px;
+  }
 
-    .price-cart {
-        margin-top: 26.2px;
-    }
-
-    .card {
-        border-radius: 0 0 34.75px 34.75px;
-        padding: 30.30px 30.30px 26.7px 30.30px;
-    }
-
-    .cart {
-        padding: 11.5px;
-        border-radius: 6.18px 6.18px 17.76px 6.18px;
-        margin-right: 14px;
-    }
-
-    .card-div {
-        margin: 100px auto 0;
-        padding: 0 20px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, 285px);
-        grid-gap: 40px;
-        justify-content: center;
-    }
+  .card-div {
+    margin: 100px auto 0;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 285px);
+    grid-gap: 40px;
+    justify-content: center;
+  }
 }
 
 @media screen and (min-width: 1700px) {
-    #product-page {
-       margin: 80px 0px 245px 0px;
-    }
+  #product-page {
+    margin: 80px 0px 245px 0px;
+  }
 
-    h2 {
-        font-size: 40px;
-        margin-top: 100px;
-    }
+  h2 {
+    font-size: 40px;
+    margin-top: 100px;
+  }
 
-    .img-card img {
-        height: 255px;
-    }
+  .img-card img {
+    height: 255px;
+  }
+  .txt-container {
+    margin-left: 19px;
+  }
+  .txt-container h3 {
+    font-size: 26px;
+    margin-top: 20px;
+    max-width: 240px;
+  }
 
-    .txt-container h3 {
-        font-size: 26px;
-        margin-top: 20px;
-    }
+  .txt-container p {
+    font-size: 19px;
+    margin-top: 10px;
+    // max-width: 201px;
+  }
+  .saveur {
+    height: 87px;
+    width: 264px;
+  }
+  .price-cart p {
+    font-size: 24px;
+    margin-top: 8px;
+  }
 
-    .txt-container p {
-        font-size: 19px;
-        margin-top: 10px;
-        max-width: 201px;
-    }
+  .price-cart {
+    margin-top: 6px;
+  }
 
-    .price-cart p {
-        font-size: 24px;
-        margin-top: 8px;
-    }
+  .card {
+    border-radius: 0 0 45px 45px;
+    padding: 40px 40px 35px 40px;
+  }
 
-    .price-cart {
-        margin-top: 33px;
-    }
+  .cart {
+    padding: 15px;
+    border-radius: 8px 8px 23px 8px;
+    margin-right: 18px;
+  }
 
-    .card {
-        border-radius: 0 0 45px 45px;
-        padding: 40px 40px 35px 40px;
-    }
+  .card-div {
+    margin: 100px auto 0;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 370px);
+    grid-gap: 54px;
+    justify-content: center;
+  }
 
-    .cart {
-        padding: 15px;
-        border-radius: 8px 8px 23px 8px;
-        margin-right: 18px;
-    }
+  .container {
+    max-width: 1683px;
+  }
 
-    .card-div {
-        margin: 100px auto 0;
-        padding: 0 20px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, 370px);
-        grid-gap: 54px;
-        justify-content: center;
-    }
-
-    .container {
-        max-width: 1683px;
-    }
-
-    .cart img {
-        height: 23px;
-        width: 23px;
-    }
+  .cart img {
+    height: 23px;
+    width: 23px;
+  }
 }

@@ -16,41 +16,75 @@
 <body>
   <app-root></app-root>
 
-  <div class="home__shape-1"></div>
+  <!-- <div class="home__shape-1"></div>
   <div class="home__shape-2"></div>
   <div class="home__shape-3"></div>
   <div class="home__shape-4"></div>
-  <div class="home__shape-5"></div>
+  <div class="home__shape-5"></div> -->
 
-  <script>
-    window.addEventListener('load', checkHeight);
-    window.addEventListener('resize', checkHeight);
+  <!-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Sélectionnez vos shapes
+      var shapes = document.querySelectorAll('.home__shape-1, .home__shape-2, .home__shape-3, .home__shape-4, .home__shape-5');
+  
+      // Sélectionnez app-root
+      var appRoot = document.querySelector('app-root');
+  
+      // Fonction pour positionner les shapes en fonction de la hauteur de app-root
+      function positionShapes() {
+          var appRootRect = appRoot.getBoundingClientRect();
+          var appRootBottom = appRootRect.top + appRootRect.height;
+  
+          shapes.forEach(function(shape) {
+              var shapeRect = shape.getBoundingClientRect();
+              var shapeBottom = shapeRect.top + shapeRect.height;
+  
+              // Si la position du bas de la forme est inférieure au bas de app-root
+              if (shapeBottom > appRootBottom) {
+                  shape.style.display = 'none'; // Masquer la forme
+              } else {
+                  shape.style.display = 'block'; // Sinon, afficher la forme
+              }
+          });
+      }
+  
+      // Appelez la fonction au chargement de la page et lors du redimensionnement de la fenêtre
+      positionShapes();
+      window.addEventListener('resize', positionShapes);
+  });
+  
+  
+  </script> -->
 
-    function checkHeight() {
-      const shapes = [
-        { selector: '.home__shape-1', minHeight: 0 },
-        { selector: '.home__shape-2', minHeight: 3000 },
-        { selector: '.home__shape-3', minHeight: 3500 },
-        { selector: '.home__shape-4', minHeight: 4000 },
-        { selector: '.home__shape-5', minHeight: 3800 }
-      ];
 
-      const bodyHeight = document.body.offsetHeight;
-      const footerHeight = document.querySelector('.footer').offsetHeight;
-      const totalHeight = bodyHeight - footerHeight;
 
-      shapes.forEach(shape => {
-        const shapeElement = document.querySelector(shape.selector);
-        if (shapeElement) {
-          if (totalHeight > shape.minHeight) {
-            shapeElement.style.display = 'block';
-          } else {
-            shapeElement.style.display = 'none';
-          }
-        }
-      });
+<!-- window.addEventListener('load', checkHeight);
+window.addEventListener('resize', checkHeight);
+
+function checkHeight() {
+  const shapes = [
+    { selector: '.home__shape-1', minHeight: 0 },
+    { selector: '.home__shape-2', minHeight: 3000 },
+    { selector: '.home__shape-3', minHeight: 3500 },
+    { selector: '.home__shape-4', minHeight: 4000 },
+    { selector: '.home__shape-5', minHeight: 3800 }
+  ];
+
+  const bodyHeight = document.body.offsetHeight;
+  const footerHeight = document.querySelector('.footer').offsetHeight;
+  const totalHeight = bodyHeight - footerHeight;
+
+  shapes.forEach(shape => {
+    const shapeElement = document.querySelector(shape.selector);
+    if (shapeElement) {
+      if (totalHeight > shape.minHeight) {
+        shapeElement.style.display = 'block';
+      } else {
+        shapeElement.style.display = 'none';
+      }
     }
-  </script>
+  });
+} -->
 </body>
 
 </html>

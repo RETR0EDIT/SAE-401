@@ -1,44 +1,77 @@
-<div class="panier-item-container" *ngFor="let item of cart; let i = index">
-  <div class="price-indication">
-    <p>Prix</p>
-    <hr />
-  </div>
-  <div class="er-part">
-    <div class="img-item-panier">
-      <img [src]="'../../../assets/ressources/images/box-sushi/carée/' + item.box.image ">
+<section id="panier">
+  <div class="container-panier">
+    <div class="btn">
+      <a href="#"><img src="../../../assets/ressources/icons/Chevron_Left_.svg" alt="" /> Retourner aux boxes</a>
     </div>
-    <div class="info-item-panier">
-      <div class="nom-prix">
-        <h6 class="nom-item">{{ item.box.nom }}</h6>
-        <h5 class="prix-item">{{ item.box.prix * item.quantity }}€</h5>
-      </div>
-      <div class="container-item-info">
-        <div class="saveur">
-          <p>Saveurs :</p>
-          <p>{{ item.box.saveurs }}</p>
-        </div>
-        <div class="composition">
-          <p>Composition :</p>
-          <p>{{ item.box.nom_aliment }}</p>
-        </div>
-        <div class="select-supr-div">
-          <div class="container-select-choix">
-            <div class="select-choix">
-              <label for="quantity">Qte:</label>
-              <select id="quantity" name="quantity">
-                <option [value]="item.quantity">{{ item.quantity }}</option>
-              </select>
+    <div class="container-window">
+
+      <div class="item-panier-div">
+
+        <h3 class="panier">Votre panier</h3>
+        <div class="panier-item-container" *ngFor="let item of cart; let i = index">
+          <div class="price-indication">
+            <p>Prix</p>
+            <hr />
+          </div>
+          <div class="er-part">
+            <div class="img-item-panier">
+              <img [src]="'../../../assets/ressources/images/box-sushi/carée/' + item.box.image ">
             </div>
-          </div>
-          <div class="btn-supr">
-            <button (click)="removeFromCart(i)">Supprimer </button>
+            <div class="info-item-panier">
+              <div class="nom-prix">
+                <h6 class="nom-item">{{ item.box.nom }}</h6>
+                <h5 class="prix-item">{{ item.box.prix * item.quantity }}€</h5>
+              </div>
+              <div class="container-item-info">
+                <div class="saveur">
+                  <p>Saveurs :</p>
+                  <p>{{ item.box.saveurs }}</p>
+                </div>
+                <div class="composition">
+                  <p>Composition :</p>
+                  <p>{{ item.box.nom_aliment }}</p>
+                </div>
+                <div class="select-supr-div">
+                  <div class="container-select-choix">
+                    <div class="select-choix">
+                      <label for="quantity">Qte:</label>
+                      <select id="quantity" name="quantity">
+                        <option [value]="item.quantity">{{ item.quantity }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="btn-supr">
+                    <button (click)="removeFromCart(i)">Supprimer </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="nombre-box-choix">
+              <button class="add">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                </svg>
+              </button>
+              <h4 class="number-box">{{ item.quantity }}</h4>
+              <button class="less">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M5 11V13H19V11H5Z"></path>
+                </svg>
+              </button>
+            </div>
+            <hr />
           </div>
         </div>
+
       </div>
+
+      <div class="resume-panier">
+        <h3>Résumé</h3>
+        <p>Sous total(4 articles) : 2500€</p>
+        <button>Finaliser ma commande</button>
+      </div>
+
     </div>
-    <div class="nombre-box-choix">
-      <h4 class="number-box">{{ item.quantity }}</h4>
-    </div>
-    <hr />
   </div>
-</div>
+
+</section>

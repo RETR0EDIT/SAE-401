@@ -3,7 +3,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
       <div class="logo-div">
         <img src="../../../assets/ressources/logo/logo.svg" alt="">
-        <h3>LOGO</h3>
+        <h3>Hako Shi</h3>
       </div>
       <div class="title-div">
         <h2>S'inscrire</h2>
@@ -51,7 +51,7 @@
           </div>
           <div class="div-form numero-voie">
             <label for="numero-voie">Numéro de voie</label>
-            <input type="text" formControlName="numero_voie" required>
+            <input type="number" formControlName="numero_voie" required>
             <div *ngIf="numero_voie?.invalid && (numero_voie?.dirty || numero_voie?.touched)" class="error">
               Veuillez entrer un numéro de voie.
             </div>
