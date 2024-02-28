@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 28 fév. 2024 à 12:07
+-- Généré le : mer. 28 fév. 2024 à 17:51
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -40,14 +40,14 @@ CREATE TABLE `acheter` (
 
 CREATE TABLE `aliment` (
   `id_aliment` int(11) NOT NULL,
-  `nom` varchar(50) NOT NULL
+  `nom_aliment` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `aliment`
 --
 
-INSERT INTO `aliment` (`id_aliment`, `nom`) VALUES
+INSERT INTO `aliment` (`id_aliment`, `nom_aliment`) VALUES
 (1, 'California Saumon Avocat'),
 (2, 'Sushi Saumon'),
 (3, 'Spring Avocat Cheese'),
@@ -280,16 +280,16 @@ CREATE TABLE `saveur` (
 -- Déchargement des données de la table `saveur`
 --
 
-INSERT INTO `saveur` (`id_saveur`,`nom`) VALUES
-(1,'avocat'),
-(2,'cheese'),
-(3,'coriandre'),
-(4,'crevette'),
-(5,'saumon'),
-(6,'seriole lalandi'),
-(7,'spicy'),
-(8,'thon'),
-(9,'viande');
+INSERT INTO `saveur` (`id_saveur`, `nom`) VALUES
+(1, 'avocat'),
+(2, 'cheese'),
+(3, 'coriandre'),
+(4, 'crevette'),
+(5, 'saumon'),
+(6, 'seriole lalandi'),
+(7, 'spicy'),
+(8, 'thon'),
+(9, 'viande');
 
 --
 -- Index pour les tables déchargées
