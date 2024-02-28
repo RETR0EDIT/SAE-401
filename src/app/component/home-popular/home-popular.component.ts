@@ -4,12 +4,8 @@ interface Box {
   nom: string;
   prix: number;
   image: string;
-<<<<<<< HEAD
   saveurs: string;
-=======
-  saveur: string;
   id_boxe: string;
->>>>>>> 1c775c65fd80a9ac90e157e2f961a1900fdf6617
 }
 
 @Component({

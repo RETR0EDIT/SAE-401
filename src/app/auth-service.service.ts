@@ -15,7 +15,7 @@ export class AuthService {
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   constructor(private cookieService: CookieService, private http: HttpClient, private localStorage: LocalStorageService) {
-    // Récupérer le token du stockage local lors de l'initialisation du service
+   
     const savedToken = this.localStorage.getItem('authToken');
     if (savedToken) {
       this.token = savedToken;
@@ -32,11 +32,16 @@ export class AuthService {
   }
 
   logout(): void {
-    this.token = '';
-    // Supprimer le token du stockage local
-    this.localStorage.removeItem('authToken');
-    this.isLoggedInSubject.next(false);
+    this.http.post('http://localhost/SAE-401/api/signout.php', {})
+      .subscribe(response => {
+        this.token = '';
+        this.localStorage.removeItem('authToken');
+        this.isLoggedInSubject.next(false);
+      }, error => {
+        console.error('Erreur lors de la déconnexion :', error);
+      });
   }
+
 
   isUserLoggedIn(): Observable<boolean> {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.token);

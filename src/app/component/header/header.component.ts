@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../auth-service.service'; 
 import { Router } from '@angular/router';
 import { CartService } from '../../cart.service';
-
+import { SharedService } from '../../shared.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,10 +11,10 @@ import { CartService } from '../../cart.service';
 export class HeaderComponent implements OnInit {
   isMenuOpen: boolean = false;
   isLoggedIn: boolean = false;
-  totalItems: number = 0;
+  
 
-  constructor(private authService: AuthService, private router: Router, private cartService: CartService) { }
-
+  constructor(private authService: AuthService, private router: Router, private cartService: CartService, private sharedService: SharedService) { }
+  totalItems: number =0;
   ngOnInit() {
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
@@ -41,23 +41,7 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-
-
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const header = document.getElementById('header');
-    if (window.scrollY >= 50) {
-      header?.classList.add('scroll-header');
-    } else {
-      header?.classList.remove('scroll-header');
-    }
-  }
-  getTotalItems() {
-    let cart = this.cartService.getCart();
-    let total = 0;
-    for (let item of cart) {
-      total += item.quantity;
-    }
-    return total;
+  someFunction() {
+    this.sharedService.getTotalItems();
   }
 }

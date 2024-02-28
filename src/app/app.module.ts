@@ -17,6 +17,7 @@ import { ProductPageComponent } from './component/product-page/product-page.comp
 import { FormsModule } from '@angular/forms';
 import { ProfilComponent } from './component/profil/profil.component';
 import { CartService } from './cart.service';
+import { SharedService } from './shared.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { CartService } from './cart.service';
     BoxDetailsComponent,
     PanierComponent,
     ProductPageComponent,
-    ProfilComponent
+    ProfilComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +42,8 @@ import { CartService } from './cart.service';
     FormsModule
   ],
   providers: [
-    CartService
+    CartService,
+    SharedService
   ],
   bootstrap: [AppComponent]
 })
