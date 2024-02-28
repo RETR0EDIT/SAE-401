@@ -22,27 +22,9 @@ export class PanierComponent implements OnInit {
     this.cartService.cart$.subscribe(cart => {
       this.cart = cart;
     });
-    this.loadData();
   }
   
   removeFromCart(index: number) {
     this.cartService.removeFromCart(index);
-  }
-  
-  loadData() {
-    const userId = localStorage.getItem('userId');
-    const authToken = localStorage.getItem('authToken');
-    this.cartService.setUserId(userId);
-    if (!userId || !authToken) {
-      window.location.href = 'http://localhost:4200/login';
-    } else {
-      this.http.get<LoginResponse>('http://localhost/sae-401/api/check-login.php', { withCredentials: true }).subscribe(
-        response => {
-          if (response && response.message === "Vous n'êtes pas connecté.") {
-            window.location.href = 'http://localhost:4200/login';
-          }
-        }
-      );
-    }
   }
 }

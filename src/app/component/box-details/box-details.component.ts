@@ -7,8 +7,8 @@ interface Box {
   nom: string;
   prix: number;
   image: string;
-  composition: string;
-  saveur: string;
+  nom_aliment: string;
+  saveurs: string;
   id_boxe: string;
 }
 
@@ -22,7 +22,7 @@ export class BoxDetailsComponent implements OnInit {
   box: Box | null = null;
   valeur: number = 1;
   total: number = 0;
-  url = 'http://localhost/SAE-401/api/controller/DetailsController.php';
+  url = 'http://localhost/SAE-401/api/details/Read_one.php';
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private cartService: CartService) { }
 

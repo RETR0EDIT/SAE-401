@@ -5,8 +5,8 @@ export interface Box {
   nom: string;
   prix: number;
   image: string;
-  composition: string;
-  saveur: string;
+  nom_aliment: string;
+  saveurs: string;
   id_boxe: string;
 }
 

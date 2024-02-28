@@ -1,0 +1,17 @@
+[{
+  "id_client": "6",
+  "nom": "admin",
+  "prenom": " ",
+  "adresse": "admin",
+  "email": "admin@gmail.com",
+  "password": "$2y$10$1dPumd8bktNeFDe5Sqoaw.rFuAHKOpL.wcFKKfsf3TEfnqYT8DoUa",
+  "role": "admin"
+}, {
+  "id_client": "81",
+  "nom": "nn",
+  "prenom": "nn",
+  "adresse": "nn nn, nn",
+  "email": "nn@nn",
+  "password": "$2y$10$0aKEKFPRiggnJhI0U5FqWuwzyAV5zdWJoMElaRGtmG227\/9Tj8mXa",
+  "role": "user"
+}]

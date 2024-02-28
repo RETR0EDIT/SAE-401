@@ -6,7 +6,7 @@ interface Box {
   nom: string;
   prix: number;
   image: string;
-  saveur: string;
+  saveurs: string;
   id_boxe: string;
 }
 
@@ -23,8 +23,11 @@ export class ProductPageComponent {
 
   ngOnInit(): void {
     this.http.get<Box[]>(this.url).subscribe(boxes => {
-      this.boxes = boxes;
-      console.log('Boîtes récupérées de l\'API :', boxes);
+      this.boxes = boxes.map(box => ({
+        ...box,
+        saveurs: box.saveurs.replace(/,/g, ', ')
+      }));
+      console.log('Boîtes récupérées de l\'API :', this.boxes);
     }, error => {
       console.error('Erreur lors de la récupération des boîtes de l\'API :', error);
     });

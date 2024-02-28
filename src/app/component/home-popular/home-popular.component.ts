@@ -4,7 +4,7 @@ interface Box {
   nom: string;
   prix: number;
   image: string;
-  saveur: string;
+  saveurs: string;
 }
 
 @Component({
@@ -14,15 +14,16 @@ interface Box {
 })
 export class HomePopularComponent implements OnInit {
   boxes: Box[] = [];
-  url = 'http://localhost/SAE-401/api/controller/BoxController.php';
+  url = 'http://localhost/SAE-401/api/box/read.php';
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.http.get<Box[]>(this.url).subscribe(boxes => {
-      this.boxes = boxes.slice(0, 4);
+      this.boxes = boxes.map(box => ({
+        ...box,
+        saveurs: box.saveurs.replace(/,/g, ', ')
+      })).slice(0, 4);
     });
   }
-
-  
 }

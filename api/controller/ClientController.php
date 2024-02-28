@@ -16,13 +16,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch ($method) {
     case 'GET':
-        $result = $client->getAllClients();
-        $clients = array();
-
-        while ($row = $result->fetch_assoc()) {
-            $clients[] = $row;
-        }
-
+        $clients = $client->read();
         http_response_code(200);
         echo json_encode($clients);
         break;
@@ -37,4 +31,4 @@ switch ($method) {
         break;
 }
 
-$db->close();
+$db = null;
