@@ -8,11 +8,12 @@
       <div class="item-panier-div">
 
         <h3 class="panier">Votre panier</h3>
-        <div class="panier-item-container" *ngFor="let item of cart; let i = index">
+        <div class="panier-item-container" >
           <div class="price-indication">
             <p>Prix</p>
             <hr />
           </div>
+          <div class="item-panier" *ngFor="let item of cart; let i = index">
           <div class="er-part">
             <div class="img-item-panier">
               <img [src]="'../../../assets/ressources/images/box-sushi/carée/' + item.box.image ">
@@ -60,6 +61,7 @@
               </button>
             </div>
             <hr />
+          </div>
           </div>
         </div>
 
