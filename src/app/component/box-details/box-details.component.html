@@ -8,15 +8,16 @@
         </div>
         <div class="right-element-box">
           <div id="info-box">
-            <div id="composition-container">
+            <div id="composition-container" *ngIf="box">
               <p class="subtitle-text" id="composition-title">Composition: </p>
-              <p class="info-text" id="composition-text" *ngIf="box">{{ box.nom_aliment }}</p>
+              <p class="info-text" id="composition-text" *ngIf="box" [innerHTML]="getComposition()">
+                {{ getComposition() }}
+              </p>
             </div>
             <div id="composition-container">
               <p class="subtitle-text"><span id="saveur-title">Saveurs:</span>
                 <span class="info-text" id="saveur-text" *ngIf="box"> {{ box.saveurs }}</span>
               </p>
-
 
             </div>
           </div>

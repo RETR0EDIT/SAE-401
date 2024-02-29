@@ -38,7 +38,7 @@ class Details
     {
         $sql = "SELECT b.id_boxe,
         b.nom,
-        COUNT(c.id_aliment) AS pieces,
+        b.pieces,
         b.prix,
         b.image,
         GROUP_CONCAT(DISTINCT s.nom) AS saveurs,
@@ -53,7 +53,7 @@ class Details
         GROUP BY b.id_boxe, a.nom_aliment";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 

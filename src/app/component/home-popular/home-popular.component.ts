@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-interface Box {
-  nom: string;
-  prix: number;
-  image: string;
-  saveurs: string;
-  id_boxe: string;
-}
+import { Box } from '../../box.interface';
 
 @Component({
   selector: 'app-home-popular',
@@ -23,8 +17,8 @@ export class HomePopularComponent implements OnInit {
     this.http.get<Box[]>(this.url).subscribe(boxes => {
       this.boxes = boxes.map(box => ({
         ...box,
-        saveurs: box.saveurs.replace(/,/g, ', ')
+        saveurs: Array.isArray(box.saveurs) ? box.saveurs.join(', ') : box.saveurs
       })).slice(0, 4);
     });
   }
-}
+};

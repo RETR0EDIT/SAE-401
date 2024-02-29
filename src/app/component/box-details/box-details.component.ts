@@ -1,16 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { CartService } from '../../cart.service'; 
+import { CartService } from '../../cart.service';
+import { Box } from '../../box.interface';
 
-interface Box {
-  nom: string;
-  prix: number;
-  image: string;
-  nom_aliment: string;
-  saveurs: string;
-  id_boxe: string;
-}
 
 @Component({
   selector: 'app-box-details',
@@ -30,9 +23,11 @@ export class BoxDetailsComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const id_boxe = params['id'];
       if (id_boxe) {
-        this.http.get<Box>(`${this.url}?id=${id_boxe}`).subscribe(box => {
-          this.box = box;
-          this.total = this.box.prix;
+        this.http.get<Box[]>(`${this.url}?id=${id_boxe}`).subscribe(boxes => {
+          if (boxes.length > 0) {
+            this.box = boxes[0];
+            this.total = this.box.prix;
+          }
         });
       }
     });
@@ -64,5 +59,12 @@ export class BoxDetailsComponent implements OnInit {
     if (this.box) {
       this.cartService.addToCart(this.box, this.valeur);
     }
+  }
+
+  getComposition(): string {
+    if (this.box && this.box.aliments) {
+      return this.box.aliments.map(aliment => `${aliment.nom} x${aliment.quantite}`).join('<br>');
+    }
+    return '';
   }
 }

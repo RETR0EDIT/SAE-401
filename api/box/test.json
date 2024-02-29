@@ -1,10 +1,10 @@
 [{
   "id_boxe": "1",
   "nom": "Tasty Blend",
-  "pieces": "3",
+  "pieces": "12",
   "prix": "12.50",
   "image": "Tasty Blend.png",
-  "saveurs": "avocat,cheese,coriandre",
+  "saveurs": ["avocat", "cheese", "saumon"],
   "aliments": [{
     "nom": "California pacific",
     "quantite": "3.00"
@@ -24,10 +24,10 @@
 }, {
   "id_boxe": "2",
   "nom": "Amateur Mix",
-  "pieces": "4",
+  "pieces": "18",
   "prix": "15.90",
   "image": "Amateur Mix.png",
-  "saveurs": "avocat,cheese,coriandre,crevette",
+  "saveurs": ["avocat", "cheese", "coriandre", "crevette"],
   "aliments": [{
     "nom": "California Saumon Avocat",
     "quantite": "3.00"
@@ -47,10 +47,10 @@
 }, {
   "id_boxe": "3",
   "nom": "Saumon Original",
-  "pieces": "2",
+  "pieces": "11",
   "prix": "12.50",
   "image": "Saumon Original.png",
-  "saveurs": "avocat,cheese",
+  "saveurs": ["avocat", "saumon"],
   "aliments": [{
     "nom": "California Saumon Avocat",
     "quantite": "6.00"
@@ -64,10 +64,10 @@
 }, {
   "id_boxe": "4",
   "nom": "Salmon Lovers",
-  "pieces": "3",
+  "pieces": "18",
   "prix": "15.90",
   "image": "Salmon Lovers.png",
-  "saveurs": "avocat,cheese,crevette",
+  "saveurs": ["avocat", "coriandre", "saumon"],
   "aliments": [{
     "nom": "California Saumon Avocat",
     "quantite": "6.00"
@@ -84,10 +84,10 @@
 }, {
   "id_boxe": "5",
   "nom": "Salmon Classic",
-  "pieces": "1",
+  "pieces": "10",
   "prix": "15.90",
   "image": "Salmon Classic.png",
-  "saveurs": "avocat",
+  "saveurs": ["saumon"],
   "aliments": [{
     "nom": "Edamame\/Salade de chou",
     "quantite": "1.00"
@@ -98,10 +98,10 @@
 }, {
   "id_boxe": "6",
   "nom": "Master Mix",
-  "pieces": "4",
+  "pieces": "12",
   "prix": "15.90",
   "image": "Master Mix.png",
-  "saveurs": "avocat,cheese,coriandre,saumon",
+  "saveurs": ["avocat", "saumon", "thon"],
   "aliments": [{
     "nom": "California Saumon Avocat",
     "quantite": "3.00"
@@ -121,10 +121,10 @@
 }, {
   "id_boxe": "7",
   "nom": "Sunrise",
-  "pieces": "4",
+  "pieces": "18",
   "prix": "15.90",
   "image": "Sunrise.png",
-  "saveurs": "avocat,cheese,saumon,seriole lalandi",
+  "saveurs": ["avocat", "cheese", "saumon", "thon"],
   "aliments": [{
     "nom": "California Saumon Avocat",
     "quantite": "6.00"
@@ -141,10 +141,10 @@
 }, {
   "id_boxe": "8",
   "nom": "Sando Box Chicken Katsu",
-  "pieces": "4",
+  "pieces": "13",
   "prix": "15.90",
   "image": "Sando Box Chicken Katsu.png",
-  "saveurs": "avocat,coriandre,saumon,seriole lalandi",
+  "saveurs": ["avocat", "cheese", "saumon", "viande"],
   "aliments": [{
     "nom": "California Saumon Avocat",
     "quantite": "6.00"
@@ -164,10 +164,10 @@
 }, {
   "id_boxe": "9",
   "nom": "Sando Box Salmon Aburi",
-  "pieces": "3",
+  "pieces": "13",
   "prix": "15.90",
   "image": "Sando Box Salmon Aburi.png",
-  "saveurs": "avocat,cheese,seriole lalandi",
+  "saveurs": ["avocat", "saumon", "thon"],
   "aliments": [{
     "nom": "California Saumon Avocat",
     "quantite": "6.00"
@@ -184,10 +184,10 @@
 }, {
   "id_boxe": "10",
   "nom": "Super Salmon",
-  "pieces": "4",
+  "pieces": "24",
   "prix": "19.90",
   "image": "Super Salmon.png",
-  "saveurs": "avocat,crevette,saumon,seriole lalandi",
+  "saveurs": ["avocat", "cheese", "coriandre", "saumon"],
   "aliments": [{
     "nom": "California Saumon Avocat",
     "quantite": "6.00"
@@ -201,34 +201,76 @@
 }, {
   "id_boxe": "11",
   "nom": "California Dream",
-  "pieces": "0",
+  "pieces": "24",
   "prix": "19.90",
   "image": "California Dream.png",
-  "saveurs": "avocat,crevette,saumon,seriole lalandi,spicy,thon",
+  "saveurs": ["avocat", "crevette", "saumon", "spicy", "thon", "viande"],
   "aliments": [{
-    "nom": null,
-    "quantite": null
+    "nom": "California Chicken Katsu",
+    "quantite": "6.00"
+  }, {
+    "nom": "California Crevette",
+    "quantite": "6.00"
+  }, {
+    "nom": "California Saumon Avocat",
+    "quantite": "6.00"
+  }, {
+    "nom": "California Thon Cuit Avocat",
+    "quantite": "6.00"
+  }, {
+    "nom": "Edamame\/Salade de chou",
+    "quantite": "1.00"
   }]
 }, {
   "id_boxe": "12",
   "nom": "Gourmet Mix",
-  "pieces": "0",
+  "pieces": "22",
   "prix": "24.50",
   "image": "Gourmet Mix.png",
-  "saveurs": "avocat,coriandre,crevette,saumon,seriole lalandi,viande",
+  "saveurs": ["avocat", "coriandre", "saumon", "seriole lalandi", "spicy", "viande"],
   "aliments": [{
-    "nom": null,
-    "quantite": null
+    "nom": "California Thon Avocat",
+    "quantite": "6.00"
+  }, {
+    "nom": "Edamame\/Salade de chou",
+    "quantite": "1.00"
+  }, {
+    "nom": "Maki Cheese Avocat",
+    "quantite": "6.00"
+  }, {
+    "nom": "Maki Salmon Roll",
+    "quantite": "6.00"
+  }, {
+    "nom": "Spring Avocat Cheese",
+    "quantite": "6.00"
+  }, {
+    "nom": "Spring Saumon Avocat",
+    "quantite": "6.00"
   }]
 }, {
   "id_boxe": "13",
   "nom": "Fresh Mix",
-  "pieces": "0",
+  "pieces": "22",
   "prix": "24.50",
   "image": "Fresh Mix.png",
-  "saveurs": "cheese,coriandre,crevette,saumon,seriole lalandi",
+  "saveurs": ["avocat", "cheese", "saumon", "spicy", "thon"],
   "aliments": [{
-    "nom": null,
-    "quantite": null
+    "nom": "California pacific",
+    "quantite": "6.00"
+  }, {
+    "nom": "Edamame\/Salade de chou",
+    "quantite": "1.00"
+  }, {
+    "nom": "Maki Salmon Roll",
+    "quantite": "6.00"
+  }, {
+    "nom": "Signature Rock n Roll",
+    "quantite": "6.00"
+  }, {
+    "nom": "Sushi Salmon",
+    "quantite": "6.00"
+  }, {
+    "nom": "Sushi Saumon Tsukudani",
+    "quantite": "2.00"
   }]
 }]

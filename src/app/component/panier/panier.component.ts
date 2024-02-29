@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CartService, Box } from '../../cart.service';
+import { CartService } from '../../cart.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SharedService } from '../../shared.service';
+import { Box } from '../../box.interface';
 
 interface LoginResponse {
   message: string;

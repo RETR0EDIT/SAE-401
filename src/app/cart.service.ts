@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
-export interface Box {
-  nom: string;
-  prix: number;
-  image: string;
-  nom_aliment: string;
-  saveurs: string;
-  id_boxe: string;
-}
+import { Box } from './box.interface';
+
+
 
 @Injectable({
   providedIn: 'root'

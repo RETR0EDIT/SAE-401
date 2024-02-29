@@ -30,7 +30,7 @@ class Box
             "
         SELECT b.id_boxe,
         b.nom,
-        COUNT(c.id_aliment) AS pieces,
+        b.pieces,
         b.prix,
         b.image,
         GROUP_CONCAT(DISTINCT s.nom) AS saveurs,
@@ -57,7 +57,7 @@ class Box
                     'pieces' => $row['pieces'],
                     'prix' => $row['prix'],
                     'image' => $row['image'],
-                    'saveurs' => $row['saveurs'],
+                    'saveurs' => explode(',', $row['saveurs']),
                     'aliments' => [],
                 ];
             }

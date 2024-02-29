@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mer. 28 fév. 2024 à 17:51
+-- Généré le : jeu. 29 fév. 2024 à 16:54
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -81,27 +81,28 @@ CREATE TABLE `boxes` (
   `id_boxe` int(11) NOT NULL,
   `nom` varchar(100) NOT NULL,
   `prix` decimal(15,2) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `image` varchar(255) NOT NULL,
+  `pieces` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `boxes`
 --
 
-INSERT INTO `boxes` (`id_boxe`, `nom`, `prix`, `image`) VALUES
-(1, 'Tasty Blend', 12.50, 'Tasty Blend.png'),
-(2, 'Amateur Mix', 15.90, 'Amateur Mix.png'),
-(3, 'Saumon Original', 12.50, 'Saumon Original.png'),
-(4, 'Salmon Lovers', 15.90, 'Salmon Lovers.png'),
-(5, 'Salmon Classic', 15.90, 'Salmon Classic.png'),
-(6, 'Master Mix', 15.90, 'Master Mix.png'),
-(7, 'Sunrise', 15.90, 'Sunrise.png'),
-(8, 'Sando Box Chicken Katsu', 15.90, 'Sando Box Chicken Katsu.png'),
-(9, 'Sando Box Salmon Aburi', 15.90, 'Sando Box Salmon Aburi.png'),
-(10, 'Super Salmon', 19.90, 'Super Salmon.png'),
-(11, 'California Dream', 19.90, 'California Dream.png'),
-(12, 'Gourmet Mix', 24.50, 'Gourmet Mix.png'),
-(13, 'Fresh Mix', 24.50, 'Fresh Mix.png');
+INSERT INTO `boxes` (`id_boxe`, `nom`, `prix`, `image`, `pieces`) VALUES
+(1, 'Tasty Blend', 12.50, 'Tasty Blend.png', 12),
+(2, 'Amateur Mix', 15.90, 'Amateur Mix.png', 18),
+(3, 'Saumon Original', 12.50, 'Saumon Original.png', 11),
+(4, 'Salmon Lovers', 15.90, 'Salmon Lovers.png', 18),
+(5, 'Salmon Classic', 15.90, 'Salmon Classic.png', 10),
+(6, 'Master Mix', 15.90, 'Master Mix.png', 12),
+(7, 'Sunrise', 15.90, 'Sunrise.png', 18),
+(8, 'Sando Box Chicken Katsu', 15.90, 'Sando Box Chicken Katsu.png', 13),
+(9, 'Sando Box Salmon Aburi', 15.90, 'Sando Box Salmon Aburi.png', 13),
+(10, 'Super Salmon', 19.90, 'Super Salmon.png', 24),
+(11, 'California Dream', 19.90, 'California Dream.png', 24),
+(12, 'Gourmet Mix', 24.50, 'Gourmet Mix.png', 22),
+(13, 'Fresh Mix', 24.50, 'Fresh Mix.png', 22);
 
 -- --------------------------------------------------------
 
@@ -183,7 +184,24 @@ INSERT INTO `contenir` (`id_boxe`, `id_aliment`, `quantite`) VALUES
 (9, 5, 1.00),
 (10, 1, 6.00),
 (10, 6, 6.00),
-(10, 7, 6.00);
+(10, 7, 6.00),
+(11, 1, 6.00),
+(11, 14, 6.00),
+(11, 11, 6.00),
+(11, 15, 6.00),
+(11, 5, 1.00),
+(12, 3, 6.00),
+(12, 6, 6.00),
+(12, 7, 6.00),
+(12, 8, 6.00),
+(12, 9, 6.00),
+(12, 5, 1.00),
+(13, 20, 6.00),
+(13, 6, 6.00),
+(13, 4, 6.00),
+(13, 21, 6.00),
+(13, 22, 2.00),
+(13, 5, 1.00);
 
 -- --------------------------------------------------------
 
@@ -217,53 +235,52 @@ CREATE TABLE `posseder` (
 INSERT INTO `posseder` (`id_boxe`, `id_saveur`) VALUES
 (1, 1),
 (1, 2),
-(1, 3),
+(1, 5),
 (2, 1),
 (2, 2),
 (2, 3),
 (2, 4),
 (3, 1),
-(3, 2),
+(3, 5),
 (4, 1),
-(4, 2),
-(4, 4),
-(5, 1),
+(4, 3),
+(4, 5),
+(5, 5),
 (6, 1),
-(6, 2),
-(6, 3),
 (6, 5),
+(6, 8),
 (7, 1),
 (7, 2),
 (7, 5),
-(7, 6),
+(7, 8),
 (8, 1),
-(8, 3),
+(8, 2),
 (8, 5),
-(8, 6),
+(8, 9),
 (9, 1),
-(9, 2),
-(9, 6),
+(9, 5),
+(9, 8),
 (10, 1),
-(10, 4),
+(10, 2),
+(10, 3),
 (10, 5),
-(10, 6),
 (11, 1),
 (11, 4),
 (11, 5),
-(11, 6),
 (11, 7),
 (11, 8),
+(11, 9),
 (12, 1),
 (12, 3),
-(12, 4),
 (12, 5),
 (12, 6),
+(12, 7),
 (12, 9),
+(13, 1),
 (13, 2),
-(13, 3),
-(13, 4),
 (13, 5),
-(13, 6);
+(13, 7),
+(13, 8);
 
 -- --------------------------------------------------------
 
