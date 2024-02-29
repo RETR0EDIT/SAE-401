@@ -33,7 +33,7 @@ export class ProfilComponent implements OnInit {
   }
 
   getProfilInfo(id_client: string): Observable<any> {
-    const url = `http://localhost/sae-401/api/controller/ProfilController.php?id=${id_client}`;
+    const url = `http://localhost/sae-401/api/profil/Read_one.php?id=${id_client}`;
     return this.http.get(url);
   }
 }

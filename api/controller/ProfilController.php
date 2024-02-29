@@ -10,6 +10,6 @@ $user = new Profil($db);
 
 $id = isset($_GET['id']) ? $_GET['id'] : die('ERROR: User ID not found.');
 
-$userInfo = $user->getUserInfo($id);
+$userInfo = $user->readOne($id);
 header('Content-Type: application/json');
 echo json_encode($userInfo);
