@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Box } from '../../box.interface';
 
-interface Box {
-  nom: string;
-  prix: number;
-  image: string;
-  saveurs: string;
-  id_boxe: string;
-}
 
 @Component({
   selector: 'app-product-page',
@@ -25,7 +19,7 @@ export class ProductPageComponent {
     this.http.get<Box[]>(this.url).subscribe(boxes => {
       this.boxes = boxes.map(box => ({
         ...box,
-        saveurs: box.saveurs.replace(/,/g, ', ')
+        saveurs: Array.isArray(box.saveurs) ? box.saveurs.join(', ') : box.saveurs
       }));
       console.log('Boîtes récupérées de l\'API :', this.boxes);
     }, error => {
