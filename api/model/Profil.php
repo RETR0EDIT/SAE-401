@@ -3,11 +3,12 @@ class Profil
 {
     private $conn;
     private $table_name = "client";
-
+    public $id;
     public $nom;
     public $prenom;
     public $email;
     public $adresse;
+    public $role;
 
     public function __construct($db)
     {
@@ -25,7 +26,7 @@ class Profil
     // Read
     public function read($id)
     {
-        $query = "SELECT nom, prenom, email, adresse FROM " . $this->table_name . " WHERE id_client = ?";
+        $query = "SELECT nom, prenom, email, role, adresse FROM " . $this->table_name . " WHERE id_client = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $id);
         $stmt->execute();
@@ -34,6 +35,7 @@ class Profil
         $this->prenom = $row['prenom'];
         $this->email = $row['email'];
         $this->adresse = $row['adresse'];
+        $this->role = $row['role'];
         return $row;
     }
 

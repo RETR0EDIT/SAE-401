@@ -3,6 +3,7 @@ import { AuthService } from '../../auth-service.service';
 import { Router } from '@angular/router';
 import { CartService } from '../../cart.service';
 import { SharedService } from '../../shared.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,15 +14,27 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
   
 
-  constructor(private authService: AuthService, private router: Router, private cartService: CartService, private sharedService: SharedService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router, private cartService: CartService, private sharedService: SharedService) { }
   totalItems: number =0;
+  role: string = '';
   ngOnInit() {
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
+      if (isLoggedIn) {
+        this.getUserRole();
+      }
     });
     this.totalItems = this.cartService.getTotalItems();
   }
 
+  getUserRole(): void {
+    let id_client = localStorage.getItem('userId');
+    this.http.get<any>(`http://localhost/sae-401/api/profil/Read_one.php?id=${id_client}`).subscribe(response => {
+      this.role = response.role;
+    }, error => {
+      console.error('Erreur lors de la récupération du rôle de l\'utilisateur :', error);
+    });
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -34,14 +47,16 @@ export class HeaderComponent implements OnInit {
   onLogoutClick(): void {
 
     this.authService.logout();
-
+    this.role = '';
     this.router.navigate(['/']).then(success => {
       if (success) {
       } else {
       }
     });
   }
+  
+
   someFunction() {
-    this.sharedService.getTotalItems();
+    this.totalItems = this.sharedService.getTotalItems();
   }
 }

@@ -16,8 +16,13 @@
         <li class="nav__item">
           <a href="#about" class="nav__link" (click)="closeMenu()">À propos</a>
         </li>
-        <a *ngIf="!isLoggedIn" routerLink="/login" id="login-btn" class="nav-connecter2"><i
+        <li class="nav__item" *ngIf="role === 'admin'">
+          <a href="#contact" class="nav__link" (click)="closeMenu()">Admin</a>
+        </li>
+
+        <a *ngIf="!isLoggedIn" routerLink="/login" id="login-btn" class="nav-connecter2" (click)="closeMenu()"><i
             class="ri-login-box-line"></i> Se connecter</a>
+
         <button *ngIf="isLoggedIn" id="logout-btn" class="nav-connecter2" (click)="onLogoutClick()">
           <i class="ri-logout-box-line"></i> Se déconnecter
         </button>

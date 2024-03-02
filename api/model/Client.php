@@ -47,6 +47,7 @@ class Client
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    //read one client
 
     // Ajouter methode pour creer, maj et suppr des clients
     /**
@@ -65,7 +66,7 @@ class Client
     /**
      * Supprimer un client method DELETE
      */
-    public function  delete()
+    public function  delete($id)
     {
         $query = "DELETE FROM " . $this->table_name . " WHERE id_client=?";
         $stmt = $this->conn->prepare($query);

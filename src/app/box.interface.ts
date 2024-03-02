@@ -8,6 +8,7 @@ export interface Aliment {
     prix: number;
     image: string;
     aliments: Aliment[];
+    alimentsString: string;
     saveurs: string;
     id_boxe: string;
   }

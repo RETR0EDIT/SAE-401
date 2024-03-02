@@ -15,6 +15,7 @@ export class BoxDetailsComponent implements OnInit {
   box: Box | null = null;
   valeur: number = 1;
   total: number = 0;
+  totalString: string = '0.00';
   url = 'http://localhost/SAE-401/api/details/Read_one.php';
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private cartService: CartService) { }
@@ -26,7 +27,7 @@ export class BoxDetailsComponent implements OnInit {
         this.http.get<Box[]>(`${this.url}?id=${id_boxe}`).subscribe(boxes => {
           if (boxes.length > 0) {
             this.box = boxes[0];
-            this.total = this.box.prix;
+            this.updateTotal();
           }
         });
       }
@@ -39,7 +40,7 @@ export class BoxDetailsComponent implements OnInit {
   }
   
   decrement() {
-    if (this.valeur > 0) {
+    if (this.valeur > 1) {
       this.valeur--;
       this.updateTotal();
     }
@@ -48,8 +49,10 @@ export class BoxDetailsComponent implements OnInit {
   updateTotal() {
     if (this.box && this.box.prix) {
       this.total = this.valeur * this.box.prix;
+      this.totalString = this.total.toFixed(2);
     } else {
       this.total = 0;
+      this.totalString = '0.00';
     }
   }
 

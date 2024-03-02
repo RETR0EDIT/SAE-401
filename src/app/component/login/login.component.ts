@@ -30,16 +30,16 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { } // Injectez AuthService
 
   onSubmit() {
-    console.log('Submitting form...');
+    
     if (this.form && this.form.valid) {
-      console.log('Form is valid. Form data:', this.formData);
+      
       this.http.post<ApiResponse>('http://localhost/sae-401/api/login.php', this.formData, { withCredentials: true }).subscribe(
         response => {
-          console.log('Received response from server:', response);
+         
           if (response) {
             if (response.success) {
               console.log('Login successful. Redirecting...');
-              alert(response.success);
+              
               if (response.id_client) {
                 this.authService.setToken(response.success, response.id_client);
               } else {
