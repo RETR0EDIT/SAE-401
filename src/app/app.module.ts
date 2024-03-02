@@ -18,6 +18,11 @@ import { FormsModule } from '@angular/forms';
 import { ProfilComponent } from './component/profil/profil.component';
 import { CartService } from './cart.service';
 import { SharedService } from './shared.service';
+import { AdminComponent } from './component/admin/admin.component';
+import { AdminBoxComponent } from './component/admin-box/admin-box.component';
+import { AdminUserComponent } from './component/admin-user/admin-user.component';
+import { AdminAlimentComponent } from './component/admin-aliment/admin-aliment.component';
+import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,11 @@ import { SharedService } from './shared.service';
     PanierComponent,
     ProductPageComponent,
     ProfilComponent,
+    AdminComponent,
+    AdminBoxComponent,
+    AdminUserComponent,
+    AdminAlimentComponent,
+    AdminSaveurComponent,
   ],
   imports: [
     BrowserModule,

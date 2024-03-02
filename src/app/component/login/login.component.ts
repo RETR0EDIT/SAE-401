@@ -40,13 +40,19 @@ export class LoginComponent {
             if (response.success) {
               console.log('Login successful. Redirecting...');
               
-              if (response.id_client) {
-                this.authService.setToken(response.success, response.id_client);
+              if (response.success && response.id_client) {
+                this.authService.setToken(response.success, response.id_client, '');
+                this.authService.getUserRole(response.id_client).subscribe(role => {
+                  this.authService.userRole = role;
+                }, error => {
+                  console.error('Erreur lors de la récupération du rôle de l\'utilisateur :', error);
+                });
+                this.router.navigate(['/']); 
               } else {
-                // Gérez l'erreur comme vous le souhaitez, par exemple en affichant un message d'erreur
+                
                 console.error('User ID is undefined');
               }
-              this.router.navigate(['/']); // Redirigez l'utilisateur vers la page d'accueil
+              this.router.navigate(['/']);
             }
           }
         },

@@ -8,6 +8,13 @@ import { LoginComponent } from './component/login/login.component';
 import { HomeAboutComponent } from './component/home-about/home-about.component';
 import { BoxDetailsComponent } from './component/box-details/box-details.component';
 import { ProfilComponent } from './component/profil/profil.component';
+import { AdminComponent } from './component/admin/admin.component';
+import { AdminAlimentComponent } from './component/admin-aliment/admin-aliment.component';
+import { AdminBoxComponent } from './component/admin-box/admin-box.component';
+import { AdminUserComponent } from './component/admin-user/admin-user.component';
+import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.component';
+import { AdminGuard } from './admin.guard';
+
 const routes: Routes = [
   { path: "", component: HomeComponent},
   { path: "panier", component: PanierComponent},
@@ -16,7 +23,12 @@ const routes: Routes = [
   { path: "login", component: LoginComponent},
   { path: "about", component: HomeAboutComponent},
   { path: "details", component: BoxDetailsComponent},
-  { path: "profil" , component: ProfilComponent}
+  { path: "profil" , component: ProfilComponent},
+  { path: "admin", component: AdminComponent, canActivate: [AdminGuard]},
+  { path: "admin/aliment", component: AdminAlimentComponent, canActivate: [AdminGuard]},
+  { path: "admin/box", component: AdminBoxComponent, canActivate: [AdminGuard]},
+  { path: "admin/user", component: AdminUserComponent, canActivate: [AdminGuard]},
+  { path: "admin/saveur", component: AdminSaveurComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({

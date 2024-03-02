@@ -29,8 +29,14 @@ export class HeaderComponent implements OnInit {
 
   getUserRole(): void {
     let id_client = localStorage.getItem('userId');
-    this.http.get<any>(`http://localhost/sae-401/api/profil/Read_one.php?id=${id_client}`).subscribe(response => {
-      this.role = response.role;
+    if (id_client === null) {
+      
+      
+      return;
+    }
+    this.authService.getUserRole(id_client).subscribe(role => {
+      this.role = role;
+      this.authService.userRole = role; // Stockez le rôle dans AuthService
     }, error => {
       console.error('Erreur lors de la récupération du rôle de l\'utilisateur :', error);
     });
@@ -49,9 +55,6 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
     this.role = '';
     this.router.navigate(['/']).then(success => {
-      if (success) {
-      } else {
-      }
     });
   }
   

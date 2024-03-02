@@ -1,0 +1,29 @@
+<p>admin-aliment works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>ID Aliment</th>
+      <th>Nom Aliment</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let aliment of aliments$ | async">
+      <td>{{ aliment.id_aliment }}</td>
+      <td>
+        <input type="text" [(ngModel)]="aliment.nom_aliment" [readonly]="!editing[aliment.id_aliment]">
+      </td>
+      <td>
+        <button (click)="editAliment(aliment.id_aliment, aliment.nom_aliment)">
+          {{editing[aliment.id_aliment] ? 'Enregistrer' : 'Modifier'}}
+        </button>
+        <button (click)="deleteAliment(aliment.id_aliment)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>{{ errorMessage }}</p>
+<div *ngIf="showInputs">
+  <input [(ngModel)]="nom_aliment" placeholder="Nom Aliment">
+</div>
+<button (click)="addAliment()">Ajouter un aliment</button>

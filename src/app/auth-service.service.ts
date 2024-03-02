@@ -10,9 +10,11 @@ import { LocalStorageService } from './local-storage.service';
 })
 export class AuthService {
   private token: string = '';
-  private checkLoginUrl: string = 'http://your-api-url.com/check-login';
+  private checkLoginUrl: string = 'http://localhost/sae-401/api/login.php';
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
+  userId: string = '';
+  userRole: string = '';
 
   constructor(private cookieService: CookieService, private http: HttpClient, private localStorage: LocalStorageService) {
    
@@ -23,11 +25,16 @@ export class AuthService {
     }
   }
 
-  setToken(token: string, userId: string): void {
+  
+
+  setToken(token: string, userId: string, role: string): void {
+
     this.token = token;
-    
+    this.userId = userId;
+    this.userRole = role;
     this.localStorage.setItem('authToken', token);
     this.localStorage.setItem('userId', userId);
+    this.localStorage.setItem('userRole', role);
     this.isLoggedInSubject.next(true);
   }
 
@@ -59,5 +66,10 @@ export class AuthService {
         return throwError(error);
       })
     );
+  }
+  
+  getUserRole(id_client: string): Observable<string> {
+    return this.http.get<any>(`http://localhost/sae-401/api/profil/Read_one.php?id=${id_client}`)
+      .pipe(map(response => response.role));
   }
 }
