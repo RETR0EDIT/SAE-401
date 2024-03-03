@@ -1,1 +1,41 @@
 <p>admin-box works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>ID Box</th>
+      <th>Nom</th>
+      <th>Prix</th>
+      <th>Image</th>
+      <th>Pièces</th>
+      <th>Saveurs</th>
+      <th>Aliments</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let box of boxes$ | async">
+      <td>{{ box.id_boxe }}</td>
+      <td>{{ box.nom }}</td>
+      <td>{{ box.prix }}</td>
+      <td><img [src]="'../../../assets/ressources/images/box-sushi/carée/' + box.image" alt="{{ box.nom }}" width="50">
+      </td>
+      <td>{{ box.pieces }}</td>
+      <td>
+        <ul>
+          <li *ngFor="let saveur of box.saveurs">{{ saveur }}</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li *ngFor="let aliment of box.aliments">{{ aliment.nom }} - {{ aliment.quantite }}</li>
+        </ul>
+      </td>
+      <td>
+        <button (click)="editBox(box.id_boxe, box.nom, box.prix, box.image, box.pieces)">Modifier</button>
+        <button (click)="deleteBox(box.id_boxe)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>{{ errorMessage }}</p>
+<!--fonction pas encore faite-->

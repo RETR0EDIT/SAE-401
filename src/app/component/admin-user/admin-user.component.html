@@ -1,1 +1,50 @@
-<p>admin-user works!</p>
+<p>admin-client works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>ID Client</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Adresse</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of clients$ | async">
+      <td>{{ client.id_client }}</td>
+      <td>
+        <input type="text" [(ngModel)]="client.nom" [readonly]="!editing[client.id_client]">
+      </td>
+      <td>
+        <input type="text" [(ngModel)]="client.prenom" [readonly]="!editing[client.id_client]">
+      </td>
+      <td>
+        <input type="text" [(ngModel)]="client.adresse" [readonly]="!editing[client.id_client]">
+      </td>
+      <td>
+        <input type="text" [(ngModel)]="client.email" [readonly]="!editing[client.id_client]">
+      </td>
+      <td>
+        <input type="text" [(ngModel)]="client.role" [readonly]="!editing[client.id_client]">
+      </td>
+      <td>
+        <button (click)="editClient(client)">
+          {{editing[client.id_client] ? 'Enregistrer' : 'Modifier'}}
+        </button>
+        <button (click)="deleteClient(client.id_client)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>{{ errorMessage }}</p>
+<div *ngIf="showInputs">
+  <input [(ngModel)]="nom" placeholder="Nom">
+  <input [(ngModel)]="prenom" placeholder="Prénom">
+  <input [(ngModel)]="adresse" placeholder="Adresse">
+  <input [(ngModel)]="email" placeholder="Email">
+  <input [(ngModel)]="password" placeholder="Password">
+  <input [(ngModel)]="role" placeholder="Role">
+</div>
+<button (click)="addClient()">Ajouter un client</button>

@@ -11,7 +11,6 @@ header("Access-Control-Allow-Origin: http://localhost:4200");
 header("Access-Control-Allow-Credentials: true");
 
 require_once "config/database.php";
-require_once 'check-login.php';
 
 $database = new Database();
 $conn = $database->getConnection();

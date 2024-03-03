@@ -10,6 +10,7 @@ class Client
     public $email;
     public $password;
     public $adresse;
+    public $role;
 
     public function __construct($db)
     {
@@ -18,11 +19,16 @@ class Client
     /**
      * Creer un client method POST 
      */
-    public function create($nom, $prenom, $email, $password, $adresse)
+    public function create($nom, $prenom, $email, $password, $adresse, $role)
     {
-        $query = "INSERT INTO " . $this->table_name . " SET nom=?, prenom=?, email=?, password=?, adresse=?";
+        $query = "INSERT INTO " . $this->table_name . " SET nom=?, prenom=?, email=?, password=?, adresse=?, role=?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("sssss", $nom, $prenom, $email, $password, $adresse);
+        $stmt->bindParam(1, $nom);
+        $stmt->bindParam(2, $prenom);
+        $stmt->bindParam(3, $email);
+        $stmt->bindParam(4, $password);
+        $stmt->bindParam(5, $adresse);
+        $stmt->bindParam(6, $role);
         if ($stmt->execute()) {
             return true;
         }
@@ -57,21 +63,35 @@ class Client
     {
         $query = "UPDATE " . $this->table_name . " SET nom=?, prenom=?, email=?, password=?, adresse=? WHERE id_client=?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("sssssi", $data['nom'], $data['prenom'], $data['email'], $data['password'], $data['adresse'], $data['id']);
+        $stmt->bindParam(1, $data['nom']);
+        $stmt->bindParam(2, $data['prenom']);
+        $stmt->bindParam(3, $data['email']);
+        $stmt->bindParam(4, $data['password']);
+        $stmt->bindParam(5, $data['adresse']);
+        $stmt->bindParam(6, $data['id']);
         if ($stmt->execute()) {
             return true;
         }
         return false;
     }
-    /**
-     * Supprimer un client method DELETE
-     */
-    public function  delete($id)
+
+    public function delete($id)
     {
         $query = "DELETE FROM " . $this->table_name . " WHERE id_client=?";
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("?", $id);
+        $stmt->bindParam(1, $id);
         if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+    public function emailExists($email)
+    {
+        $query = "SELECT id_client FROM " . $this->table_name . " WHERE email = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $email);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
             return true;
         }
         return false;

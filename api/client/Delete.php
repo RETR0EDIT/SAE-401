@@ -12,26 +12,26 @@ if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
 }
 
 require_once '../config/Database.php';
-require_once '../model/Aliment.php';
+require_once '../model/Client.php';
 $database = new Database();
 $db = $database->getConnection();
-$aliment = new Aliment($db);
+$client = new Client($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
 if ($_SERVER['REQUEST_METHOD'] == "DELETE") {
-    if (!empty($data->id_aliment)) {
-        $result = $aliment->delete($data->id_aliment);
+    if (!empty($data->id_client)) {
+        $result = $client->delete($data->id_client);
         if ($result === true) {
             http_response_code(200);
-            echo json_encode(array("message" => "Aliment supprimé."));
+            echo json_encode(array("message" => "Client supprimé."));
         } else {
             http_response_code(503);
-            echo json_encode(array("message" => "Impossible de supprimer l'aliment."));
+            echo json_encode(array("message" => "Impossible de supprimer le client."));
         }
     } else {
         http_response_code(400);
-        echo json_encode(array("message" => "Impossible de supprimer l'aliment. L'ID de l'aliment est manquant."));
+        echo json_encode(array("message" => "Impossible de supprimer le client. L'ID du client est manquant."));
     }
 } else {
     http_response_code(405);

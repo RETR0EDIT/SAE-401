@@ -12,26 +12,26 @@ if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
 }
 
 require_once '../config/Database.php';
-require_once '../model/Aliment.php';
+require_once '../model/Saveur.php';
 $database = new Database();
 $db = $database->getConnection();
-$aliment = new Aliment($db);
+$saveur = new Saveur($db);
 
 $data = json_decode(file_get_contents("php://input"));
 
 if ($_SERVER['REQUEST_METHOD'] == "DELETE") {
-    if (!empty($data->id_aliment)) {
-        $result = $aliment->delete($data->id_aliment);
+    if (!empty($data->id_saveur)) {
+        $result = $saveur->delete($data->id_saveur);
         if ($result === true) {
             http_response_code(200);
-            echo json_encode(array("message" => "Aliment supprimé."));
+            echo json_encode(array("message" => "Saveur supprimée."));
         } else {
             http_response_code(503);
-            echo json_encode(array("message" => "Impossible de supprimer l'aliment."));
+            echo json_encode(array("message" => "Impossible de supprimer la saveur."));
         }
     } else {
         http_response_code(400);
-        echo json_encode(array("message" => "Impossible de supprimer l'aliment. L'ID de l'aliment est manquant."));
+        echo json_encode(array("message" => "Impossible de supprimer la saveur. L'ID de la saveur est manquant."));
     }
 } else {
     http_response_code(405);

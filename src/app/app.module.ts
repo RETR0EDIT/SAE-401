@@ -42,7 +42,7 @@ import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.comp
     AdminBoxComponent,
     AdminUserComponent,
     AdminAlimentComponent,
-    AdminSaveurComponent,
+    AdminSaveurComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +53,7 @@ import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.comp
   ],
   providers: [
     CartService,
-    SharedService
+    SharedService,    
   ],
   bootstrap: [AppComponent]
 })
