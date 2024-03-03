@@ -26,6 +26,7 @@ $grey-color: #454545;
   text-align: center;
 }
 
+.btn-box-details button,
 .btn-box-details a {
   border-radius: 30px 30px 30px 30px;
   background: $black-color;
@@ -195,6 +196,12 @@ $grey-color: #454545;
   margin-top: 10px;
 }
 
+#total-container #total-container2 .btn-box-details button {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
 #total-container #total-container2 .btn-box-details a {
   margin-top: 10px;
   font-size: 12px;
@@ -203,30 +210,31 @@ $grey-color: #454545;
 
 
 @media (min-width: 331px) and (max-width: 531px) {
-    #quantite-container {
-      justify-content: center;
-      width: auto;
-      margin-left: 0px;
-    }
-  
-    #total-container {
-      justify-content: center;
-      display: flex;
-      margin-left: 0px;
-    }
-  
-    #composition-text {
-      font-size: 13px;
-    }
-  
-    #composition-title {
-      font-size: 15px;
-    }
-  
-    .btn-box-details a {
-      font-size: 12px;
-    }
+  #quantite-container {
+    justify-content: center;
+    width: auto;
+    margin-left: 0px;
   }
+
+  #total-container {
+    justify-content: center;
+    display: flex;
+    margin-left: 0px;
+  }
+
+  #composition-text {
+    font-size: 13px;
+  }
+
+  #composition-title {
+    font-size: 15px;
+  }
+
+  .btn-box-details button,
+  .btn-box-details a {
+    font-size: 12px;
+  }
+}
 
 @media (min-width: 531px) {
 
@@ -234,13 +242,14 @@ $grey-color: #454545;
     top: 95px;
   }
 
+  .btn-box-details button,
   .btn-box-details a {
     font-size: 15px;
   }
 
-#info-box{
+  #info-box {
     margin: 40px;
-}
+  }
 
   #composition-text {
     font-size: 15px;
@@ -344,69 +353,70 @@ $grey-color: #454545;
     margin-top: 11px;
   }
 
-  #total-container #total-container2 .btn-box-details a {
+  #total-container #total-container2 .btn-box-details button,
+  .btn-box-details a {
     font-size: 16px;
   }
 }
 
 @media (min-width: 900px) {
 
-    #section-box-details {
-        margin-top: 80px;
-        margin-bottom: 200px;
-      }
+  #section-box-details {
+    margin-top: 80px;
+    margin-bottom: 200px;
+  }
 
-    #saveur-title {
-        display: inline-block;
-        font-size: 16px;
-      }
-      
-      #saveur-text {
-        text-align: left;
-        font-size: 13px;
-        font-weight: 500;
-        position: initial;
-        margin-left: 70px;
-      }
+  #saveur-title {
+    display: inline-block;
+    font-size: 16px;
+  }
 
-      #container{
-        display: flex;
-      }
+  #saveur-text {
+    text-align: left;
+    font-size: 13px;
+    font-weight: 500;
+    position: initial;
+    margin-left: 70px;
+  }
 
-      #title-box{
-        position: absolute;
-        top: 0;
-        font-size: 30px;
+  #container {
+    display: flex;
+  }
 
-      }
+  #title-box {
+    position: absolute;
+    top: 0;
+    font-size: 30px;
 
-      #info-box{
-        margin-top: 100px;
-      }
+  }
 
-      .left-img-box {
-        margin: 0px !important;
-    
-      }
+  #info-box {
+    margin-top: 100px;
+  }
 
-      .left-img-box img {
-        width: 300px;
-        height: auto;
-      }
+  .left-img-box {
+    margin: 0px !important;
 
-      #composition-text{
-        font-size: 13px;
-        margin-top: 36px;
-        width: 350px;
-      }
+  }
 
-      #composition-title{
-        font-size: 16px;
-      }
+  .left-img-box img {
+    width: 300px;
+    height: auto;
+  }
 
-      #composition-container{
-        display: flex;
-      }
+  #composition-text {
+    font-size: 13px;
+    margin-top: 36px;
+    width: 350px;
+  }
+
+  #composition-title {
+    font-size: 16px;
+  }
+
+  #composition-container {
+    display: flex;
+  }
 
 }
 
@@ -414,10 +424,10 @@ $grey-color: #454545;
 @media (min-width: 1200px) {
 
 
-      .left-img-box img {
-        width: 400px;
-        height: auto;
-      }
+  .left-img-box img {
+    width: 400px;
+    height: auto;
+  }
 
 
 }

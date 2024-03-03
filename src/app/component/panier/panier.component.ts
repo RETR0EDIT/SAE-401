@@ -39,7 +39,7 @@ export class PanierComponent implements OnInit {
   }
 
   someFunction() {
-    this.sharedService.getTotalItems();
+    this.totalItems = this.cartService.getTotalItems();
   }
   formatAliments(aliments: Aliment[]): string {
     return aliments.map(aliment => `${aliment.nom}: ${aliment.quantite}`).join(', ');

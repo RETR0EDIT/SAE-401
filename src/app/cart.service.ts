@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { Box } from './box.interface';
-
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -21,10 +21,14 @@ export class CartService {
 
   addToCart(box: Box, quantity: number) {
     let cart = this.getCart();
+    const totalBoxes = this.getTotalBoxes();
     const total = box.prix * quantity;
     const item = { box, quantity, total };
     cart.push(item);
     const userId = typeof localStorage !== 'undefined' ? localStorage.getItem('userId') : null;
+    if (totalBoxes + quantity > 10) {
+      throw new Error('Vous ne pouvez pas avoir plus de 10 boîtes dans votre panier.');
+    }
     if (userId) {
       localStorage.setItem('cart-' + userId, JSON.stringify(cart));
     }
@@ -66,4 +70,20 @@ export class CartService {
     }
     return total;
   }
+  getTotalBoxes(): number {
+    let total = 0;
+    this.cart$.subscribe(cart => {
+      for (let item of cart) {
+        total += item.quantity;
+      }
+    });
+    return total;
+  }
+  totalBoxes$ = this.cart$.pipe(map(cart => {
+    let total = 0;
+    for (let item of cart) {
+      total += item.quantity;
+    }
+    return total;
+  }));
 }

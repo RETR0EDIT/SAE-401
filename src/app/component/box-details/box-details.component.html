@@ -35,11 +35,14 @@
               </div>
               <div id="total-container2">
                 <div class="btn-box-details">
-                  <a href="#" (click)="addToCart()">Ajouter au panier +</a>
+                  <button (click)="addToCart()"
+                    style="cursor: pointer;  margin: 0; border: none; outline: none;">Ajouter au
+                    panier +</button>
                 </div>
               </div>
             </div>
           </div>
+          <p>{{ message }}</p>
         </div>
   </div>
 </section>

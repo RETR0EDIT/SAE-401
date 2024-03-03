@@ -41,7 +41,7 @@ class Details
         b.pieces,
         b.prix,
         b.image,
-        GROUP_CONCAT(DISTINCT s.nom) AS saveurs,
+        GROUP_CONCAT(DISTINCT s.nom_saveur) AS saveurs,
         a.nom_aliment,
         c.quantite AS aliment_quantite
         FROM boxes b
