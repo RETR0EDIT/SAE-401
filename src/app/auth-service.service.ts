@@ -44,8 +44,6 @@ export class AuthService {
         this.token = '';
         this.localStorage.removeItem('authToken');
         this.isLoggedInSubject.next(false);
-      }, error => {
-        console.error('Erreur lors de la déconnexion :', error);
       });
   }
 
@@ -55,11 +53,9 @@ export class AuthService {
   
     return this.http.get(this.checkLoginUrl, { headers, observe: 'response' }).pipe(
       map((response: any) => {
-        console.log('Response from server:', response);
         return response.status === 200;
       }),
       catchError((error: HttpErrorResponse): Observable<boolean> => {
-        console.error('Error occurred:', error.message, 'Error details:', error);
         if (error.status === 401) {
           return of(false);
         }

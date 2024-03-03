@@ -37,9 +37,7 @@ export class LoginComponent {
         response => {
          
           if (response) {
-            if (response.success) {
-              console.log('Login successful. Redirecting...');
-              
+            if (response.success) {        
               if (response.success && response.id_client) {
                 this.authService.setToken(response.success, response.id_client, '');
                 this.authService.getUserRole(response.id_client).subscribe(role => {
@@ -57,12 +55,11 @@ export class LoginComponent {
           }
         },
         error => {
-          console.log('An error occurred while connecting:', error);
           console.error('Une erreur est survenue lors de la connexion.', error);
         }
       );
     } else {
-      console.log('Form is not valid or not present.');
+      console.error('Le formulaire est invalide.');
     }
   }
 }

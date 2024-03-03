@@ -64,7 +64,6 @@ export class BoxDetailsComponent implements OnInit {
       try {
         this.cartService.addToCart(this.box, this.valeur);
         this.message = '';
-        // Redirigez seulement si le message est vide
         if (this.message === '') {
           this.router.navigate(['/']);
         }

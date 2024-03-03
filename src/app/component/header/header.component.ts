@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService, private router: Router, private cartService: CartService, private sharedService: SharedService) { }
   totalItems: number =0;
   role: string = '';
+
+  // Initialise le composant et souscrit aux observables nécessaires
   ngOnInit() {
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
@@ -24,9 +26,12 @@ export class HeaderComponent implements OnInit {
         this.getUserRole();
       }
     });
-    this.totalItems = this.cartService.getTotalItems();
+    this.cartService.totalItems$.subscribe(totalItems => {
+      this.totalItems = totalItems;
+    });
   }
 
+  // Récupère le rôle de l'utilisateur
   getUserRole(): void {
     let id_client = localStorage.getItem('userId');
     if (id_client === null) {
@@ -36,20 +41,21 @@ export class HeaderComponent implements OnInit {
     }
     this.authService.getUserRole(id_client).subscribe(role => {
       this.role = role;
-      this.authService.userRole = role; // Stockez le rôle dans AuthService
-    }, error => {
-      console.error('Erreur lors de la récupération du rôle de l\'utilisateur :', error);
+      this.authService.userRole = role; 
     });
   }
 
+  // Bascule l'état du menu entre ouvert et fermé
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
+  // Ferme le menu
   closeMenu() {
     this.isMenuOpen = false;
   }
 
+  // Déconnecte l'utilisateur et le redirige vers la page d'accueil
   onLogoutClick(): void {
 
     this.authService.logout();
@@ -58,7 +64,7 @@ export class HeaderComponent implements OnInit {
     });
   }
   
-
+  // Met à jour le nombre total d'articles dans le panier
   someFunction() {
     this.totalItems = this.sharedService.getTotalItems();
   }

@@ -21,7 +21,6 @@ export class ProductPageComponent {
         ...box,
         saveurs: Array.isArray(box.saveurs) ? box.saveurs.join(', ') : box.saveurs
       }));
-      console.log('Boîtes récupérées de l\'API :', this.boxes);
     }, error => {
       console.error('Erreur lors de la récupération des boîtes de l\'API :', error);
     });

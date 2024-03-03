@@ -43,9 +43,7 @@ export class AdminUserComponent {
         role: this.role
       };
       this.http.post('http://localhost/sae-401/api/client/Create.php', client).subscribe(response => {
-        console.log('Client créé avec succès :', response);
         this.clients$ = this.getAllClients();
-        
         this.id_client = '';
         this.nom = '';
         this.prenom = '';
@@ -54,9 +52,9 @@ export class AdminUserComponent {
         this.password = '';
         this.role = '';
         this.showInputs = false;
-        this.errorMessage = ''; // Réinitialisez le message d'erreur
+        this.errorMessage = '';
       }, error => {
-        this.errorMessage = error.error.message; // Mettez à jour le message d'erreur
+        this.errorMessage = error.error.message;
       });
     }
   }
@@ -64,12 +62,11 @@ export class AdminUserComponent {
   editClient(client: { id_client: string, nom: string, prenom: string, adresse: string, email: string, password: string, role: string }) {
     if (this.editing[client.id_client]) {
       this.clientService.updateClient(client.id_client, client.nom, client.prenom, client.adresse, client.email, client.password, client.role).subscribe(response => {
-        console.log('Client mis à jour avec succès :', response);
         this.clients$ = this.getAllClients();
         this.errorMessage = ''; 
       }, error => {
         console.error('Erreur lors de la mise à jour du client :', error);
-        this.errorMessage = error.error.message; // Enregistre le message d'erreur
+        this.errorMessage = error.error.message; 
       });
     }
     this.editing[client.id_client] = !this.editing[client.id_client];
@@ -86,11 +83,11 @@ export class AdminUserComponent {
     };
   
     this.http.delete('http://localhost/sae-401/api/client/Delete.php', options).subscribe(response => {
-      console.log('Client supprimé avec succès :', response);
       this.clients$ = this.getAllClients();
       this.errorMessage = '';
     }, error => {
-      // Gérer les erreurs ici
+      console.error('Erreur lors de la suppression du client :', error);
+      this.errorMessage = error.error.message;
     });
   }
 }
