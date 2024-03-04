@@ -31,15 +31,18 @@ h2 {
 .img-card img {
   height: 168px;
 }
+
 .txt-container {
   margin-left: 12.5px;
+  display: flex;
+  flex-direction: column;
+  height: 136px;
 }
 .txt-container h3 {
   color: $grey-color-light;
   font-family: $font-poppins;
   font-size: 17.19px;
   font-weight: 700;
-  line-height: 21px;
   letter-spacing: 4%;
   margin-top: 13px;
   max-width: 158px;
@@ -62,7 +65,7 @@ h2 {
   display: flex;
   justify-content: space-between;
   // gap: 75px;
-  margin-top: 6.2px;
+  margin-top: auto;
 }
 
 .price-cart p {
@@ -129,6 +132,14 @@ h1 {
   display: inline-grid;
 }
 
+.saveur-box {
+  // height: 58px;
+}
+
+.card {
+  height: 374px;
+}
+
 @media screen and (min-width: 1100px) {
   #product-page {
     margin: 120px 0;
@@ -159,11 +170,13 @@ h1 {
 
   .txt-container {
     margin-left: 15.6px;
+    height: 180px;
   }
   .txt-container h3 {
     font-size: 20.08px;
     margin-top: 15.45px;
     max-width: 178px;
+    line-height: 33px;
   }
 
   .txt-container p {
@@ -179,7 +192,7 @@ h1 {
   }
 
   .price-cart {
-    margin-top: 5.8px;
+    // margin-top: 5.8px;
   }
 
   .card {
@@ -200,6 +213,14 @@ h1 {
     grid-template-columns: repeat(auto-fit, 285px);
     grid-gap: 40px;
     justify-content: center;
+  }
+
+  .saveur-box {
+    // height: 67px;
+  }
+
+  .card {
+    height: 435px;
   }
 }
 
@@ -240,7 +261,7 @@ h1 {
   }
 
   .price-cart {
-    margin-top: 6px;
+    // margin-top: 6px;
   }
 
   .card {
@@ -270,5 +291,15 @@ h1 {
   .cart img {
     height: 23px;
     width: 23px;
+  }
+
+  .saveur-box {
+    // height: 87px;
+  }
+  .txt-container {
+    height: 193px;
+  }
+  .card {
+    height: 536px;
   }
 }
