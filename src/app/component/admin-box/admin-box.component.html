@@ -38,4 +38,14 @@
   </tbody>
 </table>
 <p>{{ errorMessage }}</p>
-<!--fonction pas encore faite-->
+<div *ngIf="showInputs">
+  <input [(ngModel)]="nom" placeholder="Nom Boxes">
+  <input [(ngModel)]="prix" placeholder="Prix">
+  <input [(ngModel)]="image" placeholder="Image" type="file">
+  <input [(ngModel)]="pieces" placeholder="Pièces">
+  <input [(ngModel)]="nom_saveur" placeholder="Saveurs">
+  <input [(ngModel)]="nom_aliment" placeholder="Aliments">
+
+
+</div>
+<button (click)="addBox()">Ajouter une boxes</button>

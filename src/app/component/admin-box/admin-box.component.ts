@@ -15,6 +15,8 @@ export class AdminBoxComponent {
   prix: number = 0;
   image: string = '';
   pieces: string[] = [];
+  nom_saveur: string = '';
+  nom_aliment: string = '';
   errorMessage: string = '';
   showInputs: boolean = false;
   editing: { [key: string]: boolean } = {};
@@ -28,10 +30,12 @@ export class AdminBoxComponent {
   }
 
   addBox() {
+    console.log('add box');
     if (!this.showInputs) {
+      console.log('show input');
       this.showInputs = true;
     } else {
-      const box = { id_boxe: this.id_boxe, nom: this.nom, prix: this.prix, image: this.image, pieces: this.pieces };
+      const box = { id_boxe: this.id_boxe, nom: this.nom, prix: this.prix, image: this.image, pieces: this.pieces, nom_aliment: this.nom_aliment, nom_saveur: this.nom_saveur};
       this.http.post('http://localhost/sae-401/api/box/Create.php', box).subscribe(response => {
         console.log('Box créée avec succès :', response);
         this.boxes$ = this.getAllBoxes();
@@ -40,6 +44,8 @@ export class AdminBoxComponent {
         this.prix = 0;
         this.image = '';
         this.pieces = [];
+        this.nom_aliment = '';
+        this.nom_saveur = '';
         this.showInputs = false;
       }, error => {
         this.errorMessage = 'Erreur lors de la création de la box : ' + error;
