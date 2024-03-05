@@ -18,12 +18,12 @@ Home page
 
 
 product-page
-![product-page](liverable/maquette/productpage.png)
+![product-page](liverable/maquette/product-page.png)
 
 
 
 page details
-![page details](liverable/maquette/deailspng)
+![page details](liverable/maquette/deails.png)
 
 
 
