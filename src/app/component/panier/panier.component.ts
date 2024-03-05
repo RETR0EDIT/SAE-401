@@ -44,4 +44,8 @@ export class PanierComponent implements OnInit {
   formatAliments(aliments: Aliment[]): string {
     return aliments.map(aliment => `${aliment.nom}: ${aliment.quantite}`).join(', ');
   }
+
+  modifier(){
+    //debloque acces au option de la box voir panier.component.html ligne 40
+  }
 }

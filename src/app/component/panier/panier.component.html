@@ -38,10 +38,13 @@
                         <label for="quantity">Qte:</label>
                         <select id="quantity" name="quantity">
                           <option [value]="item.quantity">{{ item.quantity }}</option>
+                          <!--faire ajouter les option compris entre 1 et le nom de box maximal (ex: si j'ai 3 box dans mon panier plus
+                             celle que je veux modifier cela ne dois pas depasser la valeur de 10 (totalBoxes + quantity)-->
                         </select>
                       </div>
                     </div>
                     <div class="btn-supr">
+                      <button (click)="modifier()"></button>
                       <button (click)="removeFromCart(i)">Supprimer </button>
                     </div>
                   </div>
