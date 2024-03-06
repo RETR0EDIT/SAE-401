@@ -38,14 +38,40 @@
   </tbody>
 </table>
 <p>{{ errorMessage }}</p>
-<div *ngIf="showInputs">
-  <input [(ngModel)]="nom" placeholder="Nom Boxes">
-  <input [(ngModel)]="prix" placeholder="Prix">
-  <input [(ngModel)]="image" placeholder="Image" type="file">
-  <input [(ngModel)]="pieces" placeholder="Pièces">
-  <input [(ngModel)]="nom_saveur" placeholder="Saveurs">
-  <input [(ngModel)]="nom_aliment" placeholder="Aliments">
+<form [formGroup]="form">
+  <div *ngIf="showInputs">
+    <input formControlName="nom" placeholder="Nom Boxes">
+    <input formControlName="prix" placeholder="Prix">
+    <input formControlName="image" placeholder="Image" type="file">
+    <input formControlName="pieces" placeholder="Pièces">
 
+    <div formArrayName="saveurs">
+      <p>Saveurs</p>
+      <div *ngFor="let saveur of allSaveurs; index as i">
 
-</div>
+        <label>
+          <input type="checkbox" [formControlName]="i" [value]="saveur.id_saveur">
+          {{saveur.nom_saveur}}
+        </label>
+        <div *ngIf="isSaveurSelected(saveur.id_saveur)">
+          Saveur sélectionnée : {{saveur.nom_saveur}}
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="aliments">
+      <p>Aliments</p>
+      <div *ngFor="let aliment of allAliments; index as i">
+
+        <label>
+          <input type="checkbox" [formControlName]="i" [value]="aliment.id_aliment">
+          {{aliment.nom_aliment}}
+        </label>
+        <div *ngIf="isAlimentSelected(aliment.id_aliment)">
+          Aliment sélectionné : {{aliment.nom_aliment}}
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
 <button (click)="addBox()">Ajouter une boxes</button>

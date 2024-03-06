@@ -1,28 +1,104 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { BoxService } from '../../box.service'; 
+import { Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-box',
   templateUrl: './admin-box.component.html',
   styleUrls: ['./admin-box.component.scss']
 })
-export class AdminBoxComponent {
+export class AdminBoxComponent implements OnInit {
   boxes$: Observable<any>;
   id_boxe: string = '';
   nom: string = '';
   prix: number = 0;
   image: string = '';
   pieces: string[] = [];
-  nom_saveur: string = '';
-  nom_aliment: string = '';
+  form: FormGroup;
   errorMessage: string = '';
   showInputs: boolean = false;
   editing: { [key: string]: boolean } = {};
+  allSaveurs: any[] = [];
+  allAliments: any[] = [];
+  saveur: any = this.allSaveurs[0]; 
+  aliment: any = this.allAliments[0];
 
-  constructor(private http: HttpClient, private boxService: BoxService) {
+  constructor(private http: HttpClient, private boxService: BoxService, private fb: FormBuilder) {
+    this.getSaveurs().subscribe(saveurs => {
+      this.allSaveurs = saveurs;
+      this.createFormControls('saveurs', this.allSaveurs);
+    });
+    this.getAliments().subscribe(aliments => {
+      this.allAliments = aliments;
+      this.createFormControls('aliments', this.allAliments);
+    });
     this.boxes$ = this.getAllBoxes();
+    this.form = this.fb.group({
+      nom: ['', Validators.required],
+      prix: ['', Validators.required],
+      image: ['', Validators.required],
+      pieces: ['', Validators.required],
+      saveurs: this.fb.array([]),
+      aliments: this.fb.array([])
+    });
+  }
+
+  createFormControls(controlName: string, items: any[]) {
+    const formArray = this.form.get(controlName) as FormArray;
+    items.forEach(() => {
+      formArray.push(new FormControl(false));
+    });
+  }
+
+  ngOnInit(): void {
+    this.allSaveurs.forEach((saveur, index) => {
+      this.saveurs.push(this.fb.control(saveur.id_saveur));
+    });
+  
+    this.allAliments.forEach((aliment, index) => {
+      this.aliments.push(this.fb.control(aliment.id_aliment));
+    });
+  }
+
+  get saveurs(): FormArray {
+    return this.form.controls['saveurs'] as FormArray;
+  }
+  
+  get aliments(): FormArray {
+    return this.form.controls['aliments'] as FormArray;
+  }
+
+  addSaveur() {
+    this.saveurs.push(this.fb.group({
+      id_saveur: [''],
+      nom_saveur: ['']
+    }));
+  }
+  
+  addAliment() {
+    this.aliments.push(this.fb.group({
+      id_aliment: [''],
+      nom_aliment: ['']
+    }));
+  }
+  isSaveurSelected(id_saveur: string): boolean {
+    return this.form.value.saveurs.map((s: { id_saveur: string }) => s.id_saveur).includes(id_saveur);
+  }
+  
+  isAlimentSelected(id_aliment: string): boolean {
+    return this.form.value.aliments.map((a: { id_aliment: string }) => a.id_aliment).includes(id_aliment);
+  }
+
+  removeSaveur(i: number) {
+    this.saveurs.removeAt(i);
+  }
+  
+  removeAliment(i: number) {
+    this.aliments.removeAt(i);
   }
 
   getAllBoxes(): Observable<any> {
@@ -31,24 +107,41 @@ export class AdminBoxComponent {
 
   addBox() {
     console.log('add box');
+    
     if (!this.showInputs) {
       console.log('show input');
       this.showInputs = true;
     } else {
-      const box = { id_boxe: this.id_boxe, nom: this.nom, prix: this.prix, image: this.image, pieces: this.pieces, nom_aliment: this.nom_aliment, nom_saveur: this.nom_saveur};
+      // Extraire uniquement le nom du fichier de l'image
+      const imageName = this.form.value.image.split('\\').pop();
+  
+      // Filtrer les saveurs et les aliments sélectionnés et renvoyer leurs ID
+      const selectedSaveurs = this.form.value.saveurs
+        .map((selected: boolean, i: number) => selected ? this.allSaveurs[i].id_saveur : null)
+        .filter((id: number) => id !== null);
+      const selectedAliments = this.form.value.aliments
+        .map((selected: boolean, i: number) => selected ? this.allAliments[i].id_aliment : null)
+        .filter((id: number) => id !== null);
+  
+        const box = { 
+          nom: this.form.value.nom, 
+          prix: +this.form.value.prix, 
+          image: imageName, 
+          pieces: +this.form.value.pieces, 
+          id_saveur: selectedSaveurs.map(Number), 
+          id_aliment: selectedAliments.map(Number)
+        };
+  
+      console.log('Box à créer :', box); // Ajout du débogage ici
+  
       this.http.post('http://localhost/sae-401/api/box/Create.php', box).subscribe(response => {
         console.log('Box créée avec succès :', response);
         this.boxes$ = this.getAllBoxes();
-        this.id_boxe = '';
-        this.nom = '';
-        this.prix = 0;
-        this.image = '';
-        this.pieces = [];
-        this.nom_aliment = '';
-        this.nom_saveur = '';
+        this.form.reset();
         this.showInputs = false;
       }, error => {
-        this.errorMessage = 'Erreur lors de la création de la box : ' + error;
+        this.errorMessage = 'Erreur lors de la création de la box : ' + JSON.stringify(error);
+        console.log('Erreur lors de la création de la box :', box); // Ajout du débogage ici
       });
     }
   }
@@ -82,7 +175,15 @@ export class AdminBoxComponent {
       this.boxes$ = this.getAllBoxes();
       this.errorMessage = '';
     }, error => {
-      this.errorMessage = 'Erreur lors de la suppression de la box : ' + error;
+      this.errorMessage = 'Erreur lors de la suppression de la box : ' + JSON.stringify(error);
     });
+  }
+
+  getSaveurs(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost/sae-401/api/saveur/Read.php');
+  }
+
+  getAliments(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost/sae-401/api/aliment/Read.php');
   }
 }

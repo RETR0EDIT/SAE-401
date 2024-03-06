@@ -15,11 +15,41 @@ class Box
     }
 
     // Create
-    public function create($nom, $prix, $image)
+    public function create($nom, $prix, $image, $pieces, $id_aliment, $id_saveur)
     {
-        $stmt = $this->conn->prepare("INSERT INTO boxes (nom, prix, image) VALUES (?, ?, ?)");
-        $stmt->execute([$nom, $prix, $image]);
+        // Insérer la boxe
+        $stmt = $this->conn->prepare("INSERT INTO boxes (nom, prix, image, pieces) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$nom, $prix, $image, $pieces]);
+
+        // Récupérer l'ID de la boxe insérée
+        $id_boxe = $this->conn->lastInsertId();
+
+        // Insérer les données dans la table 'posseder'
+        foreach ($id_saveur as $saveur) {
+            $stmt = $this->conn->prepare("INSERT INTO posseder (id_boxe, id_saveur) VALUES (?, ?)");
+            $stmt->execute([$id_boxe, $saveur]);
+            if ($stmt->rowCount() == 0) {
+                return "Erreur lors de l'insertion dans la table 'posseder'";
+            }
+        }
+
+        // Insérer les données dans la table 'contenir'
+        foreach ($id_aliment as $aliment) {
+            $stmt = $this->conn->prepare("INSERT INTO contenir (id_boxe, id_aliment) VALUES (?, ?)");
+            $stmt->execute([$id_boxe, $aliment]);
+            if ($stmt->rowCount() == 0) {
+                return "Erreur lors de l'insertion dans la table 'contenir'";
+            }
+        }
+
+        // Vérifier si toutes les requêtes ont réussi
+        if ($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
 
 
     // Read
@@ -73,16 +103,17 @@ class Box
 
 
     // Update
-    public function update($id_boxe, $nom, $prix, $image)
-    {
-        $stmt = $this->conn->prepare("UPDATE boxes SET nom = ?, prix = ?, image = ? WHERE id_boxe = ?");
-        $stmt->execute([$nom, $prix, $image, $id_boxe]);
-    }
-
-    // Delete
     public function delete($id_boxe)
     {
-        $stmt = $this->conn->prepare("DELETE FROM boxes WHERE id_boxe = ?");
+        $stmt = $this->conn->prepare("DELETE FROM contenir WHERE id_boxe = ?");
         $stmt->execute([$id_boxe]);
+
+        $stmt = $this->conn->prepare("DELETE FROM posseder WHERE id_boxe = ?");
+        $stmt->execute([$id_boxe]);
+
+        $stmt = $this->conn->prepare("DELETE FROM boxes WHERE id_boxe = ?");
+        $result = $stmt->execute([$id_boxe]);
+
+        return $result;
     }
 }
