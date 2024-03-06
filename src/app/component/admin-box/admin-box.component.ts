@@ -28,29 +28,35 @@ export class AdminBoxComponent implements OnInit {
   aliment: any = this.allAliments[0];
 
   constructor(private http: HttpClient, private boxService: BoxService, private fb: FormBuilder) {
+    this.boxes$ = new Observable<any>();
+    this.form = this.fb.group({});
     this.getSaveurs().subscribe(saveurs => {
       this.allSaveurs = saveurs;
-      this.createFormControls('saveurs', this.allSaveurs);
-    });
-    this.getAliments().subscribe(aliments => {
-      this.allAliments = aliments;
-      this.createFormControls('aliments', this.allAliments);
-    });
-    this.boxes$ = this.getAllBoxes();
-    this.form = this.fb.group({
-      nom: ['', Validators.required],
-      prix: ['', Validators.required],
-      image: ['', Validators.required],
-      pieces: ['', Validators.required],
-      saveurs: this.fb.array([]),
-      aliments: this.fb.array([])
+      this.getAliments().subscribe(aliments => {
+        this.allAliments = aliments;
+        this.form = this.fb.group({
+          nom: [''],
+          prix: [''],
+          image: [''],
+          pieces: [''],
+          saveurs: this.fb.array(this.allSaveurs.map(() => new FormControl(false))),
+          aliments: this.fb.array(this.allAliments.map(() => this.fb.group({
+            selected: false,
+            quantite: 0
+          })))
+        });
+        this.boxes$ = this.getAllBoxes();
+      });
     });
   }
 
   createFormControls(controlName: string, items: any[]) {
     const formArray = this.form.get(controlName) as FormArray;
     items.forEach(() => {
-      formArray.push(new FormControl(false));
+      formArray.push(this.fb.group({
+        selected: new FormControl(false),
+        quantite: new FormControl(0)
+      }));
     });
   }
 
@@ -82,7 +88,8 @@ export class AdminBoxComponent implements OnInit {
   addAliment() {
     this.aliments.push(this.fb.group({
       id_aliment: [''],
-      nom_aliment: ['']
+      nom_aliment: [''],
+      quantite: ['']
     }));
   }
   isSaveurSelected(id_saveur: string): boolean {
@@ -119,18 +126,22 @@ export class AdminBoxComponent implements OnInit {
       const selectedSaveurs = this.form.value.saveurs
         .map((selected: boolean, i: number) => selected ? this.allSaveurs[i].id_saveur : null)
         .filter((id: number) => id !== null);
-      const selectedAliments = this.form.value.aliments
-        .map((selected: boolean, i: number) => selected ? this.allAliments[i].id_aliment : null)
-        .filter((id: number) => id !== null);
-  
-        const box = { 
-          nom: this.form.value.nom, 
-          prix: +this.form.value.prix, 
-          image: imageName, 
-          pieces: +this.form.value.pieces, 
-          id_saveur: selectedSaveurs.map(Number), 
-          id_aliment: selectedAliments.map(Number)
-        };
+        const selectedAliments = this.form.value.aliments
+  .map((aliment: { selected: boolean, quantite: number }, i: number) => aliment.selected ? { id_aliment: this.allAliments[i].id_aliment, quantite: aliment.quantite } : null)
+  .filter((aliment: any) => aliment !== null);
+      
+  const id_aliment = selectedAliments.map((aliment: { id_aliment: number, quantite: number }) => aliment.id_aliment);
+  const quantite = selectedAliments.map((aliment: { id_aliment: number, quantite: number }) => aliment.quantite);
+      
+      const box = { 
+        nom: this.form.value.nom, 
+        prix: +this.form.value.prix, 
+        image: imageName, 
+        pieces: +this.form.value.pieces, 
+        id_saveur: selectedSaveurs.map(Number), 
+        id_aliment: id_aliment,
+        quantite: quantite
+      };
   
       console.log('Box à créer :', box); // Ajout du débogage ici
   

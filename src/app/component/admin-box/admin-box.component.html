@@ -17,7 +17,8 @@
       <td>{{ box.id_boxe }}</td>
       <td>{{ box.nom }}</td>
       <td>{{ box.prix }}</td>
-      <td><img [src]="'../../../assets/ressources/images/box-sushi/caree/' + box.image" alt="{{ box.nom }}" width="50">
+      <td><img [src]="'../../../assets/ressources/images/box-sushi/caree/' + box.image" alt="{{ box.nom }}"
+          width="100px">
       </td>
       <td>{{ box.pieces }}</td>
       <td>
@@ -61,14 +62,16 @@
 
     <div formArrayName="aliments">
       <p>Aliments</p>
-      <div *ngFor="let aliment of allAliments; index as i">
-
-        <label>
-          <input type="checkbox" [formControlName]="i" [value]="aliment.id_aliment">
-          {{aliment.nom_aliment}}
-        </label>
-        <div *ngIf="isAlimentSelected(aliment.id_aliment)">
-          Aliment sélectionné : {{aliment.nom_aliment}}
+      <div *ngFor="let aliment of aliments.controls; let i = index">
+        <div [formGroupName]="i">
+          <label>
+            <input type="checkbox" formControlName="selected">
+            {{allAliments[i].nom_aliment}}
+          </label>
+          <div *ngIf="aliment.get('selected')?.value">
+            Quantité :
+            <input type="number" formControlName="quantite">
+          </div>
         </div>
       </div>
     </div>

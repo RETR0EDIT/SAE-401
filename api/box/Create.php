@@ -18,15 +18,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $data = json_decode(file_get_contents("php://input"));
 
-    if (!empty($data->nom) && !empty($data->prix) && !empty($data->image) && !empty($data->pieces) && !empty($data->id_aliment) && !empty($data->id_saveur)) {
+    if (!empty($data->nom) && !empty($data->prix) && !empty($data->image) && !empty($data->pieces) && !empty($data->id_aliment) && !empty($data->id_saveur) && !empty($data->quantite)) {
         $nom = $data->nom;
         $prix = $data->prix;
         $image = $data->image;
         $pieces = $data->pieces;
         $id_aliment = $data->id_aliment;
         $id_saveur = $data->id_saveur;
+        $quantite = $data->quantite;
 
-        $result = $box->create($nom, $prix, $image, $pieces, $id_aliment, $id_saveur);
+        $result = $box->create($nom, $prix, $image, $pieces, $id_aliment, $id_saveur, $quantite);
         if ($result === true) {
             http_response_code(201);
             echo json_encode(array("message" => "box créé."));

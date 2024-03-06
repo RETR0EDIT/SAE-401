@@ -15,7 +15,7 @@ class Box
     }
 
     // Create
-    public function create($nom, $prix, $image, $pieces, $id_aliment, $id_saveur)
+    public function create($nom, $prix, $image, $pieces, $id_aliment, $id_saveur, $quantite)
     {
         // Insérer la boxe
         $stmt = $this->conn->prepare("INSERT INTO boxes (nom, prix, image, pieces) VALUES (?, ?, ?, ?)");
@@ -33,10 +33,9 @@ class Box
             }
         }
 
-        // Insérer les données dans la table 'contenir'
-        foreach ($id_aliment as $aliment) {
-            $stmt = $this->conn->prepare("INSERT INTO contenir (id_boxe, id_aliment) VALUES (?, ?)");
-            $stmt->execute([$id_boxe, $aliment]);
+        for ($i = 0; $i < count($id_aliment); $i++) {
+            $stmt = $this->conn->prepare("INSERT INTO contenir (id_boxe, id_aliment, quantite) VALUES (?, ?, ?)");
+            $stmt->execute([$id_boxe, $id_aliment[$i], $quantite[$i]]);
             if ($stmt->rowCount() == 0) {
                 return "Erreur lors de l'insertion dans la table 'contenir'";
             }
