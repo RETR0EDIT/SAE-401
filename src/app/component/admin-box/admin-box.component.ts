@@ -186,4 +186,36 @@ export class AdminBoxComponent implements OnInit {
   getAliments(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost/sae-401/api/aliment/Read.php');
   }
+
+  
+fileData!: File;
+
+fileProcess(event: Event) {
+  const target = event.target as HTMLInputElement;
+  if (target.files) {
+    this.fileData = target.files[0];
+  }
+}
+
+uploadFile() {
+  const formData = new FormData();
+  formData.append('file', this.fileData);
+  //mettre le file dans SAE-401\src\assets\ressources\images\box-sushi\carée
+  this.http.post('http://localhost/sae-401/api/file/Upload.php', formData).subscribe(response => {
+    console.log('Fichier téléversé avec succès :', response);
+  }, error => {
+    console.error('Erreur lors du téléversement du fichier :', error);
+  });
+}
+
+clickCount = 0;
+
+addBoxAndUploadFile() {
+  this.addBox();
+  this.clickCount++;
+  if (this.clickCount === 2) {
+    this.uploadFile();
+    this.clickCount = 0;
+  }
+}
 }
