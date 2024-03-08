@@ -12,23 +12,28 @@
       </thead>
       <tbody>
         <tr *ngFor="let saveur of saveurs$ | async">
-          <td>{{ saveur.id_saveur }}</td>
+          <td class="id">#{{ saveur.id_saveur }}</td>
           <td>
             <input type="text" [(ngModel)]="saveur.nom_saveur" [readonly]="!editing[saveur.id_saveur]">
           </td>
-          <td>
-            <button (click)="editSaveur(saveur.id_saveur, saveur.nom_saveur)">
-              {{editing[saveur.id_saveur] ? 'Enregistrer' : 'Modifier'}}
+          <td class="action">
+            <button class="edit-btn" (click)="editSaveur(saveur.id_saveur, saveur.nom_saveur)">
+              <img *ngIf="!editing[saveur.id_saveur]" src="../../../assets/ressources/icons/Edit.svg" alt="">
+              <img *ngIf="editing[saveur.id_saveur]" src="../../../assets/ressources/icons/check-check.svg" alt="">
             </button>
-            <button (click)="deleteSaveur(saveur.id_saveur)">Supprimer</button>
+            <button class="supr-btn" (click)="deleteSaveur(saveur.id_saveur)">
+              <img src="../../../assets/ressources/icons/Delete.svg" alt="">
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
-    <p>{{ errorMessage }}</p>
-    <div *ngIf="showInputs">
-      <input [(ngModel)]="nom_saveur" placeholder="Nom Saveur">
+    <p class="error">{{ errorMessage }}</p>
+    <div class="div-add">
+      <button class="add-saveur" (click)="addSaveur()">Ajouter une saveur</button>
+      <div *ngIf="showInputs">
+        <input [(ngModel)]="nom_saveur" placeholder="Nom Saveur">
+      </div>
     </div>
-    <button (click)="addSaveur()">Ajouter une saveur</button>
   </main>
 </div>

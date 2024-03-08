@@ -1,7 +1,7 @@
 <div class="container-grille">
   <app-nav-admin></app-nav-admin>
   <main>
-    <!-- <p>admin-aliment works!</p> -->
+    <p>admin-aliment works!</p>
     <table>
       <thead>
         <tr>
@@ -27,7 +27,7 @@
         </tr>
       </tbody>
     </table>
-    <p>{{ errorMessage }}</p>
+    <p class="error">{{ errorMessage }}</p>
     <div class="div-add">
       <button class="add-aliment" (click)="addAliment()">Ajouter un aliment</button>
       <div *ngIf="showInputs" class="div-input">
