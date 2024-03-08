@@ -1,29 +1,39 @@
-<p>admin-aliment works!</p>
-<table>
-  <thead>
-    <tr>
-      <th>ID Aliment</th>
-      <th>Nom Aliment</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let aliment of aliments$ | async">
-      <td>{{ aliment.id_aliment }}</td>
-      <td>
-        <input type="text" [(ngModel)]="aliment.nom_aliment" [readonly]="!editing[aliment.id_aliment]">
-      </td>
-      <td>
-        <button (click)="editAliment(aliment.id_aliment, aliment.nom_aliment)">
-          {{editing[aliment.id_aliment] ? 'Enregistrer' : 'Modifier'}}
-        </button>
-        <button (click)="deleteAliment(aliment.id_aliment)">Supprimer</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p>{{ errorMessage }}</p>
-<div *ngIf="showInputs">
-  <input [(ngModel)]="nom_aliment" placeholder="Nom Aliment">
+<div class="container-grille">
+  <app-nav-admin></app-nav-admin>
+  <main>
+    <!-- <p>admin-aliment works!</p> -->
+    <table>
+      <thead>
+        <tr>
+          <th class="id-th">ID Aliment</th>
+          <th class="nom-th">Nom Aliment</th>
+          <th class="action-th">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aliment of aliments$ | async">
+          <td class="id">#{{ aliment.id_aliment }}</td>
+          <td>
+            <input type="text" [(ngModel)]="aliment.nom_aliment" [readonly]="!editing[aliment.id_aliment]">
+          </td>
+          <td class="action">
+            <button class="supr-btn" (click)="deleteAliment(aliment.id_aliment)"><img
+                src="../../../assets/ressources/icons/Delete.svg" alt=""></button>
+            <button class="edit-btn" (click)="editAliment(aliment.id_aliment, aliment.nom_aliment)">
+              <img src="../../../assets/ressources/icons/Edit.svg" alt="" *ngIf="!editing[aliment.id_aliment]">
+              <img src="../../../assets/ressources/icons/check-check.svg" alt="" *ngIf="editing[aliment.id_aliment]">
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>{{ errorMessage }}</p>
+    <div class="div-add">
+      <button class="add-aliment" (click)="addAliment()">Ajouter un aliment</button>
+      <div *ngIf="showInputs" class="div-input">
+        <input [(ngModel)]="nom_aliment" placeholder="Nom Aliment">
+      </div>
+    </div>
+
+  </main>
 </div>
-<button (click)="addAliment()">Ajouter un aliment</button>

@@ -1,29 +1,34 @@
-<p>admin-saveur works!</p>
-<table>
-  <thead>
-    <tr>
-      <th>ID Saveur</th>
-      <th>Nom Saveur</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let saveur of saveurs$ | async">
-      <td>{{ saveur.id_saveur }}</td>
-      <td>
-        <input type="text" [(ngModel)]="saveur.nom_saveur" [readonly]="!editing[saveur.id_saveur]">
-      </td>
-      <td>
-        <button (click)="editSaveur(saveur.id_saveur, saveur.nom_saveur)">
-          {{editing[saveur.id_saveur] ? 'Enregistrer' : 'Modifier'}}
-        </button>
-        <button (click)="deleteSaveur(saveur.id_saveur)">Supprimer</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p>{{ errorMessage }}</p>
-<div *ngIf="showInputs">
-  <input [(ngModel)]="nom_saveur" placeholder="Nom Saveur">
+<div class="container-grille">
+  <app-nav-admin></app-nav-admin>
+  <main>
+    <p>admin-saveur works!</p>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Saveur</th>
+          <th>Nom Saveur</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let saveur of saveurs$ | async">
+          <td>{{ saveur.id_saveur }}</td>
+          <td>
+            <input type="text" [(ngModel)]="saveur.nom_saveur" [readonly]="!editing[saveur.id_saveur]">
+          </td>
+          <td>
+            <button (click)="editSaveur(saveur.id_saveur, saveur.nom_saveur)">
+              {{editing[saveur.id_saveur] ? 'Enregistrer' : 'Modifier'}}
+            </button>
+            <button (click)="deleteSaveur(saveur.id_saveur)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>{{ errorMessage }}</p>
+    <div *ngIf="showInputs">
+      <input [(ngModel)]="nom_saveur" placeholder="Nom Saveur">
+    </div>
+    <button (click)="addSaveur()">Ajouter une saveur</button>
+  </main>
 </div>
-<button (click)="addSaveur()">Ajouter une saveur</button>
