@@ -1,50 +1,60 @@
-<p>admin-client works!</p>
-<table>
-  <thead>
-    <tr>
-      <th>ID Client</th>
-      <th>Nom</th>
-      <th>Prénom</th>
-      <th>Adresse</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let client of clients$ | async">
-      <td>{{ client.id_client }}</td>
-      <td>
-        <input type="text" [(ngModel)]="client.nom" [readonly]="!editing[client.id_client]">
-      </td>
-      <td>
-        <input type="text" [(ngModel)]="client.prenom" [readonly]="!editing[client.id_client]">
-      </td>
-      <td>
-        <input type="text" [(ngModel)]="client.adresse" [readonly]="!editing[client.id_client]">
-      </td>
-      <td>
-        <input type="text" [(ngModel)]="client.email" [readonly]="!editing[client.id_client]">
-      </td>
-      <td>
-        <input type="text" [(ngModel)]="client.role" [readonly]="!editing[client.id_client]">
-      </td>
-      <td>
-        <button (click)="editClient(client)">
-          {{editing[client.id_client] ? 'Enregistrer' : 'Modifier'}}
-        </button>
-        <button (click)="deleteClient(client.id_client)">Supprimer</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p>{{ errorMessage }}</p>
-<div *ngIf="showInputs">
-  <input [(ngModel)]="nom" placeholder="Nom">
-  <input [(ngModel)]="prenom" placeholder="Prénom">
-  <input [(ngModel)]="adresse" placeholder="Adresse">
-  <input [(ngModel)]="email" placeholder="Email">
-  <input [(ngModel)]="password" placeholder="Password">
-  <input [(ngModel)]="role" placeholder="Role">
+<div class="container-grille">
+  <app-nav-admin></app-nav-admin>
+  <main>
+    <p>admin-client works!</p>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Client</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Adresse</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of clients$ | async">
+          <td class="id">#{{ client.id_client }}</td>
+          <td>
+            <input type="text" [(ngModel)]="client.nom" [readonly]="!editing[client.id_client]">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="client.prenom" [readonly]="!editing[client.id_client]">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="client.adresse" [readonly]="!editing[client.id_client]">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="client.email" [readonly]="!editing[client.id_client]">
+          </td>
+          <td>
+            <input type="text" [(ngModel)]="client.role" [readonly]="!editing[client.id_client]">
+          </td>
+          <td class="action">
+            <button class="supr-btn" (click)="deleteClient(client.id_client)"><img
+                src="../../../assets/ressources/icons/Delete.svg" alt=""></button>
+            <button class="edit-btn" (click)="editClient(client)">
+              <img src="../../../assets/ressources/icons/Edit.svg" alt="" *ngIf="!editing[client.id_client]">
+              <img src="../../../assets/ressources/icons/check-check.svg" alt="" *ngIf="editing[client.id_client]">
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="error">{{ errorMessage }}</p>
+    <div class="div-add">
+      <button class="add-client" (click)="addClient()">Ajouter un client</button>
+      <div class="input-add" *ngIf="showInputs">
+        <input [(ngModel)]="nom" placeholder="Nom">
+        <input [(ngModel)]="prenom" placeholder="Prénom">
+        <input [(ngModel)]="adresse" placeholder="Adresse">
+        <input [(ngModel)]="email" placeholder="Email">
+        <input [(ngModel)]="password" placeholder="Password">
+        <input [(ngModel)]="role" placeholder="Role">
+      </div>
+    </div>
+
+  </main>
 </div>
-<button (click)="addClient()">Ajouter un client</button>

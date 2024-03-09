@@ -23,6 +23,7 @@ import { AdminBoxComponent } from './component/admin-box/admin-box.component';
 import { AdminUserComponent } from './component/admin-user/admin-user.component';
 import { AdminAlimentComponent } from './component/admin-aliment/admin-aliment.component';
 import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.component';
+import { NavAdminComponent } from './component/nav-admin/nav-admin.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.comp
     AdminBoxComponent,
     AdminUserComponent,
     AdminAlimentComponent,
-    AdminSaveurComponent
+    AdminSaveurComponent,
+    NavAdminComponent
   ],
   imports: [
     BrowserModule,

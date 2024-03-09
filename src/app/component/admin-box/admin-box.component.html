@@ -1,79 +1,85 @@
-<table>
-  <thead>
-    <tr>
-      <th>ID Box</th>
-      <th>Nom</th>
-      <th>Prix</th>
-      <th>Image</th>
-      <th>Pièces</th>
-      <th>Saveurs</th>
-      <th>Aliments</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let box of boxes$ | async">
-      <td>{{ box.id_boxe }}</td>
-      <td>{{ box.nom }}</td>
-      <td>{{ box.prix }}</td>
-      <td><img [src]="'../../../assets/ressources/images/box-sushi/caree/' + box.image" alt="{{ box.nom }}"
-          width="100px">
-      </td>
-      <td>{{ box.pieces }}</td>
-      <td>
-        <ul>
-          <li *ngFor="let saveur of box.saveurs">{{ saveur }}</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li *ngFor="let aliment of box.aliments">{{ aliment.nom }} - {{ aliment.quantite }}</li>
-        </ul>
-      </td>
-      <td>
-        <button (click)="editBox(box.id_boxe, box.nom, box.prix, box.image, box.pieces)">Modifier</button>
-        <button (click)="deleteBox(box.id_boxe)">Supprimer</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<p>{{ errorMessage }}</p>
-<form [formGroup]="form">
-  <div *ngIf="showInputs">
-    <input formControlName="nom" placeholder="Nom Boxes">
-    <input formControlName="prix" placeholder="Prix">
-    <input formControlName="image" placeholder="Image" type="file" accept="image/*" (change)="fileProcess($event)">
-    <input formControlName="pieces" placeholder="Pièces">
+<div class="container-grille">
+  <app-nav-admin></app-nav-admin>
+  <main>
+    <p>admin-box works!</p>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Box</th>
+          <th>Nom</th>
+          <th>Prix</th>
+          <th>Image</th>
+          <th>Pièces</th>
+          <th>Saveurs</th>
+          <th>Aliments</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let box of boxes$ | async">
+          <td>{{ box.id_boxe }}</td>
+          <td>{{ box.nom }}</td>
+          <td>{{ box.prix }}</td>
+          <td><img [src]="'../../../assets/ressources/images/box-sushi/caree/' + box.image" alt="{{ box.nom }}"
+              width="100px">
+          </td>
+          <td>{{ box.pieces }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let saveur of box.saveurs">{{ saveur }}</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li *ngFor="let aliment of box.aliments">{{ aliment.nom }} - {{ aliment.quantite }}</li>
+            </ul>
+          </td>
+          <td>
+            <button (click)="editBox(box.id_boxe, box.nom, box.prix, box.image, box.pieces)">Modifier</button>
+            <button (click)="deleteBox(box.id_boxe)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>{{ errorMessage }}</p>
+    <form [formGroup]="form">
+      <div *ngIf="showInputs">
+        <input formControlName="nom" placeholder="Nom Boxes">
+        <input formControlName="prix" placeholder="Prix">
+        <input formControlName="image" placeholder="Image" type="file" accept="image/*" (change)="fileProcess($event)">
+        <input formControlName="pieces" placeholder="Pièces">
 
-    <div formArrayName="saveurs">
-      <p>Saveurs</p>
-      <div *ngFor="let saveur of allSaveurs; index as i">
+        <div formArrayName="saveurs">
+          <p>Saveurs</p>
+          <div *ngFor="let saveur of allSaveurs; index as i">
 
-        <label>
-          <input type="checkbox" [formControlName]="i" [value]="saveur.id_saveur">
-          {{saveur.nom_saveur}}
-        </label>
-        <div *ngIf="isSaveurSelected(saveur.id_saveur)">
-          Saveur sélectionnée : {{saveur.nom_saveur}}
+            <label>
+              <input type="checkbox" [formControlName]="i" [value]="saveur.id_saveur">
+              {{saveur.nom_saveur}}
+            </label>
+            <div *ngIf="isSaveurSelected(saveur.id_saveur)">
+              Saveur sélectionnée : {{saveur.nom_saveur}}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div formArrayName="aliments">
-      <p>Aliments</p>
-      <div *ngFor="let aliment of aliments.controls; let i = index">
-        <div [formGroupName]="i">
-          <label>
-            <input type="checkbox" formControlName="selected">
-            {{allAliments[i].nom_aliment}}
-          </label>
-          <div *ngIf="aliment.get('selected')?.value">
-            Quantité :
-            <input type="number" formControlName="quantite">
+        <div formArrayName="aliments">
+          <p>Aliments</p>
+          <div *ngFor="let aliment of aliments.controls; let i = index">
+            <div [formGroupName]="i">
+              <label>
+                <input type="checkbox" formControlName="selected">
+                {{allAliments[i].nom_aliment}}
+              </label>
+              <div *ngIf="aliment.get('selected')?.value">
+                Quantité :
+                <input type="number" formControlName="quantite">
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</form>
-<button (click)="addBoxAndUploadFile()">Ajouter une boxes</button>
+    </form>
+    <button (click)="addBoxAndUploadFile()">Ajouter une boxes</button>
+  </main>
+</div>
