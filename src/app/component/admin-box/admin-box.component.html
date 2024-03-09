@@ -17,69 +17,90 @@
       </thead>
       <tbody>
         <tr *ngFor="let box of boxes$ | async">
-          <td>{{ box.id_boxe }}</td>
-          <td>{{ box.nom }}</td>
-          <td>{{ box.prix }}</td>
+          <td class="id">#{{ box.id_boxe }}</td>
+          <td class="id">{{ box.nom }}</td>
+          <td class="id">{{ box.prix }}</td>
           <td><img [src]="'../../../assets/ressources/images/box-sushi/caree/' + box.image" alt="{{ box.nom }}"
               width="100px">
           </td>
-          <td>{{ box.pieces }}</td>
+          <td class="id">{{ box.pieces }}</td>
           <td>
             <ul>
-              <li *ngFor="let saveur of box.saveurs">{{ saveur }}</li>
+              <li class="id" *ngFor="let saveur of box.saveurs">{{ saveur }}</li>
             </ul>
           </td>
           <td>
             <ul>
-              <li *ngFor="let aliment of box.aliments">{{ aliment.nom }} - {{ aliment.quantite }}</li>
+              <li class="id" *ngFor="let aliment of box.aliments">{{ aliment.nom }} - {{ aliment.quantite }}</li>
             </ul>
           </td>
-          <td>
+          <td class="action">
             <!--<button (click)="editBox(box.id_boxe, box.nom, box.prix, box.image, box.pieces)">Modifier</button>-->
-            <button (click)="deleteBox(box.id_boxe)">Supprimer</button>
+
+            <button class="supr-btn" (click)="deleteBox(box.id_boxe)">
+              <img src="../../../assets/ressources/icons/Delete.svg" alt="">
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
     <p>{{ errorMessage }}</p>
-    <form [formGroup]="form">
-      <div *ngIf="showInputs">
-        <input formControlName="nom" placeholder="Nom Boxes">
-        <input formControlName="prix" placeholder="Prix">
-        <input formControlName="image" placeholder="Image" type="file" accept="image/*" (change)="fileProcess($event)">
-        <input formControlName="pieces" placeholder="Pièces">
 
-        <div formArrayName="saveurs">
-          <p>Saveurs</p>
-          <div *ngFor="let saveur of allSaveurs; index as i">
 
-            <label>
-              <input type="checkbox" [formControlName]="i" [value]="saveur.id_saveur">
-              {{saveur.nom_saveur}}
-            </label>
-            <div *ngIf="isSaveurSelected(saveur.id_saveur)">
-              Saveur sélectionnée : {{saveur.nom_saveur}}
-            </div>
+    <div class="div-add">
+      <div>
+        <button class="add-saveur" (click)="addBoxAndUploadFile()">Ajouter une boxes</button>
+      </div>
+
+      <form [formGroup]="form">
+        <div *ngIf="showInputs">
+          <div class="container-input">
+            <input class="input-txt" formControlName="nom" placeholder="Nom Boxes">
+            <input class="input-txt" formControlName="prix" placeholder="Prix">
+            <input class="input-txt file" id="file" formControlName="image" placeholder="Image" type="file" accept="image/*"
+              (change)="fileProcess($event)">
+            <label class="txt-file id" for="file"><img src="../../../assets/ressources/icons/cloud.svg" alt="">Choisir une image</label>
+            <input class="input-txt" formControlName="pieces" placeholder="Pièces">
           </div>
-        </div>
 
-        <div formArrayName="aliments">
-          <p>Aliments</p>
-          <div *ngFor="let aliment of aliments.controls; let i = index">
-            <div [formGroupName]="i">
-              <label>
-                <input type="checkbox" formControlName="selected">
-                {{allAliments[i].nom_aliment}}
-              </label>
-              <div *ngIf="aliment.get('selected')?.value">
-                Quantité :
-                <input type="number" formControlName="quantite">
+          <div class="div-checked">
+
+            <div formArrayName="saveurs">
+              <p class="id title">Saveurs</p>
+              <div *ngFor="let saveur of allSaveurs; index as i">
+
+                <label class="id label-check">
+                  <input type="checkbox" [formControlName]="i" [value]="saveur.id_saveur">
+                  {{saveur.nom_saveur}}
+                </label>
+                <div class="id" *ngIf="isSaveurSelected(saveur.id_saveur)">
+                  Saveur sélectionnée : {{saveur.nom_saveur}}
+                </div>
               </div>
             </div>
+
+            <div formArrayName="aliments">
+              <p class="id title">Aliments</p>
+
+              <div class="alimet-div">
+                <div *ngFor="let aliment of aliments.controls; let i = index">
+                  <div [formGroupName]="i">
+                    <label class="id label-check">
+                      <input type="checkbox" formControlName="selected">
+                      {{allAliments[i].nom_aliment}}
+                    </label>
+                    <div class="id input-add" *ngIf="aliment.get('selected')?.value">
+                      Quantité :
+                      <input type="number" formControlName="quantite">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
-      </div>
-    </form>
-    <button (click)="addBoxAndUploadFile()">Ajouter une boxes</button>
+      </form>
+    </div>
   </main>
 </div>

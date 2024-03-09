@@ -1,66 +1,15 @@
-table {
-  width: 100%;
-  border-collapse: collapse;
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-table,
-th,
-td {
-  border: 1px solid black;
-  text-align: center;
-  padding: 10px;
-}
+$barlow : "Barlow",
+sans-serif;
+$white : #ffffff;
 
-th {
-  background-color: #f2f2f2;
-}
-
-button {
-  margin: 5px;
-  padding: 5px 10px;
-  background-color: #4CAF50;
-  /* Green */
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-form {
-  margin: 20px;
-  font-family: Arial, sans-serif;
-}
-
-input {
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 16px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input[type="checkbox"] {
-  margin: 10px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-family: Arial, sans-serif;
-}
 .container-grille {
-  height: 100vh;
+  // height: 100vh;
   width: 100%;
   display: grid;
   grid-template-columns: 136px 1fr 200px;
@@ -73,4 +22,189 @@ label {
 
 main {
   padding: 20px;
+}
+
+tr th {
+  color: rgb(255, 255, 255);
+  font-family: $barlow;
+  font-size: 20.73px;
+  font-weight: 600;
+  color: $white;
+  text-align: left;
+  padding-right: 30px;
+}
+
+td {
+  padding-right: 30px;
+}
+
+table {
+  border-spacing: 0 17px;
+}
+
+.id {
+  color: $white;
+  font-family: $barlow;
+  font-size: 20.73px;
+  font-weight: 500;
+}
+
+.input-txt {
+  box-sizing: border-box;
+  border: 1.3px solid rgb(57, 60, 73);
+  border-radius: 10.37px;
+  background: rgb(45, 48, 62);
+  color: #E0E6E9;
+  font-family: $barlow;
+  font-size: 18.14px;
+  font-weight: 400;
+  padding: 17px 17px 19px 17px;
+  outline: none;
+  min-width: 100px;
+  width: 385px;
+}
+
+.supr-btn {
+  background: transparent;
+  border: 1.3px solid rgb(255, 124, 163);
+  border-radius: 10.3px;
+  padding: 14px;
+}
+
+.supr-btn img {
+  height: 26px;
+  width: 26px;
+}
+
+
+.edit-btn {
+  background: transparent;
+  border: 1.3px solid rgb(101, 143, 251);
+  border-radius: 10.3px;
+  padding: 14px;
+}
+
+.edit-btn img {
+  height: 26px;
+  width: 26px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+main .add-saveur {
+  color: $white;
+  font-family: $barlow;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10.37px;
+  background: rgb(234, 124, 105);
+  border: none;
+  padding: 17px 50px;
+  cursor: pointer;
+  transition: ease-in-out 0.25s;
+}
+
+main .add-saveur:hover {
+  box-shadow: 0px 10.37px 31.1px 0px rgba(234, 124, 105, 0.3);
+}
+
+.div-add {
+  margin-top: 10px;
+  display: flex;
+  gap: 17px;
+}
+
+.div-add input {
+  // height: 56px !important;
+}
+
+.div-add button{
+  display: inline-block;
+}
+
+.error {
+  color: rgb(204, 93, 93);
+  font-family: $barlow;
+  font-size: 18.14px;
+  font-weight: 400;
+}
+
+.label-check{
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 20px;
+}
+
+.div-checked{
+  display: flex;
+  gap: 50px;
+}
+
+.alimet-div{
+  columns: 3;
+  column-gap: 50px;
+}
+
+.title{
+  margin-bottom: 20px;
+}
+
+.container-input{
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.input-add{
+  margin-bottom: 30px;
+}
+
+.input-add input {
+  box-sizing: border-box;
+  border: 1.3px solid rgb(57, 60, 73);
+  border-radius: 10.37px;
+  background: rgb(45, 48, 62);
+  color: #E0E6E9;
+  font-family: $barlow;
+  font-size: 18.14px;
+  font-weight: 400;
+  padding: 5px 5px 7px 8px;
+  outline: none;
+  width: 60px;
+}
+
+.file {
+  display: none; 
+}
+.txt-file{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.txt-file img{
+  width: 80px;
+}
+.file  + label {
+  padding: 15px 25px;
+  background-color: transparent; /* Couleur de fond */
+  color: white; /* Couleur du texte */
+  cursor: pointer; /* Change le curseur en main lorsqu'on survole */
+  border-radius: 5px; /* Coins arrondis */
+  text-align: center;
+  border: dashed 3px #ea7c69; 
+  border-radius: 10px;
+}
+
+.file :active + label,
+.file :focus + label {
+  background-color: #ea7c69; /* Change la couleur de fond lorsque l'input est actif ou a le focus */
 }

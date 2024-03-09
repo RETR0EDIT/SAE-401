@@ -25,17 +25,17 @@ const routes: Routes = [
   { path: "about", component: HomeAboutComponent},
   { path: "details", component: BoxDetailsComponent},
   { path: "profil" , component: ProfilComponent},
-  //{ path: "admin", component: AdminComponent},
-  //{ path: "admin/aliment", component: AdminAlimentComponent},
-  //{ path: "admin/box", component: AdminBoxComponent},
-  //{ path: "admin/user", component: AdminUserComponent},
-  //{ path: "admin/saveur", component: AdminSaveurComponent},
+  { path: "admin", component: AdminComponent},
+  { path: "admin/aliment", component: AdminAlimentComponent},
+  { path: "admin/box", component: AdminBoxComponent},
+  { path: "admin/user", component: AdminUserComponent},
+  { path: "admin/saveur", component: AdminSaveurComponent},
   { path: "nav-admin", component: NavAdminComponent},
-   { path: "admin", component: AdminComponent, canActivate: [AdminGuard]},
-   { path: "admin/aliment", component: AdminAlimentComponent, canActivate: [AdminGuard]},
-   { path: "admin/box", component: AdminBoxComponent, canActivate: [AdminGuard]},
-   { path: "admin/user", component: AdminUserComponent, canActivate: [AdminGuard]},
-   { path: "admin/saveur", component: AdminSaveurComponent, canActivate: [AdminGuard]}
+  //  { path: "admin", component: AdminComponent, canActivate: [AdminGuard]},
+  //  { path: "admin/aliment", component: AdminAlimentComponent, canActivate: [AdminGuard]},
+  //  { path: "admin/box", component: AdminBoxComponent, canActivate: [AdminGuard]},
+  //  { path: "admin/user", component: AdminUserComponent, canActivate: [AdminGuard]},
+  //  { path: "admin/saveur", component: AdminSaveurComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({
