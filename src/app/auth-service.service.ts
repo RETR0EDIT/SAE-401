@@ -17,18 +17,25 @@ export class AuthService {
   userRole: string = '';
 
   constructor(private cookieService: CookieService, private http: HttpClient, private localStorage: LocalStorageService) {
-   
     const savedToken = this.localStorage.getItem('authToken');
+    const savedUserRole = this.localStorage.getItem('userRole');
+    const savedUserId = this.localStorage.getItem('userId');
+    
     if (savedToken) {
       this.token = savedToken;
       this.isLoggedInSubject.next(true);
     }
+  
+    if (savedUserRole) {
+      this.userRole = savedUserRole;
+    }
+
+    if (savedUserId) {
+      this.userId = savedUserId;
+    }
   }
 
-  
-
   setToken(token: string, userId: string, role: string): void {
-
     this.token = token;
     this.userId = userId;
     this.userRole = role;
@@ -43,10 +50,11 @@ export class AuthService {
       .subscribe(response => {
         this.token = '';
         this.localStorage.removeItem('authToken');
+        this.localStorage.removeItem('userId');
+        this.localStorage.removeItem('userRole');
         this.isLoggedInSubject.next(false);
       });
   }
-
 
   isUserLoggedIn(): Observable<boolean> {
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.token);
