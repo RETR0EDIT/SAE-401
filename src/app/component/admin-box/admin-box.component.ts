@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { BoxService } from '../../box.service'; 
-import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 
 @Component({

@@ -93,4 +93,13 @@ export class CartService {
     const totalItems = this.getTotalItems();
     this.totalItemsSubject.next(totalItems); 
   }
+
+  
+  getBoxCommander(): number[] {
+    return this.getCart().map((item: { box: { id_boxe: number }}) => item.box.id_boxe);
+  }
+
+  getQuantiteCommander(): number[] {
+    return this.getCart().map((item: { quantity: number }) => item.quantity);
+  }
 }

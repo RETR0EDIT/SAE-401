@@ -24,7 +24,8 @@ import { AdminUserComponent } from './component/admin-user/admin-user.component'
 import { AdminAlimentComponent } from './component/admin-aliment/admin-aliment.component';
 import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.component';
 import { NavAdminComponent } from './component/nav-admin/nav-admin.component';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,14 +45,17 @@ import { NavAdminComponent } from './component/nav-admin/nav-admin.component';
     AdminUserComponent,
     AdminAlimentComponent,
     AdminSaveurComponent,
-    NavAdminComponent
+    NavAdminComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     CartService,

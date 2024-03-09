@@ -76,4 +76,9 @@ export class AuthService {
     return this.http.get<any>(`http://localhost/sae-401/api/profil/Read_one.php?id=${id_client}`)
       .pipe(map(response => response.role));
   }
+
+  
+getIdClient(): string {
+  return this.userId;
+}
 }

@@ -5,11 +5,15 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { SharedService } from '../../shared.service';
 import { Box, Aliment } from '../../box.interface';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../auth-service.service';
 interface LoginResponse {
   message: string;
 }
+interface ServerResponse {
+  message: string;
 
+}
 @Component({
   selector: 'app-panier',
   templateUrl: './panier.component.html',
@@ -21,7 +25,7 @@ export class PanierComponent implements OnInit {
   alimentStrings: string[] = [];
   totalPrix: number = 0;
 
-  constructor(private location: Location, private http: HttpClient, private cartService: CartService, private router: Router, private sharedService: SharedService) { }
+  constructor(private location: Location, private http: HttpClient, private cartService: CartService, private router: Router, private sharedService: SharedService, private snackBar: MatSnackBar, private authService: AuthService) { }
 
   ngOnInit() {
     this.cartService.cart$.subscribe(cart => {
@@ -47,5 +51,33 @@ export class PanierComponent implements OnInit {
 
   modifier(){
     //debloque acces au option de la box voir panier.component.html ligne 40
+  }
+
+
+  finaliserCommande() {
+    this.snackBar.open('Finalisation de la commande...', '', {
+      duration: 4000,  
+    });
+  
+    setTimeout(() => {
+      this.http.post<ServerResponse>('http://localhost/sae-401/api/acheter/Create.php', {
+        id_client: this.authService.getIdClient(), 
+        id_boxe: this.cartService.getBoxCommander(),
+        quantite: this.cartService.getQuantiteCommander(),
+        date: new Date().toISOString(),
+      }).subscribe((response: ServerResponse) => {
+        console.log(response);
+        
+        if (response && response.message === 'Achat créé.') {
+          this.snackBar.open('Commande validée', '', {
+            duration: 4000,
+          });
+        } else {
+          this.snackBar.open('Erreur lors de la validation de la commande', '', {
+            duration: 4000,
+          });
+        }
+      });
+    }, 4000);
   }
 }
