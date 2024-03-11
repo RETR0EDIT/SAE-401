@@ -1,6 +1,6 @@
 <section id="panier">
   <div class="container-panier">
-    <div class="btn">
+    <div class="btn" *ngIf="cart && cart.length > 0">
       <a href="#"><img src="../../../assets/ressources/icons/Chevron_Left_.svg" alt="" /> Retourner aux boxes</a>
     </div>
 

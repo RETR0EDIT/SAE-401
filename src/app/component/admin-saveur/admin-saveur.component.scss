@@ -9,6 +9,7 @@ sans-serif;
 $white : #ffffff;
 
 .container-grille {
+  min-height: 100vh;
   width: 100%;
   display: grid;
   grid-template-columns: 136px 1fr 200px;

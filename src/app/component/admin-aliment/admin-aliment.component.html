@@ -5,18 +5,18 @@
     <table>
       <thead>
         <tr>
-          <th class="id-th">ID Aliment</th>
-          <th class="nom-th">Nom Aliment</th>
-          <th class="action-th">Actions</th>
+          <th scope="col" class="id-th">ID Aliment</th>
+          <th scope="col" class="nom-th">Nom Aliment</th>
+          <th scope="col" class="action-th">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let aliment of aliments$ | async">
-          <td class="id">#{{ aliment.id_aliment }}</td>
-          <td>
+          <td data-label="ID Aliment" class="id">#{{ aliment.id_aliment }}</td>
+          <td data-label="Nom Aliment" class="id">
             <input type="text" [(ngModel)]="aliment.nom_aliment" [readonly]="!editing[aliment.id_aliment]">
           </td>
-          <td class="action">
+          <td data-label="Actions" class="action id">
             <button class="supr-btn" (click)="deleteAliment(aliment.id_aliment)"><img
                 src="../../../assets/ressources/icons/Delete.svg" alt=""></button>
             <button class="edit-btn" (click)="editAliment(aliment.id_aliment, aliment.nom_aliment)">

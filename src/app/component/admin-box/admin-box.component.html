@@ -2,39 +2,40 @@
   <app-nav-admin></app-nav-admin>
   <main>
     <p>admin-box works!</p>
+    <div class="responsive-table">
     <table>
       <thead>
         <tr>
-          <th>ID Box</th>
-          <th>Nom</th>
-          <th>Prix</th>
-          <th>Image</th>
-          <th>Pièces</th>
-          <th>Saveurs</th>
-          <th>Aliments</th>
-          <th>Actions</th>
+          <th scope="col">ID Box</th>
+          <th scope="col" class="nom">Nom</th>
+          <th scope="col">Prix</th>
+          <th scope="col">Image</th>
+          <th scope="col">Pièces</th>
+          <th scope="col" class="saveur">Saveurs</th>
+          <th scope="col">Aliments</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let box of boxes$ | async">
-          <td class="id">#{{ box.id_boxe }}</td>
-          <td class="id">{{ box.nom }}</td>
-          <td class="id">{{ box.prix }}</td>
-          <td><img [src]="'../../../assets/ressources/images/box-sushi/caree/' + box.image" alt="{{ box.nom }}"
+          <td data-label="ID Box" class="id">#{{ box.id_boxe }}</td>
+          <td data-label="Nom" class="id">{{ box.nom }}</td>
+          <td data-label="Prix" class="id">{{ box.prix }}</td>
+          <td data-label="Image" class="id"><img [src]="'../../../assets/ressources/images/box-sushi/caree/' + box.image" alt="{{ box.nom }}"
               width="100px">
           </td>
-          <td class="id">{{ box.pieces }}</td>
-          <td>
+          <td data-label="Pièces" class="id">{{ box.pieces }}</td>
+          <td data-label="Saveurs" class="id">
             <ul>
               <li class="id" *ngFor="let saveur of box.saveurs">{{ saveur }}</li>
             </ul>
           </td>
-          <td>
+          <td data-label="Aliments" class="id">
             <ul>
               <li class="id" *ngFor="let aliment of box.aliments">{{ aliment.nom }} - {{ aliment.quantite }}</li>
             </ul>
           </td>
-          <td class="action">
+          <td data-label="Actions" class="action" class="id">
             <!--<button (click)="editBox(box.id_boxe, box.nom, box.prix, box.image, box.pieces)">Modifier</button>-->
 
             <button class="supr-btn" (click)="deleteBox(box.id_boxe)">
@@ -44,6 +45,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
     <p>{{ errorMessage }}</p>
 
 
