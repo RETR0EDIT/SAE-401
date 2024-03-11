@@ -12,15 +12,14 @@
 }
 
 // ?VARIABLES
-$font-poppins: "Poppins",
-sans-serif;
+$font-poppins: "Poppins", sans-serif;
 
 // !COLOR
 $black-color: #000;
 $white-color: #fff;
 $white-soft-color: hsla(0, 0%, 100%, 0.65);
-$white-ultra-soft-color: hsla(0, 0%, 100%, 0.50);
-$light-grey-color: #B5B5B5;
+$white-ultra-soft-color: hsla(0, 0%, 100%, 0.5);
+$light-grey-color: #b5b5b5;
 $soft-grey-color: #686868;
 $ultra-soft-grey-color: rgba(217, 217, 217, 0.46);
 $red-color: hsla(0, 73%, 50%, 0.71);
@@ -172,7 +171,8 @@ $red-color: hsla(0, 73%, 50%, 0.71);
   margin-left: auto;
 }
 
-.resume-panier button {
+.resume-panier button,
+.error-panier button {
   color: $white-color;
   font-size: 20px;
   font-weight: 500;
@@ -206,6 +206,29 @@ button {
 
 .item-panier {
   margin: 0px auto 13px auto;
+}
+
+.error-panier {
+  text-align: center;
+  margin: 100px 0px;
+}
+
+.error-panier p {
+  color: #686868;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: -8%;
+  margin: 20px;
+}
+
+.error-panier h3 {
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -5%;
+  margin-bottom: 20px;
 }
 
 @media (min-width: 900px) {
@@ -364,7 +387,6 @@ button {
     gap: 35px;
   }
 
-
   .nom-prix {
     display: flex;
     justify-content: space-between;
@@ -383,7 +405,6 @@ button {
     display: flex;
     justify-content: center;
   }
-
 }
 
 @media (min-width: 1300px) {
@@ -406,8 +427,12 @@ button {
     max-width: 1056px;
   }
 
-
   .btn a {
     margin-bottom: 0;
   }
+}
+
+.error-panier img {
+  width: 220px;
+  margin-right: 45px;
 }
