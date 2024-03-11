@@ -4,15 +4,15 @@
       <a href="#"><img src="../../../assets/ressources/icons/Chevron_Left_.svg" alt="" /> Retourner aux boxes</a>
     </div>
 
-    <div class="error-panier"  *ngIf="cart && cart.length == 0">
-        <h3>Panier vide</h3>
-        <img src="../../../assets/ressources/icons/card-ps.png" alt="">
-        <p>Vous ne trouvez pas votre bonheur ? Découvrez toutes nos box. </p>
-        <button routerLink="/product">Parcourir les box</button>
+    <div class="error-panier" *ngIf="cart && cart.length == 0">
+      <h3>Panier vide</h3>
+      <img src="../../../assets/ressources/icons/card-ps.png" alt="">
+      <p>Vous ne trouvez pas votre bonheur ? Découvrez toutes nos box. </p>
+      <button routerLink="/product">Parcourir les box</button>
     </div>
-    <div class="container-window"  *ngIf="cart && cart.length > 0">
+    <div class="container-window" *ngIf="cart && cart.length > 0">
 
-      <div  class="item-panier-div">
+      <div class="item-panier-div">
 
         <h3 class="panier">Votre panier</h3>
         <div class="panier-item-container">
@@ -43,10 +43,10 @@
                     <div class="container-select-choix">
                       <div class="select-choix">
                         <label for="quantity">Qte:</label>
-                        <select id="quantity" name="quantity">
-                          <option [value]="item.quantity">{{ item.quantity }}</option>
-                          <!--faire ajouter les option compris entre 1 et le nom de box maximal (ex: si j'ai 3 box dans mon panier plus
-                             celle que je veux modifier cela ne dois pas depasser la valeur de 10 (totalBoxes + quantity)-->
+                        <select id="quantity" name="quantity" [(ngModel)]="item.quantity"
+                          (ngModelChange)="onQuantityChangeWithClone(item)">
+                          <option *ngFor="let option of getOptions(item.quantity)" [value]="option">{{ option }}
+                          </option>
                         </select>
                       </div>
                     </div>

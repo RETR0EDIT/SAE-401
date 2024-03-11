@@ -36,19 +36,27 @@ export class BoxDetailsComponent implements OnInit {
   }
 
   increment() {
-    this.valeur++;
-    this.updateTotal();
+    if (this.valeur + this.cartService.getTotalBoxes() < 10) {
+      if (this.box !== null) {
+        this.cartService.updateQuantity({...this.box}, this.valeur + 1);
+      }
+      this.valeur = this.valeur + 1;
+      this.updateTotal();
+    }
   }
   
   decrement() {
     if (this.valeur > 1) {
-      this.valeur--;
+      if (this.box !== null) {
+        this.cartService.updateQuantity({...this.box}, this.valeur - 1);
+      }
+      this.valeur = this.valeur - 1;
       this.updateTotal();
     }
   }
   
   updateTotal() {
-    if (this.box && this.box.prix) {
+    if (this.box && this.box.prix && this.valeur) {
       this.total = this.valeur * this.box.prix;
       this.totalString = this.total.toFixed(2);
     } else {

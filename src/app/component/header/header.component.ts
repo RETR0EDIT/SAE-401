@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { CartService } from '../../cart.service';
 import { SharedService } from '../../shared.service';
 import { HttpClient } from '@angular/common/http';
+import { LocalStorageService } from '../../local-storage.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,13 +14,17 @@ import { HttpClient } from '@angular/common/http';
 export class HeaderComponent implements OnInit {
   isMenuOpen: boolean = false;
   isLoggedIn: boolean = false;
-  
-
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router, private cartService: CartService, private sharedService: SharedService) { }
-  totalItems: number =0;
+  totalItems: number = 0;
   role: string = '';
 
-  // Initialise le composant et souscrit aux observables nécessaires
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router, private cartService: CartService, private sharedService: SharedService, private localStorageService: LocalStorageService) {
+    // Souscrit à totalItems$ dans le constructeur
+    this.sharedService.totalItems$.subscribe(totalItems => {
+      this.totalItems = totalItems;
+      this.localStorageService.setItem('totalItems', this.totalItems.toString()); // Enregistre totalItems dans le localStorage
+    });
+  }
+  
   ngOnInit() {
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
@@ -26,17 +32,18 @@ export class HeaderComponent implements OnInit {
         this.getUserRole();
       }
     });
-    this.cartService.totalItems$.subscribe(totalItems => {
-      this.totalItems = totalItems;
-    });
+  
+    // Récupère totalItems du localStorage
+    const savedTotalItems = this.localStorageService.getItem('totalItems');
+    if (savedTotalItems) {
+      this.totalItems = Number(savedTotalItems);
+    }
   }
 
   // Récupère le rôle de l'utilisateur
   getUserRole(): void {
-    let id_client = localStorage.getItem('userId');
+    let id_client = this.localStorageService.getItem('userId');
     if (id_client === null) {
-      
-      
       return;
     }
     this.authService.getUserRole(id_client).subscribe(role => {
@@ -57,15 +64,9 @@ export class HeaderComponent implements OnInit {
 
   // Déconnecte l'utilisateur et le redirige vers la page d'accueil
   onLogoutClick(): void {
-
     this.authService.logout();
     this.role = '';
     this.router.navigate(['/']).then(success => {
     });
-  }
-  
-  // Met à jour le nombre total d'articles dans le panier
-  someFunction() {
-    this.totalItems = this.sharedService.getTotalItems();
   }
 }

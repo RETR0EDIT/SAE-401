@@ -29,12 +29,18 @@ export class PanierComponent implements OnInit {
 
   ngOnInit() {
     this.cartService.cart$.subscribe(cart => {
-      this.cart = cart;
-      this.totalItems = this.sharedService.getTotalItems(); 
+      setTimeout(() => {
+        this.cart = cart;
+        // Convertir le tableau d'objets Aliment en une seule chaîne de caractères
+        this.alimentStrings = this.cart.map(item => item.box.aliments.map(aliment => `${aliment.nom}: ${aliment.quantite}`).join(', '));
+        this.totalPrix = this.cart.reduce((sum, item) => sum + item.box.prix * item.quantity, 0);
+        this.sharedService.getTotalItems();
 
-      // Convertir le tableau d'objets Aliment en une seule chaîne de caractères
-      this.alimentStrings = this.cart.map(item => item.box.aliments.map(aliment => `${aliment.nom}: ${aliment.quantite}`).join(', '));
-      this.totalPrix = this.cart.reduce((sum, item) => sum + item.box.prix * item.quantity, 0);
+      });
+    });
+  
+    this.sharedService.totalItems$.subscribe(totalItems => {
+      this.totalItems = totalItems;
     });
   }
   
@@ -43,7 +49,7 @@ export class PanierComponent implements OnInit {
   }
 
   someFunction() {
-    this.totalItems = this.cartService.getTotalItems();
+    this.totalItems = this.cartService.getTotalItems(this.cart);
   }
   formatAliments(aliments: Aliment[]): string {
     return aliments.map(aliment => `${aliment.nom}: ${aliment.quantite}`).join(', ');
@@ -79,5 +85,22 @@ export class PanierComponent implements OnInit {
         }
       });
     }, 4000);
+  }
+  getOptions(quantity: number): number[] {
+    const totalBoxes = this.cartService.getTotalBoxes();
+    const maxOptions = Math.min(10 - totalBoxes + quantity, 10);
+    return Array.from({length: maxOptions}, (_, i) => i + 1);
+  }
+  onQuantityChange(item: { box: Box, quantity: number, total: number }) {
+    this.cartService.updateQuantity(item.box, Number(item.quantity));
+    const totalItems = this.sharedService.getTotalItems();
+    console.log('Total des articles :', totalItems);
+  }
+    
+  onQuantityChangeWithClone(item: { box: Box, quantity: number, total: number }) {
+    console.log('Item avant le clonage :', item);
+    const clonedItem = { ...item, quantity: Number(item.quantity) };
+    console.log('Item après le clonage :', clonedItem);
+    this.onQuantityChange(clonedItem);
   }
 }
