@@ -5,18 +5,18 @@
     <table>
       <thead>
         <tr>
-          <th>ID Saveur</th>
-          <th>Nom Saveur</th>
-          <th>Actions</th>
+          <th scope="col">ID Saveur</th>
+          <th scope="col">Nom Saveur</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let saveur of saveurs$ | async">
-          <td class="id">#{{ saveur.id_saveur }}</td>
-          <td>
+          <td data-label="ID Saveur" class="id">#{{ saveur.id_saveur }}</td>
+          <td data-label="Nom Saveur" class="id">
             <input type="text" [(ngModel)]="saveur.nom_saveur" [readonly]="!editing[saveur.id_saveur]">
           </td>
-          <td class="action">
+          <td data-label="Actions" class="action id">
             <button class="edit-btn" (click)="editSaveur(saveur.id_saveur, saveur.nom_saveur)">
               <img *ngIf="!editing[saveur.id_saveur]" src="../../../assets/ressources/icons/Edit.svg" alt="">
               <img *ngIf="editing[saveur.id_saveur]" src="../../../assets/ressources/icons/check-check.svg" alt="">

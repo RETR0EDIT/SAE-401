@@ -136,3 +136,203 @@ main .add-client:hover {
   flex-wrap: wrap;
   gap: 17px;
 }
+
+table {
+  // border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  // table-layout: fixed;
+}
+
+table caption {
+  // font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+
+table tr {
+  background-color: transparent;
+  // border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  // text-align: center;
+}
+
+table th {
+  // font-size: .85em;
+  // letter-spacing: .1em;
+  // text-transform: uppercase;
+}
+
+@media screen and (max-width: 1500px) {
+  .nom{
+    width: 200px;
+  }
+  .saveur{
+    width: 100px;
+  }
+}
+@media screen and (max-width: 1272px){
+  .id {
+    color: $white;
+    font-family: $barlow;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .nom{
+    width: 100px;
+  }
+  
+}
+@media screen and (max-width: 1577px) {
+  table {
+    border: 0;
+    max-width: 500px;
+  }
+
+  table caption {
+    // font-size: 1.3em;
+  }
+  .responsive-table{
+    display: flex;
+    justify-content: center;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    // border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: 30px;
+  }
+  
+  table td {
+    // border-bottom: 1px solid #ddd;
+    display: block;
+    // font-size: .8em;
+    text-align: right;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+
+
+
+  // .container-grille {
+  //   // height: 100vh;
+  //   width: 100%;
+  //   display: grid;
+  //   grid-template-columns: 1fr;
+
+  // }
+
+  .container-table{
+    columns: 2;
+  }
+
+  main{
+    margin-bottom: 100px;
+  }
+
+  .div-add{
+    flex-direction: row;
+    // display: block;
+    align-items: start;
+  }
+
+  .container-input{
+    flex-direction: column;
+  }
+  .txt-file {
+    max-width: 200px;
+  }
+
+  .div-checked{
+    flex-direction: column;
+  }
+
+  .alimet-div{
+    columns: 1;
+  }
+  
+}
+
+
+@media screen and (max-width: 1003px){
+  .div-add{
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .input-add{
+    justify-content: center;
+  }
+
+  main{
+    width: 759px;
+  }
+}
+
+
+@media screen and (max-width : 949px){
+  .container-grille {
+    // height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  main{
+    margin: 0 auto;
+  }
+
+  .div-add{
+    margin-bottom: 100px;
+  }
+  
+}
+
+
+@media screen and (max-width : 760px) {
+  .container-table{
+    columns: 1;
+  }
+
+  main{
+    width: auto;
+    margin: 0;
+  }
+}
+@media screen and (max-width: 468px){
+  .input-txt {
+    width: 200px;
+  }
+
+}

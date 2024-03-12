@@ -2,37 +2,40 @@
   <app-nav-admin></app-nav-admin>
   <main>
     <p>admin-client works!</p>
+
+    <div class="container-table">
+
     <table>
       <thead>
         <tr>
-          <th>ID Client</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Adresse</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
+          <th scope="col">ID Client</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prénom</th>
+          <th scope="col">Adresse</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let client of clients$ | async">
-          <td class="id">#{{ client.id_client }}</td>
-          <td>
+          <td data-label="ID Client" class="id">#{{ client.id_client }}</td>
+          <td data-label="Nom" class="id">
             <input type="text" [(ngModel)]="client.nom" [readonly]="!editing[client.id_client]">
           </td>
-          <td>
+          <td data-label="Prénom" class="id">
             <input type="text" [(ngModel)]="client.prenom" [readonly]="!editing[client.id_client]">
           </td>
-          <td>
+          <td data-label="Adresse" class="id">
             <input type="text" [(ngModel)]="client.adresse" [readonly]="!editing[client.id_client]">
           </td>
-          <td>
+          <td data-label="Email" class="id">
             <input type="text" [(ngModel)]="client.email" [readonly]="!editing[client.id_client]">
           </td>
-          <td>
+          <td data-label="Role" class="id">
             <input type="text" [(ngModel)]="client.role" [readonly]="!editing[client.id_client]">
           </td>
-          <td class="action">
+          <td data-label="Actions" class="action id">
             <button class="supr-btn" (click)="deleteClient(client.id_client)"><img
                 src="../../../assets/ressources/icons/Delete.svg" alt=""></button>
             <button class="edit-btn" (click)="editClient(client)">
@@ -43,6 +46,8 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
     <p class="error">{{ errorMessage }}</p>
     <div class="div-add">
       <button class="add-client" (click)="addClient()">Ajouter un client</button>
