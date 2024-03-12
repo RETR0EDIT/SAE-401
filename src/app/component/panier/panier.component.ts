@@ -72,7 +72,6 @@ export class PanierComponent implements OnInit {
         quantite: this.cartService.getQuantiteCommander(),
         date: new Date().toISOString(),
       }).subscribe((response: ServerResponse) => {
-        console.log(response);
         
         if (response && response.message === 'Achat créé.') {
           this.snackBar.open('Commande validée', '', {
@@ -93,14 +92,10 @@ export class PanierComponent implements OnInit {
   }
   onQuantityChange(item: { box: Box, quantity: number, total: number }) {
     this.cartService.updateQuantity(item.box, Number(item.quantity));
-    const totalItems = this.sharedService.getTotalItems();
-    console.log('Total des articles :', totalItems);
   }
     
   onQuantityChangeWithClone(item: { box: Box, quantity: number, total: number }) {
-    console.log('Item avant le clonage :', item);
     const clonedItem = { ...item, quantity: Number(item.quantity) };
-    console.log('Item après le clonage :', clonedItem);
     this.onQuantityChange(clonedItem);
   }
 }
