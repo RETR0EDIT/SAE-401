@@ -13,6 +13,12 @@ Nom: Hako Shi
 logo:
 ![logo](src/assets/ressources/logo/logo.png)
 
+diagramme de classe:
+[Visualiser le diagramme de classe](liverable/diagramme_de_classe/Diagramme_de_classe.pdf)
+
+Use case:
+[Visualiser le use case](liverable/use_case/Use_case.pdf)
+
 Voici quelque exemple de la maquette réaliser sur figma
 
 URL: https://www.figma.com/file/T09ITGulXjBEqKCvg3gFOV/SAE-401?type=design&node-id=0-1&mode=design&t=X9FG0fqKFIAcFnWK-0
@@ -42,8 +48,4 @@ profil page
 ![profil page](liverable/maquette/profil-page.png)
 
 
-diagramme de classe:
-[Visualiser le diagramme de classe](liverable/diagramme_de_classe/Diagramme_de_classe.pdf)
 
-Use case:
-[Visualiser le use case](liverable/use_case/Use_case.pdf)
