@@ -1,5 +1,5 @@
 # Projet : SAE-401
-#info a ajouter:  
+## info a ajouter:  
 • Répartition des tâches 
 •Le champ d’utilisation du RGPD dans ce projet sachant qu’il sera amené à être plus tard en
 ligne,
