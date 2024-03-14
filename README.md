@@ -12,7 +12,10 @@ Nom: Hako Shi
 
 logo:
 ![logo](src/assets/ressources/logo/logo.png)
-Voici quelque exemple de la maquette réaliser sur figma url: https://www.figma.com/file/T09ITGulXjBEqKCvg3gFOV/SAE-401?type=design&node-id=0-1&mode=design&t=X9FG0fqKFIAcFnWK-0
+
+Voici quelque exemple de la maquette réaliser sur figma
+
+URL: https://www.figma.com/file/T09ITGulXjBEqKCvg3gFOV/SAE-401?type=design&node-id=0-1&mode=design&t=X9FG0fqKFIAcFnWK-0
 
 
 Home page
