@@ -34,4 +34,4 @@ profil page
 
 
 diagramme de classe:
-[Visualiser le fichier PDF](liverable/diagramme de classe/Diagramme de classe.pdf)
+[Visualiser le fichier PDF](liverable/diagramme_de_classe/Diagramme_de_classe.pdf)
