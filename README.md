@@ -31,3 +31,7 @@ panier
 
 profil page
 ![profil page](liverable/maquette/profil-page.png)
+
+
+diagramme de classe:
+[Visualiser le fichier PDF](liverable/diagramme de classe/Diagramme de classe.pdf)
