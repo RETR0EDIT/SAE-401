@@ -5,7 +5,10 @@ Date : 13 février 2024
 Équipe :Nolan Dalle-Molle, Rémy Hamelin, Nicolas Marly, Timothé Hege
 
 Dépôt distant : https://github.com/RETR0EDIT/SAE-401.git
+Trello: https://trello.com/b/DEcimwUf/sae401
 
+Nom: Hako Shi
+[logo](src/assets/ressources/logo/logo.svg)
 Voici quelque exemple de la maquette réaliser sur figma url: https://www.figma.com/file/T09ITGulXjBEqKCvg3gFOV/SAE-401?type=design&node-id=0-1&mode=design&t=X9FG0fqKFIAcFnWK-0
 
 
@@ -34,4 +37,7 @@ profil page
 
 
 diagramme de classe:
-[Visualiser le fichier PDF](liverable/diagramme_de_classe/Diagramme_de_classe.pdf)
+[Visualiser le diagramme de classe](liverable/diagramme_de_classe/Diagramme_de_classe.pdf)
+
+Use case:
+[Visualiser le use case](liverable/use_case/Use_case.pdf)
