@@ -23,7 +23,7 @@ product-page
 
 
 page details
-![page details](liverable/maquette/deails.png)
+![page details](liverable/maquette/details.png)
 
 
 
