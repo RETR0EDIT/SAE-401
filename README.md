@@ -1,11 +1,15 @@
 # Projet : SAE-401
 ## info a ajouter:  
 • Répartition des tâches 
+
 •Le champ d’utilisation du RGPD dans ce projet sachant qu’il sera amené à être plus tard en
-ligne,
+ligne.
+
 • Le format de la structure JSON (interface ts ou structure exemple JSON) des commandes
 enregistrées dans le LocalStorage.
+
 • Une sélection de copies écran mettant en relation le code source et l’UI, le tout commenté.
+
 • Une conclusion
 
 ## Informations générales
