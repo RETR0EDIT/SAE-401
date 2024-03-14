@@ -8,7 +8,7 @@ Dépôt distant : https://github.com/RETR0EDIT/SAE-401.git
 Trello: https://trello.com/b/DEcimwUf/sae401
 
 Nom: Hako Shi
-[logo](src/assets/ressources/logo/logo.svg)
+[logo](src/assets/ressources/logo/logo.png)
 Voici quelque exemple de la maquette réaliser sur figma url: https://www.figma.com/file/T09ITGulXjBEqKCvg3gFOV/SAE-401?type=design&node-id=0-1&mode=design&t=X9FG0fqKFIAcFnWK-0
 
 
