@@ -16,9 +16,9 @@ $orange-color: #D9AA52;
 $grey-color: #454545;
 
 #section-box-details {
-  margin-top: 40px;
-  margin-bottom: 100px;
   position: relative;
+  max-width: 1566px;
+  margin: 40px auto 100px auto;
 }
 
 #container {
@@ -116,7 +116,7 @@ $grey-color: #454545;
   margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 40px 41px 30px 30px;
-  padding-bottom: 10px;
+  // padding-bottom: 10px;
 }
 
 .btn-achat {
@@ -163,8 +163,9 @@ $grey-color: #454545;
 
 #total-container {
   display: flex;
-  margin-top: 5px;
+  // margin-top: 5px;
   margin-left: 20px;
+  align-items: center;
 }
 
 #texte1 {
@@ -193,7 +194,7 @@ $grey-color: #454545;
 }
 
 #total-container #total-container2 .btn-box-details {
-  margin-top: 10px;
+  // margin-top: 10px;
 }
 
 #total-container #total-container2 .btn-box-details button {
@@ -267,6 +268,8 @@ $grey-color: #454545;
     border-radius: 30px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 15px 0px;
   }
 
 
@@ -283,7 +286,7 @@ $grey-color: #454545;
     height: 35px;
     background-color: rgb(255, 255, 255);
     align-items: center;
-    margin-top: 12px;
+    // margin-top: 12px;
     border-radius: 5px;
     border: solid rgb(165, 165, 165) 1px;
     margin-left: 150px !important;
@@ -294,7 +297,7 @@ $grey-color: #454545;
 
   #total-container #total-container1 {
     margin-left: 0px;
-    margin-top: 10px;
+    // margin-top: 10px;
     position: absolute;
     left: 5%;
 
@@ -350,7 +353,7 @@ $grey-color: #454545;
   }
 
   #total-container #total-container2 .btn-box-details {
-    margin-top: 11px;
+    // margin-top: 11px;
   }
 
   #total-container #total-container2 .btn-box-details button,
