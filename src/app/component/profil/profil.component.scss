@@ -27,7 +27,7 @@ $txt-grey: #454545;
 #img-ban {
   width: 250px;
   height: 170px;
-  margin-top: 10%;
+  margin-top: 50px;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -69,7 +69,8 @@ $txt-grey: #454545;
 
 .div-form-profil label {
   font-family: $font-poppins;
-  font-size: 15px;
+  font-size: 16px;
+  color: #454545;
 }
 
 .div-form-profil input:focus {
@@ -82,17 +83,16 @@ $txt-grey: #454545;
   background: $black-color;
   color: $white-color;
   font-family: $font-poppins;
-  font-size: 12px;
+  font-size: 17px;
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 30px;
+  padding: 10px 39px;
   gap: 17px;
   margin: 50px auto 70px auto;
   outline: none;
   border: none;
-  width: 30vh;
 }
 
 h2 {
@@ -235,10 +235,6 @@ h1 {
     height: 50px;
   }
 
-  .submit-btn input {
-    width: 400px;
-    height: 50px;
-  }
 
 
 }
@@ -367,12 +363,12 @@ h1 {
 
   .txt-container {
     margin-left: 19px;
+    text-align: left;
   }
 
   .txt-container h3 {
     font-size: 26px;
     margin-top: 20px;
-    max-width: 240px;
   }
 
   .txt-container p {
