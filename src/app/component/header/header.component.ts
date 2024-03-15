@@ -14,6 +14,7 @@ import { LocalStorageService } from '../../local-storage.service';
 export class HeaderComponent implements OnInit {
   isMenuOpen: boolean = false;
   isLoggedIn: boolean = false;
+  isDropdownOpen = false;
   totalItems: number = 0;
   role: string = '';
 
@@ -69,4 +70,16 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']).then(success => {
     });
   }
+
+   toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+  
+// toggleDropdown() {
+//   const dropdownMenu = document.getElementById('dropdown-menu');
+//   if (dropdownMenu) {
+//     dropdownMenu.classList.toggle('dropdown-menu1');
+//   }
+// }
 }
+

@@ -21,13 +21,15 @@ $white-color: #fff;
   background-color: rgba(255, 255, 255, 0.56);
   padding: 16px 0px 10px 0px;
 }
-#user-btn{
+
+#user-btn {
   cursor: pointer;
 }
 
-#logout-btn{
+#logout-btn {
   cursor: pointer;
 }
+
 .nav {
   position: relative;
   height: 3.5rem;
@@ -114,7 +116,8 @@ $white-color: #fff;
   padding: 0 2px;
 }
 
-#login-btn, #logout-btn {
+#login-btn,
+#logout-btn {
   color: rgba(255, 255, 255, 0.73);
   font-family: $font-poppins;
   font-size: 19px;
@@ -126,24 +129,54 @@ $white-color: #fff;
   padding: 12px 19px;
   align-self: flex-start;
 }
-#user-btn{
-  background: rgba(255, 255, 255, 0.767);
+
+#user-btn {
+  background: #fff8f9;
   font-size: 28px;
-  width: 45px;
+  // width: 45px;
   height: 45px;
   border-radius: 20px;
   // box-shadow: inset 0px 1px 0px 0px rgba(255, 187, 0, 0.26);
   // border: 1px solid rgb(53, 53, 53);
   border: none;
-  color:rgb(53, 53, 53);
+  color: rgb(53, 53, 53);
+  padding: 2px 5px;
 }
 
-.nav-connecter-pc, .nav-connecter1{
+.nav-connecter-pc,
+.nav-connecter1 {
   display: none;
 }
-.nav-connecter2{
+
+.nav-connecter2 {
   margin: 0 auto;
 }
+
+.dropdown-menu {
+  position: absolute;
+  top: 55px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff8f9;
+  border: 2px solid hsla(233, 15%, 22%, 0.274);
+  box-shadow: inset 0px 1px 0px 0px hsla(233, 15%, 22%, 0.13);
+  border-radius: 18px;
+  padding: 12px;
+}
+
+.item-dropdown{
+  color: #000;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+// .dropdown i{
+//   cursor: pointer;
+// }
+// .dropdown-menu1{
+//   min-height: 90px !important;
+//   padding: 10px 15px !important;
+//   border: 2px solid #303241  !important;
+// }
 
 @media screen and (max-width: 1024px) {
   .nav__menu {
@@ -158,18 +191,21 @@ $white-color: #fff;
     transition: right 0.4s;
     z-index: 1000;
   }
-
-
   .nav__item {
     padding: 0 3rem;
   }
 
+  .logo{
+    flex-direction: row !important;
+    gap: 7px !important;
+  }
+}
 
-
-
-
-
-
+@media screen and (max-width: 1132px) {
+  .logo{
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 .nav__close {
@@ -238,10 +274,18 @@ $white-color: #fff;
     gap: 17px;
   }
 
-  .nav-connecter-pc, .nav-connecter1{
+  .nav-connecter-pc,
+  .nav-connecter1 {
     display: block;
   }
+
+  .admin{
+    display: none;
+  }
 }
+
+
+
 
 @media screen and (min-width: 1368px) {
   .nav {

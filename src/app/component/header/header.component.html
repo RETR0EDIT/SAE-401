@@ -16,9 +16,11 @@
         <li class="nav__item">
           <a href="#about" class="nav__link" (click)="closeMenu()">À propos</a>
         </li>
-        <li class="nav__item" *ngIf="role === 'admin'">
+
+        <li class="nav__item admin" *ngIf="role === 'admin'">
           <a routerLink="/admin" class="nav__link" (click)="closeMenu()">Admin</a>
         </li>
+
 
         <a *ngIf="!isLoggedIn" routerLink="/login" id="login-btn" class="nav-connecter2" (click)="closeMenu()"><i
             class="ri-login-box-line"></i> Se connecter</a>
@@ -53,9 +55,29 @@
         <button *ngIf="isLoggedIn" id="logout-btn" class="nav-connecter-pc" (click)="onLogoutClick()">
           <i class="ri-logout-box-line"></i> Se déconnecter
         </button>
-        <button *ngIf="isLoggedIn" id="user-btn" class="nav-connecter-pc" routerLink="profil">
-          <i class="ri-user-line"></i>
-        </button>
+
+        
+        <div *ngIf="isLoggedIn" class="dropdown">
+          <button id="user-btn" class="nav-connecter-pc" (click)="toggleDropdown()">
+            <i class="ri-user-line"></i>
+            <i class="ri-arrow-down-s-line"></i>
+          </button>
+
+          <div *ngIf="isDropdownOpen" class="dropdown-menu">
+            <a class="item-dropdown" (click)="toggleDropdown()" routerLink="profil">Profil</a>
+            <a class="item-dropdown" *ngIf="role === 'admin'" routerLink="/admin" (click)="closeMenu()">Admin</a>
+          </div>
+
+        </div>
+
+        <!-- <div *ngIf="isLoggedIn" class="dropdown">
+          <i id="user-btn" class="ri-user-line nav-connecter-pc" (click)="toggleDropdown()"></i>
+        
+          <div id="dropdown-menu">
+             <a routerLink="profil" class="Profil">Profil</a>
+          </div>
+        </div> -->
+
       </div>
 
       <div class="nav__toggle" id="nav-toggle" (click)="toggleMenu()">
