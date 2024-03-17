@@ -89,6 +89,27 @@ $grey-color: #454545;
     width: 19px;
 }
 
+.phone-container{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: $font-poppins;
+    justify-content: center;
+}
+.phone-container h1{
+    font-size: 22px;
+    font-weight: 600;
+
+}
+.phone-info h3{
+    background-color: $orange-color;
+    padding: 12px 16px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
 @media (min-width: 571px) {
     .content-about h2 {
         font-size: 59px;
@@ -132,6 +153,11 @@ $grey-color: #454545;
     #about{
         margin-bottom: 161px;
     }
+
+    .phone-container{
+        justify-content: start;
+    }
+
 }
 
 
@@ -178,5 +204,18 @@ $grey-color: #454545;
 
     #about{
         margin-bottom: 407px;
+    }
+
+    .phone-container h1{
+        font-size: 26px;
+        font-weight: 600;
+    
+    }
+    .phone-info h3{
+        background-color: $orange-color;
+        padding: 12px 16px;
+        border-radius: 15px;
+        font-size: 24px;
+        font-weight: 500;
     }
 }
