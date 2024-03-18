@@ -16,6 +16,19 @@ class Acheter
         $stmt->execute();
         return $stmt->get_result();
     }
+    public function read_One($id_client)
+    {
+        $query = "SELECT acheter.*, boxes.*, GROUP_CONCAT(saveur.nom_saveur) as saveurs FROM " . $this->table_name . "
+                  JOIN boxes ON acheter.id_boxe = boxes.id_boxe
+                  LEFT JOIN posseder ON boxes.id_boxe = posseder.id_boxe
+                  LEFT JOIN saveur ON posseder.id_saveur = saveur.id_saveur
+                  WHERE id_client = ?
+                  GROUP BY boxes.id_boxe";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $id_client);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public function create($id_client, $id_boxe, $quantite, $date)
     {

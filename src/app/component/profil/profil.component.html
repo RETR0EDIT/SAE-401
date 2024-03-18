@@ -10,20 +10,20 @@
     <div class="div-form-profil">
       <div id="div-form-profil-left">
         <label for="nom">Nom</label>
-        <input type="text" name="nom" value="{{ user.nom }}">
+        <input type="text" name="nom" [(ngModel)]="user.nom" [readonly]="!isEditing">
         <label for="prenom">Prenom</label>
-        <input type="text" name="prenom" value="{{ user.prenom }}">
+        <input type="text" name="prenom" [(ngModel)]="user.prenom" [readonly]="!isEditing">
       </div>
       <div id="div-form-profil-right">
-      <label for="email">Email</label>
-      <input type="email" name="email" value="{{ user.email }}">
+        <label for="email">Email</label>
+        <input type="email" name="email" [(ngModel)]="user.email" [readonly]="!isEditing">
         <label for="adresse">Adresse</label>
-        <input type="email" name="adresse" value="{{ user.adresse }}">
+        <input type="email" name="adresse" [(ngModel)]="user.adresse" [readonly]="!isEditing">
       </div>
     </div>
 
     <div class="submit-btn">
-      <input class="submit" type="submit" value="Modifier les informations">
+      <input class="submit" value="Modifier les informations" (click)="modifier()">
     </div>
 
   </div>
@@ -33,39 +33,17 @@
   </div>
 
   <div class="card-div">
-    <article class="card">
+    <article class="card" *ngFor="let achat of achats">
       <div class="img-card">
-        <img src="../../../assets/ressources/images/box-sushi/caree/Amateur Mix.png">
+        <img [src]="'../../../assets/ressources/images/box-sushi/caree/' + achat.image">
       </div>
-      <div class=" txt-container">
-        <h3>Amateur Mix</h3>
-        <p class="saveur-box">Coriandre, Saumon, Avocat, Fromage</p>
+      <div class="txt-container">
+        <h3>{{ achat.nom }}</h3>
+        <p class="saveur-box">
+          {{ addSpacesToSaveurs(achat.saveurs) }}
+        </p>
         <div class="price-cart">
-          <p>15,50€</p>
-        </div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="img-card">
-        <img src="../../../assets/ressources/images/box-sushi/caree/Amateur Mix.png">
-      </div>
-      <div class=" txt-container">
-        <h3>Amateur Mix</h3>
-        <p class="saveur-box">Coriandre, Saumon, Avocat, Fromage</p>
-        <div class="price-cart">
-          <p>15,50€</p>
-        </div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="img-card">
-        <img src="../../../assets/ressources/images/box-sushi/caree/Amateur Mix.png">
-      </div>
-      <div class=" txt-container">
-        <h3>Amateur Mix</h3>
-        <p class="saveur-box">Coriandre, Saumon, Avocat, Fromage</p>
-        <div class="price-cart">
-          <p>15,50€</p>
+          <p>{{ achat.prix }}€</p>
         </div>
       </div>
     </article>

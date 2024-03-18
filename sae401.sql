@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 04 mars 2024 à 09:35
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
+-- Généré le : lun. 18 mars 2024 à 23:27
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,8 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `acheter` (
   `id_boxe` int(11) NOT NULL,
-  `id_client` int(11) NOT NULL
+  `id_client` int(11) NOT NULL,
+  `quantite` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `acheter`
+--
+
+INSERT INTO `acheter` (`id_boxe`, `id_client`, `quantite`, `date`) VALUES
+(12, 6, 1, '2024-03-18'),
+(1, 6, 4, '2024-03-11');
 
 -- --------------------------------------------------------
 
@@ -125,8 +135,9 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id_client`, `nom`, `prenom`, `adresse`, `email`, `password`, `role`) VALUES
-(6, 'admin', ' ', 'admin', 'admin@gmail.com', '$2y$10$1dPumd8bktNeFDe5Sqoaw.rFuAHKOpL.wcFKKfsf3TEfnqYT8DoUa', 'admin'),
-(81, 'nn', 'nn', 'nn nn, nn', 'nn@nn', '$2y$10$0aKEKFPRiggnJhI0U5FqWuwzyAV5zdWJoMElaRGtmG227/9Tj8mXa', 'user');
+(6, 'admin', ' admin', 'admin', 'admin@gmail.com', '$2y$10$1dPumd8bktNeFDe5Sqoaw.rFuAHKOpL.wcFKKfsf3TEfnqYT8DoUa', 'admin'),
+(86, 'nn', 'nn', '3 nn, nn', 'nn@nn', '$2y$10$vDARl4kTEIMHH5YukRJ2Ae.OTJT2r.5IDNqRzWlUm3d.zWs6ZtBNW', 'user'),
+(82, 'nom', 'prenom', '8 rue, ville', 'mail@mail', '$2y$10$hKnlw6oOqQOvwYAeV0K7JOgh412y/SIBrl6gquMM9ubjz0S5e78bu', 'user');
 
 -- --------------------------------------------------------
 
@@ -290,7 +301,7 @@ INSERT INTO `posseder` (`id_boxe`, `id_saveur`) VALUES
 
 CREATE TABLE `saveur` (
   `id_saveur` int(11) NOT NULL,
-  `nom_saveur` varchar(50) NOT NULL
+  `nom_saveur` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -373,25 +384,25 @@ ALTER TABLE `saveur`
 -- AUTO_INCREMENT pour la table `aliment`
 --
 ALTER TABLE `aliment`
-  MODIFY `id_aliment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_aliment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pour la table `boxes`
 --
 ALTER TABLE `boxes`
-  MODIFY `id_boxe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_boxe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT pour la table `saveur`
 --
 ALTER TABLE `saveur`
-  MODIFY `id_saveur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_saveur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
