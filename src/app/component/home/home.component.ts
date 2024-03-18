@@ -10,7 +10,7 @@ export class HomeComponent {
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        window.scrollTo(0, 0); // Faites défiler la page vers le haut
+        window.scrollTo(0, 0);
       }
     });
   }

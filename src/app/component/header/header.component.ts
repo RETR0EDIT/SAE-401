@@ -15,14 +15,14 @@ export class HeaderComponent implements OnInit {
   isMenuOpen: boolean = false;
   isLoggedIn: boolean = false;
   isDropdownOpen = false;
-  totalItems: number = 0;
+  totalItems!: number;
   role: string = '';
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router, private cartService: CartService, private sharedService: SharedService, private localStorageService: LocalStorageService) {
-    // Souscrit à totalItems$ dans le constructeur
     this.sharedService.totalItems$.subscribe(totalItems => {
+      console.log('Nouvelle valeur de totalItems :', totalItems); // Ajout d'un log ici
       this.totalItems = totalItems;
-      this.localStorageService.setItem('totalItems', this.totalItems.toString()); // Enregistre totalItems dans le localStorage
+      this.localStorageService.setItem('totalItems', this.totalItems.toString());
     });
   }
   
@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
   
     // Récupère totalItems du localStorage
     const savedTotalItems = this.localStorageService.getItem('totalItems');
+    console.log('Valeur de totalItems récupérée du localStorage :', savedTotalItems); // Ajout d'un log ici
     if (savedTotalItems) {
       this.totalItems = Number(savedTotalItems);
     }

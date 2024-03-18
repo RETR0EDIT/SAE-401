@@ -12,7 +12,7 @@ export class CartService {
   private cartSubject = new BehaviorSubject<{ box: Box, quantity: number, total: number }[]>(this.getCart());
   cart$ = this.cartSubject.asObservable();
 
-  private totalItemsSubject = new BehaviorSubject<number>(0);
+  private totalItemsSubject = new BehaviorSubject<number>(this.localStorageService.getItem('totalItems') ? Number(this.localStorageService.getItem('totalItems')) : 0);
   totalItems$ = this.totalItemsSubject.asObservable();
 
   constructor(private localStorageService: LocalStorageService) { }

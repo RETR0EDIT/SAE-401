@@ -9,7 +9,7 @@ import { LocalStorageService } from './local-storage.service';
 export class SharedService {
   constructor(private cartService: CartService, private localStorageService: LocalStorageService) { }
 
-  private totalItemsSource = new BehaviorSubject<number>(0);
+  private totalItemsSource = new BehaviorSubject<number>(this.localStorageService.getItem('totalItems') ? Number(this.localStorageService.getItem('totalItems')) : 0);
   totalItems$ = this.totalItemsSource.asObservable();
 
   getTotalItems() {

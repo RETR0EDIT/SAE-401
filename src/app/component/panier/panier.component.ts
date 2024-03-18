@@ -21,7 +21,7 @@ interface ServerResponse {
 })
 export class PanierComponent implements OnInit {
   cart: { box: Box, quantity: number, total: number }[] = [];
-  totalItems: number = 0; 
+  totalItems!: number; 
   alimentStrings: string[] = [];
   totalPrix: number = 0;
 
