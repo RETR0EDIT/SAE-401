@@ -35,7 +35,11 @@ export class CartService {
       this.localStorageService.setItem('cart-' + this.userId, JSON.stringify(cart));
     }
     this.cartSubject.next(cart);
-    this.updateTotalItems(cart); 
+    
+    // Mettre à jour totalItems
+    const totalItems = this.totalItemsSubject.getValue() + quantity;
+    this.totalItemsSubject.next(totalItems);
+    this.localStorageService.setItem('totalItems', totalItems.toString());
   }
 
   getCart() {

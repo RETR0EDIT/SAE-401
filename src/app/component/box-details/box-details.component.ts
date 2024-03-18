@@ -14,8 +14,8 @@ export class BoxDetailsComponent implements OnInit {
   
   box: Box | null = null;
   valeur: number = 1;
-  total: number = 0;
-  totalString: string = '0.00';
+  total!: number;
+  totalString!: string ;
   message: string = '';
   url = 'http://localhost/SAE-401/api/details/Read_one.php';
 
@@ -71,9 +71,11 @@ export class BoxDetailsComponent implements OnInit {
     if (this.box !== null) {
       try {
         this.cartService.addToCart(this.box, this.valeur);
+        // Mettre à jour totalItems
+        this.cartService.updateTotalItems(this.cartService.getCart());
         this.message = '';
         if (this.message === '') {
-          this.router.navigate(['/']);
+          this.router.navigate(['/product']);
         }
       } catch (error) {
         this.message = (error as Error).message;
