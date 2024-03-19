@@ -18,12 +18,12 @@ class Acheter
     }
     public function read_One($id_client)
     {
-        $query = "SELECT acheter.*, boxes.*, GROUP_CONCAT(saveur.nom_saveur) as saveurs FROM " . $this->table_name . "
-                  JOIN boxes ON acheter.id_boxe = boxes.id_boxe
-                  LEFT JOIN posseder ON boxes.id_boxe = posseder.id_boxe
-                  LEFT JOIN saveur ON posseder.id_saveur = saveur.id_saveur
-                  WHERE id_client = ?
-                  GROUP BY boxes.id_boxe";
+        $query = "SELECT acheter.quantite, acheter.date, boxes.*, GROUP_CONCAT(saveur.nom_saveur) as saveurs FROM " . $this->table_name . "
+        JOIN boxes ON acheter.id_boxe = boxes.id_boxe
+        LEFT JOIN posseder ON boxes.id_boxe = posseder.id_boxe
+        LEFT JOIN saveur ON posseder.id_saveur = saveur.id_saveur
+        WHERE id_client = ?
+        GROUP BY boxes.id_boxe";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $id_client);
         $stmt->execute();

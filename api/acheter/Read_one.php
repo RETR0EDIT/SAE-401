@@ -26,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 'prix' => $row['prix'],
                 'image' => $row['image'],
                 'saveurs' => explode(',', $row['saveurs']),
+                'quantite' => $row['quantite'],
+                'date' => $row['date'],
             ];
         }
     }

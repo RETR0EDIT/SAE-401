@@ -24,24 +24,27 @@ isEditing = false;
   ngOnInit(): void {
     let id_client = localStorage.getItem('userId');
     if (id_client) {
-      this.getProfilInfo(id_client).subscribe(response => {
-        this.user = response;
-      });
-      this.getAchats(id_client).subscribe(response => {
-        this.achats = response;
-      });
+        this.getProfilInfo(id_client).subscribe(response => {
+            this.user = response;
+        });
+        this.getAchats(id_client).subscribe(response => {
+            this.achats = response;
+            console.log(this.achats);
+        });
     } else {
-      console.error('User ID is undefined');
+        console.error('User ID is undefined');
     }
-  }
+}
 
   getProfilInfo(id_client: string): Observable<any> {
     const url = `http://localhost/SAE-401/api/profil/Read_one.php?id=${id_client}`;
     return this.http.get(url);
   }
   getAchats(id_client: string): Observable<any> {
+    
     const url = `http://localhost/SAE-401/api/acheter/Read_one.php?id=${id_client}`;
     return this.http.get(url);
+    
   }
   addSpacesToSaveurs(saveurs: any): string {
     if (Array.isArray(saveurs)) {

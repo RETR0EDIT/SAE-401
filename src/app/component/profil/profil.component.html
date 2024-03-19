@@ -38,12 +38,13 @@
         <img [src]="'../../../assets/ressources/images/box-sushi/caree/' + achat.image">
       </div>
       <div class="txt-container">
-        <h3>{{ achat.nom }}</h3>
+        <h3>{{ achat.nom }} </h3>
         <p class="saveur-box">
           {{ addSpacesToSaveurs(achat.saveurs) }}
         </p>
+        <p>{{ achat.date }}</p>
         <div class="price-cart">
-          <p>{{ achat.prix }}€</p>
+          <p>{{ achat.prix }}€ x{{ achat.quantite}}</p>
         </div>
       </div>
     </article>
