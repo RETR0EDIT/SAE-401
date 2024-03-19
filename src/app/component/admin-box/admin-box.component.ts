@@ -4,14 +4,15 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { BoxService } from '../../box.service'; 
 import { FormControl } from '@angular/forms';
-
+import { tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 @Component({
   selector: 'app-admin-box',
   templateUrl: './admin-box.component.html',
   styleUrls: ['./admin-box.component.scss']
 })
 export class AdminBoxComponent implements OnInit {
-  boxes$: Observable<any>;
+  boxes$: Observable<any> = of();
   id_boxe: string = '';
   nom: string = '';
   prix: number = 0;
@@ -25,9 +26,9 @@ export class AdminBoxComponent implements OnInit {
   allAliments: any[] = [];
   saveur: any = this.allSaveurs[0]; 
   aliment: any = this.allAliments[0];
+  nombreDebox: number = 0;
 
   constructor(private http: HttpClient, private boxService: BoxService, private fb: FormBuilder) {
-    this.boxes$ = new Observable<any>();
     this.form = this.fb.group({});
     this.getSaveurs().subscribe(saveurs => {
       this.allSaveurs = saveurs;
@@ -45,6 +46,7 @@ export class AdminBoxComponent implements OnInit {
           })))
         });
         this.boxes$ = this.getAllBoxes();
+        this.boxes$.subscribe(); // Ajoutez cette ligne
       });
     });
   }
@@ -67,6 +69,8 @@ export class AdminBoxComponent implements OnInit {
     this.allAliments.forEach((aliment, index) => {
       this.aliments.push(this.fb.control(aliment.id_aliment));
     });
+    this.getAllBoxes();
+
   }
 
   get saveurs(): FormArray {
@@ -108,7 +112,11 @@ export class AdminBoxComponent implements OnInit {
   }
 
   getAllBoxes(): Observable<any> {
-    return this.http.get('http://localhost/sae-401/api/box/Read.php');
+    return this.http.get('http://localhost/sae-401/api/box/Read.php').pipe(
+      tap((response: any) => {
+        this.nombreDebox = response.length;
+      })
+    );
   }
 
   addBox() {

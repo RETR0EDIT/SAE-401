@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { ClientService } from '../../client.service'; 
 
 
@@ -21,12 +22,17 @@ export class AdminUserComponent {
   errorMessage: string = '';
   showInputs: boolean = false;
   editing: { [key: string]: boolean } = {};
+  nombreDeUser: number = 0;
   constructor(private http: HttpClient, private clientService: ClientService) {
     this.clients$ = this.getAllClients();
   }
 
   getAllClients(): Observable<any> {
-    return this.http.get('http://localhost/sae-401/api/client/Read.php');
+    return this.http.get('http://localhost/sae-401/api/client/Read.php').pipe(
+      tap((response: any) => {
+        this.nombreDeUser = response.length; // Mettez à jour le nombre d'utilisateurs
+      })
+    );
   }
 
 
