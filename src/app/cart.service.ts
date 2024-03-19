@@ -38,17 +38,19 @@ export class CartService {
     
     // Mettre à jour totalItems
     const totalItems = this.totalItemsSubject.getValue() + quantity;
+    console.log(`addToCart: totalItems = ${totalItems}`);
     this.totalItemsSubject.next(totalItems);
     this.localStorageService.setItem('totalItems', totalItems.toString());
+    this.updateTotalItems(this.getCart());
   }
 
   getCart() {
-    let cart = null;
-    if (this.userId) {
-      cart = this.localStorageService.getItem('cart-' + this.userId);
+    if (!this.userId) {
+      return [];
     }
+  
+    const cart = this.localStorageService.getItem('cart-' + this.userId);
     return cart ? JSON.parse(cart) : [];
-    
   }
 
   removeFromCart(index: number) {
@@ -71,6 +73,7 @@ export class CartService {
     for (let item of cart) {
       total += item.quantity;
     }
+    console.log(`getTotalItems: totalItems = ${total}`);
     return total;
   }
 
@@ -86,7 +89,9 @@ export class CartService {
 
   updateTotalItems(cart: { box: Box, quantity: number, total: number }[]) {
     const totalItems = this.getTotalItems(cart);
+    console.log(`updateTotalItems: totalItems = ${totalItems}`);
     this.totalItemsSubject.next(totalItems); 
+    this.localStorageService.setItem('totalItems', totalItems.toString());
   }
 
   updateQuantity(box: Box, quantity: number) {

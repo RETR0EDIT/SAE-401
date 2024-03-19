@@ -19,11 +19,6 @@ export class HeaderComponent implements OnInit {
   role: string = '';
 
   constructor(private http: HttpClient, private authService: AuthService, private router: Router, private cartService: CartService, private sharedService: SharedService, private localStorageService: LocalStorageService) {
-    this.sharedService.totalItems$.subscribe(totalItems => {
-      console.log('Nouvelle valeur de totalItems :', totalItems); // Ajout d'un log ici
-      this.totalItems = totalItems;
-      this.localStorageService.setItem('totalItems', this.totalItems.toString());
-    });
   }
   
   ngOnInit() {
@@ -40,6 +35,13 @@ export class HeaderComponent implements OnInit {
     if (savedTotalItems) {
       this.totalItems = Number(savedTotalItems);
     }
+
+    // Abonnez-vous à totalItems$ ici
+    this.cartService.totalItems$.subscribe(totalItems => {
+      console.log('Nouvelle valeur de totalItems :', totalItems); // Ajout d'un log ici
+      this.totalItems = totalItems;
+      this.localStorageService.setItem('totalItems', this.totalItems.toString());
+    });
   }
 
   // Récupère le rôle de l'utilisateur
