@@ -65,7 +65,7 @@
 
           <div *ngIf="isDropdownOpen" class="dropdown-menu">
             <a class="item-dropdown" (click)="toggleDropdown()" routerLink="profil">Profil</a>
-            <a class="item-dropdown" *ngIf="role === 'admin'" routerLink="/admin" (click)="closeMenu()">Admin</a>
+            <a class="item-dropdown" *ngIf="role === 'admin'" routerLink="/admin/box" (click)="closeMenu()">Admin</a>
           </div>
 
         </div>

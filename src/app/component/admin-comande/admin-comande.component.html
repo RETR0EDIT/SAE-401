@@ -1,7 +1,64 @@
-<div *ngFor="let command of commands">
+<!-- <div >
   <p>ID Boxe: {{ command.id_boxe }}</p>
   <p>ID Client: {{ command.id_client }}</p>
   <p>Quantité: {{ command.quantite }}</p>
   <p>Date: {{ command.date }}</p>
   <br>
+</div> -->
+
+<div class="container-grille">
+  <app-nav-admin></app-nav-admin>
+  <main>
+    <div class="info-container">
+      <div class="info">
+        <div class="icon-container">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-calendar-clock">
+            <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+            <path d="M16 2v4" />
+            <path d="M8 2v4" />
+            <path d="M3 10h5" />
+            <path d="M17.5 17.5 16 16.3V14" />
+            <circle cx="16" cy="16" r="6" />
+          </svg>
+        </div>
+      </div>
+      <h3>16</h3>
+      <p class="nom">Nombre de commande en cours</p>
+    </div>
+    <div class="responsive-table">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" class="nom">ID Client</th>
+            <th scope="col">ID Box</th>
+            <th scope="col">img</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Date</th>
+            <th scope="col">Valider</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let command of commands">
+            <td data-label="ID Client" class="id">{{ command.id_client }}</td>
+            <td data-label="ID Box" class="id">#{{ command.id_boxe }}</td>
+            <td data-label="Image" class="id"><img
+                [src]="'../../../assets/ressources/images/box-sushi/caree/' + command.image" width="100px">
+            </td>
+            <td data-label="Quantité" class="id">{{ command.quantite }}</td>
+            <td data-label="Date" class="id">{{ command.date }}</td>
+
+            <td data-label="Valider" class="action" class="id">
+              <button class="edit-btn">
+                <img src="../../../assets/ressources/icons/check-check.svg" alt="">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <p>{{ errorMessage }}</p> -->
+
+  </main>
 </div>
