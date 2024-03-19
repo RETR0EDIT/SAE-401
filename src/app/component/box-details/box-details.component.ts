@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class BoxDetailsComponent implements OnInit {
   
-  box: Box | null = null;
+  box!: Box;
   valeur: number = 1;
   total!: number;
   totalString!: string ;

@@ -4,7 +4,7 @@
       < Retourner aux boxes</a> </div> <div id="container">
         <h1 id="title-box" *ngIf="box">{{ box.nom }}</h1>
         <div class="left-img-box">
-          <img [src]="'../../../assets/ressources/images/box-sushi/caree/' + box?.image">
+          <img *ngIf="box?.image" [src]="'../../../assets/ressources/images/box-sushi/caree/' + box?.image">
         </div>
         <div class="right-element-box">
           <div id="info-box">
