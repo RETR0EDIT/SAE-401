@@ -9,13 +9,7 @@
 
 
 
-.modal button:focus {
-    outline: none;
-}
 
-.modal button:hover {
-    background-color: #0056b3;
-}
 
 // ?VARIABLES 
 $font-poppins: "Poppins", sans-serif;
@@ -84,6 +78,10 @@ a {
     cursor: pointer;
     font-size: 16px;
     font-weight: 500;
+}
+
+.modal button:focus {
+    outline: none;
 }
 
 .home__shape-1,

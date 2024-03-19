@@ -104,11 +104,27 @@ finaliserCommande() {
         });
       }
     });
-  }, 4000);
+  }, 2000);
 }
   
 
-  
+onAddQuantity(item: { box: Box, quantity: number, total: number }) {
+  const totalBoxes = this.cartService.getTotalBoxes() + 1;
+  if (totalBoxes <= 10) {
+    const clonedItem = { ...item, quantity: Number(item.quantity) + 1 };
+    this.onQuantityChangeWithClone(clonedItem);
+  } else {
+    // Affichez un message d'erreur ou effectuez une action appropriée si le maximum est atteint
+    console.log("Vous ne pouvez pas ajouter plus de 10 boîtes dans votre panier.");
+  }
+}
+
+onLessQuantity(item: { box: Box, quantity: number, total: number }) {
+  if (item.quantity > 1) {
+    const clonedItem = { ...item, quantity: Number(item.quantity) - 1 };
+    this.onQuantityChangeWithClone(clonedItem);
+  }
+}
 
   getOptions(quantity: number): number[] {
     const totalBoxes = this.cartService.getTotalBoxes();
@@ -124,3 +140,4 @@ finaliserCommande() {
     this.onQuantityChange(clonedItem);
   }
 }
+

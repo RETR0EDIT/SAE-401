@@ -56,13 +56,13 @@
                 </div>
               </div>
               <div class="nombre-box-choix">
-                <button class="add">
+                <button class="add" (click)="onAddQuantity(item)">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                   </svg>
                 </button>
                 <h4 class="number-box">{{ item.quantity }}</h4>
-                <button class="less">
+                <button class="less" (click)="onLessQuantity(item)"> 
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M5 11V13H19V11H5Z"></path>
                   </svg>

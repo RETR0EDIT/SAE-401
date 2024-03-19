@@ -64,7 +64,7 @@ $red-color: hsla(0, 73%, 50%, 0.71);
   background-color: $white-soft-color;
   border: 1px solid $light-grey-color;
   border-radius: 16px;
-  display: flex;
+  // display: flex;
   padding: 7px 13px;
   align-items: center;
   justify-content: space-between;
@@ -74,6 +74,7 @@ $red-color: hsla(0, 73%, 50%, 0.71);
 .er-part {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .info-item-panier h6 {
@@ -188,7 +189,7 @@ $red-color: hsla(0, 73%, 50%, 0.71);
   display: none;
 }
 
-.select-supr-div {
+.container-select-choix {
   display: none;
 }
 
@@ -234,10 +235,23 @@ button {
 //   left: 50%;
 //   transform: translate(-50%, -50%);
 // }
-
+.select-supr-div button {
+  margin-top: 5px;
+  background-color: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 400;
+  color: $red-color;
+}
 
 
 @media (min-width: 900px) {
+  .select-supr-div button {
+    margin-top: 0px;
+  }
+  .container-select-choix {
+    display: block;
+  }
   .item-panier {
     margin-bottom: 0px;
   }
@@ -368,13 +382,7 @@ button {
     outline: none;
   }
 
-  .select-supr-div button {
-    background-color: transparent;
-    border: none;
-    font-size: 13px;
-    font-weight: 400;
-    color: $red-color;
-  }
+
 
   .saveur,
   .composition {
