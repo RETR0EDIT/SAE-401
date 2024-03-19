@@ -23,9 +23,6 @@ getAllCommands() {
     (response: any) => {
       this.commands = response as any[];
       this.nombre_commande = this.commands.length;
-      const groupedCommandsObject = this.groupCommandsByClientAndDate(this.commands);
-      this.groupedCommands = Object.values(groupedCommandsObject);
-      console.log(this.groupedCommands);
     },
     error => {
       console.error('There was an error!', error);
@@ -37,10 +34,18 @@ getAllCommands() {
     const elements = this.el.nativeElement.querySelectorAll('.nombre_comande');
     return elements.length;
   }
-  groupCommandsByClientAndDate(commands: any[]): any[] {
-    return commands.map((command, index) => {
-      return { ...command, count: 1, key: `${command.id_client}-${command.date}-${index}` };
-    });
+  valider(id_acheter: number){
+    console.log(id_acheter);
+    const url = 'http://localhost/SAE-401/api/acheter/update.php';
+    const body = { id_acheter: id_acheter, valider: 'valider' };
+    this.http.put(url, body).subscribe(
+      response => {
+        console.log(response);
+        this.getAllCommands();
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
-  
 }

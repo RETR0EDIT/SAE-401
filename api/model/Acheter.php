@@ -11,14 +11,15 @@ class Acheter
 
     public function read()
     {
-        $query = "SELECT b.*, a.date, a.quantite, a.id_client, GROUP_CONCAT(DISTINCT s.nom_saveur) as saveurs, GROUP_CONCAT(DISTINCT al.nom_aliment) as aliments
+        $query = "SELECT b.*, a.date, a.quantite, a.id_client, a.id_acheter, GROUP_CONCAT(DISTINCT s.nom_saveur) as saveurs, GROUP_CONCAT(DISTINCT al.nom_aliment) as aliments
         FROM " . $this->table_name . " a 
         JOIN boxes b ON a.id_boxe = b.id_boxe
         LEFT JOIN posseder p ON b.id_boxe = p.id_boxe
         LEFT JOIN saveur s ON p.id_saveur = s.id_saveur
         LEFT JOIN contenir c ON b.id_boxe = c.id_boxe
         LEFT JOIN aliment al ON c.id_aliment = al.id_aliment
-        GROUP BY b.id_boxe";
+        WHERE a.valider != 'valider'
+        GROUP BY a.id_acheter";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +41,7 @@ class Acheter
 
     public function create($id_client, $id_boxe, $quantite, $date)
     {
-        $query = "INSERT INTO " . $this->table_name . " (id_client, id_boxe, quantite, date) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO " . $this->table_name . " (id_client, id_boxe, quantite, date, valider) VALUES (?, ?, ?, ?, 'en cours...')";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $id_client);
 
@@ -54,5 +55,18 @@ class Acheter
         }
 
         return true;
+    }
+
+    public function update($id_acheter, $valider)
+    {
+        $query = "UPDATE " . $this->table_name . " SET valider = ? WHERE id_acheter = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $valider);
+        $stmt->bindParam(2, $id_acheter);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

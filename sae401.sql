@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 18 mars 2024 à 23:27
+-- Généré le : mar. 19 mars 2024 à 23:33
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.0.28
 
@@ -31,16 +31,18 @@ CREATE TABLE `acheter` (
   `id_boxe` int(11) NOT NULL,
   `id_client` int(11) NOT NULL,
   `quantite` int(11) DEFAULT NULL,
-  `date` date DEFAULT NULL
+  `date` datetime DEFAULT NULL,
+  `valider` varchar(11) NOT NULL,
+  `id_acheter` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `acheter`
 --
 
-INSERT INTO `acheter` (`id_boxe`, `id_client`, `quantite`, `date`) VALUES
-(12, 6, 1, '2024-03-18'),
-(1, 6, 4, '2024-03-11');
+INSERT INTO `acheter` (`id_boxe`, `id_client`, `quantite`, `date`, `valider`, `id_acheter`) VALUES
+(1, 6, 3, '2024-03-19 22:29:41', 'valider', 5),
+(2, 6, 3, '2024-03-19 22:29:41', 'valider', 6);
 
 -- --------------------------------------------------------
 
@@ -327,7 +329,7 @@ INSERT INTO `saveur` (`id_saveur`, `nom_saveur`) VALUES
 -- Index pour la table `acheter`
 --
 ALTER TABLE `acheter`
-  ADD PRIMARY KEY (`id_boxe`,`id_client`),
+  ADD PRIMARY KEY (`id_acheter`),
   ADD KEY `id_client` (`id_client`);
 
 --
@@ -379,6 +381,12 @@ ALTER TABLE `saveur`
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `acheter`
+--
+ALTER TABLE `acheter`
+  MODIFY `id_acheter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `aliment`
