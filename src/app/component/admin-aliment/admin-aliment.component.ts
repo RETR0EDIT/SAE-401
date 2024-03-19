@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AlimentService } from '../../aliment.service'; 
-
+import { tap } from 'rxjs/operators';
 
 
 @Component({
@@ -12,16 +12,22 @@ import { AlimentService } from '../../aliment.service';
 })
 export class AdminAlimentComponent {
   aliments$: Observable<any>;
+  nombreDaliment: number = 0; // Aj
   nom_aliment: string = '';
   errorMessage: string = '';
   showInputs: boolean = false;
   editing: { [key: string]: boolean } = {};
+  
   constructor(private http: HttpClient, private alimentService: AlimentService) {
     this.aliments$ = this.getAllAliments();
   }
 
   getAllAliments(): Observable<any> {
-    return this.http.get('http://localhost/sae-401/api/aliment/Read.php');
+    return this.http.get('http://localhost/sae-401/api/aliment/Read.php').pipe(
+      tap((response: any) => {
+        this.nombreDaliment = response.length; 
+      })
+    );
   }
 
  

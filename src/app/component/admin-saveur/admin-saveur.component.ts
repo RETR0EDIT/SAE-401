@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { SaveurService } from '../../saveur.service'; 
 
 @Component({
@@ -14,12 +15,17 @@ export class AdminSaveurComponent {
   errorMessage: string = '';
   showInputs: boolean = false;
   editing: { [key: string]: boolean } = {};
+  nombreDeSaveur: number = 0;
+
   constructor(private http: HttpClient, private saveurService: SaveurService) {
     this.saveurs$ = this.getAllSaveurs();
   }
-
   getAllSaveurs(): Observable<any> {
-    return this.http.get('http://localhost/sae-401/api/saveur/Read.php');
+    return this.http.get('http://localhost/sae-401/api/saveur/Read.php').pipe(
+      tap((response: any) => {
+        this.nombreDeSaveur = response.length; // Mettez à jour le nombre de saveurs
+      })
+    );
   }
 
   addSaveur() {
