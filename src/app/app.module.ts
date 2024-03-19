@@ -26,6 +26,7 @@ import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.comp
 import { NavAdminComponent } from './component/nav-admin/nav-admin.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminComandeComponent } from './component/admin-comande/admin-comande.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminAlimentComponent,
     AdminSaveurComponent,
     NavAdminComponent,
+    AdminComandeComponent,
     
   ],
   imports: [

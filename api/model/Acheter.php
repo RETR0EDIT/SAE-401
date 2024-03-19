@@ -14,7 +14,8 @@ class Acheter
         $query = "SELECT * FROM " . $this->table_name;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt->get_result();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
     public function read_One($id_client)
     {

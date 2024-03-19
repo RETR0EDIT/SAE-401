@@ -61,10 +61,18 @@ export class AuthService {
   
     return this.http.get(this.checkLoginUrl, { headers, observe: 'response' }).pipe(
       map((response: any) => {
+        if (response.status === 200) {
+          // Utilisez le service LocalStorageService pour interagir avec le stockage local
+          this.localStorage.setItem('isLoggedIn', 'true');
+          this.localStorage.setItem('userRole', 'admin'); // Remplacez 'admin' par le rôle réel de l'utilisateur
+        }
         return response.status === 200;
       }),
       catchError((error: HttpErrorResponse): Observable<boolean> => {
         if (error.status === 401) {
+          // Utilisez le service LocalStorageService pour interagir avec le stockage local
+          this.localStorage.removeItem('isLoggedIn');
+          this.localStorage.removeItem('userRole');
           return of(false);
         }
         return throwError(error);

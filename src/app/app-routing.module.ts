@@ -14,7 +14,8 @@ import { AdminBoxComponent } from './component/admin-box/admin-box.component';
 import { AdminUserComponent } from './component/admin-user/admin-user.component';
 import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.component';
 import { NavAdminComponent } from './component/nav-admin/nav-admin.component';
- import { AdminGuard } from './admin.guard';
+import { AdminGuard } from './admin.guard';
+import { AdminComandeComponent } from './component/admin-comande/admin-comande.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -25,17 +26,14 @@ const routes: Routes = [
   { path: "about", component: HomeAboutComponent},
   { path: "details", component: BoxDetailsComponent},
   { path: "profil" , component: ProfilComponent},
-  { path: "admin", component: AdminComponent},
-  { path: "admin/aliment", component: AdminAlimentComponent},
-  { path: "admin/box", component: AdminBoxComponent},
-  { path: "admin/user", component: AdminUserComponent},
-  { path: "admin/saveur", component: AdminSaveurComponent},
   { path: "nav-admin", component: NavAdminComponent},
-  //  { path: "admin", component: AdminComponent, canActivate: [AdminGuard]},
-  //  { path: "admin/aliment", component: AdminAlimentComponent, canActivate: [AdminGuard]},
-  //  { path: "admin/box", component: AdminBoxComponent, canActivate: [AdminGuard]},
-  //  { path: "admin/user", component: AdminUserComponent, canActivate: [AdminGuard]},
-  //  { path: "admin/saveur", component: AdminSaveurComponent, canActivate: [AdminGuard]}
+  { path: "admin", component: AdminComponent, canActivate: [AdminGuard]},
+  { path: "admin/aliment", component: AdminAlimentComponent, canActivate: [AdminGuard]},
+  { path: "admin/box", component: AdminBoxComponent, canActivate: [AdminGuard]},
+  { path: "admin/user", component: AdminUserComponent, canActivate: [AdminGuard]},
+  { path: "admin/saveur", component: AdminSaveurComponent, canActivate: [AdminGuard]},
+  { path: "admin/comande", component: AdminComandeComponent, canActivate: [AdminGuard]},
+  // faire 404{ path: "**", redirectTo: ""}
 ];
 
 @NgModule({
