@@ -20,7 +20,6 @@ export class CartService {
   setUserId(userId: string | null) {
     this.userId = userId;
   }
-
   addToCart(box: Box, quantity: number) {
     let cart = this.getCart();
     const totalBoxes = this.getTotalBoxes();
@@ -67,6 +66,14 @@ export class CartService {
     }
     this.updateTotalItems(cart);
   }
+
+  clearCart() {
+    this.cartSubject.next([]); // Réinitialise le sujet avec un tableau vide
+    this.totalItemsSubject.next(0); // Réinitialise le nombre total d'articles
+    this.localStorageService.removeItem('cart-' + this.userId); // Supprime le panier du stockage local
+    this.localStorageService.removeItem('totalItems'); // Supprime le nombre total d'articles du stockage local
+  }
+  
 
   getTotalItems(cart: { box: Box, quantity: number, total: number }[]) {
     let total = 0;

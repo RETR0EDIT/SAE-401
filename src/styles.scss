@@ -7,6 +7,16 @@
     box-sizing: border-box;
 }
 
+
+
+.modal button:focus {
+    outline: none;
+}
+
+.modal button:hover {
+    background-color: #0056b3;
+}
+
 // ?VARIABLES 
 $font-poppins: "Poppins", sans-serif;
 
@@ -19,32 +29,75 @@ $yellow-color: #d9cebc;
 $pink-color: #cfb6ce;
 $pink2-color: #d9b5c4;
 
-body{
+body {
     background: rgba(212, 208, 203, 0.87);
 }
-html{
+
+html {
     scroll-behavior: smooth;
 }
+
 ul {
     list-style: none;
 }
 
-a{
+a {
     text-decoration: none;
+}
+
+//   STYLE MODAL  
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fond semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-poppins;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.modal h2 {
+    margin: 0;
+    font-size: 18px;
+    color: $black-color;
+    font-weight: 600;
+}
+
+.modal button {
+    margin-top: 10px;
+    padding: 12px 24px;
+    background-color: $black-color;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .home__shape-1,
 .home__shape-2,
 .home__shape-3,
 .home__shape-4,
-.home__shape-5{
+.home__shape-5 {
     position: absolute;
     border-radius: 50%;
     z-index: -1;
     filter: blur(90px);
 }
 
-.home__shape-1{
+.home__shape-1 {
     width: 284px;
     height: 400px;
     background-color: $pink-color;
@@ -52,7 +105,7 @@ a{
     left: 0px;
 }
 
-.home__shape-2{
+.home__shape-2 {
     width: 284px;
     height: 400px;
     background-color: $yellow-color;
@@ -60,7 +113,7 @@ a{
     right: 0px;
 }
 
-.home__shape-3{
+.home__shape-3 {
     width: 284px;
     height: 352px;
     background-color: $pink-color;
@@ -68,7 +121,7 @@ a{
     left: 0px;
 }
 
-.home__shape-4{
+.home__shape-4 {
     width: 260px;
     height: 405px;
     background-color: $orange-color;
@@ -76,7 +129,7 @@ a{
     left: 0px;
 }
 
-.home__shape-5{
+.home__shape-5 {
     width: 260px;
     height: 405px;
     background-color: $pink2-color;
@@ -85,36 +138,36 @@ a{
 }
 
 @media (min-width: 848px) {
-    .home__shape-1{
+    .home__shape-1 {
         width: 318px;
         height: 454px;
         top: 31px;
         left: 0px;
     }
-    
-    .home__shape-2{
+
+    .home__shape-2 {
         width: 349.57px;
         height: 482.09px;
         top: 400px;
         right: 54px;
     }
-    
-    
-    .home__shape-3{
+
+
+    .home__shape-3 {
         width: 255.73px;
         height: 352.6px;
         top: 869px;
         left: 50px;
     }
-    
-    .home__shape-4{
+
+    .home__shape-4 {
         width: 294.14px;
         height: 405.64px;
         top: 1529px;
         left: 0px;
     }
-    
-    .home__shape-5{
+
+    .home__shape-5 {
         width: 327px;
         height: 455px;
         top: 2300px;
@@ -122,36 +175,36 @@ a{
     }
 }
 
-@media (min-width: 1272px){
-    .home__shape-1{
+@media (min-width: 1272px) {
+    .home__shape-1 {
         width: 420.63px;
         height: 599.98px;
         top: 27px;
         left: 0px;
     }
-    
-    .home__shape-2{
+
+    .home__shape-2 {
         width: 461.96px;
         height: 637px;
         top: 630px;
         right: 0px;
     }
 
-    .home__shape-3{
+    .home__shape-3 {
         width: 337.95px;
         height: 465.96px;
         top: 1292px;
         left: 137px;
     }
 
-    .home__shape-4{
+    .home__shape-4 {
         width: 388.72px;
         height: 536.06px;
         top: 1800px;
         right: 0px;
     }
 
-    .home__shape-5{
+    .home__shape-5 {
         width: 436.58px;
         height: 452.04px;
         top: 2100px;
@@ -159,36 +212,36 @@ a{
     }
 }
 
-@media (min-width: 1700px){
-    .home__shape-1{
+@media (min-width: 1700px) {
+    .home__shape-1 {
         width: 580px;
         height: 827.31px;
         top: 56px;
         left: 0px;
     }
-    
-    .home__shape-2{
+
+    .home__shape-2 {
         width: 637px;
         height: 878.48px;
         top: 1019px;
         right: 100px;
     }
 
-    .home__shape-3{
+    .home__shape-3 {
         width: 466px;
         height: 642.52px;
         top: 1932px;
         left: 213px;
     }
 
-    .home__shape-4{
+    .home__shape-4 {
         width: 336px;
         height: 400.18px;
         top: 2550px;
         right: 0px;
     }
 
-    .home__shape-5{
+    .home__shape-5 {
         width: 502px;
         height: 530.15px;
         top: 2500px;

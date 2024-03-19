@@ -74,6 +74,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  navigateToAbout(): void {
+    this.router.navigate([''], { fragment: 'about' });
+  }
+  
    toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }

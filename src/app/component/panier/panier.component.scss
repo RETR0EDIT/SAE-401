@@ -4,12 +4,8 @@
   box-sizing: border-box;
 }
 
-.center-snackbar {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
+
 
 // ?VARIABLES
 $font-poppins: "Poppins", sans-serif;
@@ -26,6 +22,7 @@ $red-color: hsla(0, 73%, 50%, 0.71);
 
 #panier {
   margin-top: 35px;
+  min-height: 59vh;
 }
 
 .btn {
@@ -230,6 +227,15 @@ button {
   letter-spacing: -5%;
   margin-bottom: 20px;
 }
+
+// .center-snackbar {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
+
+
 
 @media (min-width: 900px) {
   .item-panier {
@@ -436,4 +442,3 @@ button {
   width: 220px;
   margin-right: 45px;
 }
-

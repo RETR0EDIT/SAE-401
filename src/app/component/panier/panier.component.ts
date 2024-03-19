@@ -59,32 +59,57 @@ export class PanierComponent implements OnInit {
     //debloque acces au option de la box voir panier.component.html ligne 40
   }
 
-
-  finaliserCommande() {
-    this.snackBar.open('Finalisation de la commande...', '', {
-      duration: 4000,  
-    });
+// modal pour finlaiser la comande 
+finaliserCommande() {
+  const modal = document.createElement('div');
+  modal.classList.add('modal');
+  modal.innerHTML = `
+    <div class="modal-content">
+      <h2>Finalisation de la commande...</h2>
+    </div>
+  `;
   
-    setTimeout(() => {
-      this.http.post<ServerResponse>('http://localhost/sae-401/api/acheter/Create.php', {
-        id_client: this.authService.getIdClient(), 
-        id_boxe: this.cartService.getBoxCommander(),
-        quantite: this.cartService.getQuantiteCommander(),
-        date: new Date().toISOString(),
-      }).subscribe((response: ServerResponse) => {
-        
-        if (response && response.message === 'Achat créé.') {
-          this.snackBar.open('Commande validée', '', {
-            duration: 4000,
-          });
-        } else {
-          this.snackBar.open('Erreur lors de la validation de la commande', '', {
-            duration: 4000,
-          });
-        }
-      });
-    }, 4000);
-  }
+  document.body.appendChild(modal);
+
+  setTimeout(() => {
+    this.http.post<ServerResponse>('http://localhost/sae-401/api/acheter/Create.php', {
+      id_client: this.authService.getIdClient(), 
+      id_boxe: this.cartService.getBoxCommander(),
+      quantite: this.cartService.getQuantiteCommander(),
+      date: new Date().toISOString(),
+    }).subscribe((response: ServerResponse) => {
+      
+      if (response && response.message === 'Achat créé.') {
+        modal.innerHTML = `
+          <div class="modal-content">
+            <h2>Commande validée</h2>
+            <button id="closeModalBtn">OK</button>
+          </div>
+        `;
+        const closeModalBtn = modal.querySelector('#closeModalBtn');
+        closeModalBtn?.addEventListener('click', () => {
+          modal.remove();
+          this.cartService.clearCart(); // Vide le panier
+        });
+      } else {
+        modal.innerHTML = `
+          <div class="modal-content">
+            <h2>Erreur lors de la validation de la commande</h2>
+            <button id="closeModalBtn">OK</button>
+          </div>
+        `;
+        const closeModalBtn = modal.querySelector('#closeModalBtn');
+        closeModalBtn?.addEventListener('click', () => {
+          modal.remove();
+        });
+      }
+    });
+  }, 4000);
+}
+  
+
+  
+
   getOptions(quantity: number): number[] {
     const totalBoxes = this.cartService.getTotalBoxes();
     const maxOptions = Math.min(10 - totalBoxes + quantity, 10);
