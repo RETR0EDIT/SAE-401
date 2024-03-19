@@ -24,7 +24,7 @@
           </svg>
         </div>
       </div>
-      <h3>16</h3>
+      <h3>{{ nombre_commande }}</h3>
       <p class="nom">Nombre de commande en cours</p>
     </div>
     <div class="responsive-table">
@@ -40,14 +40,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let command of commands">
-            <td data-label="ID Client" class="id">{{ command.id_client }}</td>
-            <td data-label="ID Box" class="id">#{{ command.id_boxe }}</td>
-            <td data-label="Image" class="id"><img
-                [src]="'../../../assets/ressources/images/box-sushi/caree/' + command.image" width="100px">
+          <tr *ngFor="let item of groupedCommands" class="nombre_comande">
+            <td data-label="ID Client" class="id">{{ item.id_client }}</td>
+            <td data-label="ID Box" class="id">#{{ item.id_boxe }}</td>
+            <td data-label="Image" class="id">
+              <img *ngFor="let image of item.image.split(',')"
+                [src]="'../../../assets/ressources/images/box-sushi/caree/' + image" width="100px">
             </td>
-            <td data-label="Quantité" class="id">{{ command.quantite }}</td>
-            <td data-label="Date" class="id">{{ command.date }}</td>
+            <td data-label="Quantité" class="id">{{ item.quantite }}</td>
+            <td data-label="Date" class="id">{{ item.date }}</td>
 
             <td data-label="Valider" class="action" class="id">
               <button class="edit-btn">

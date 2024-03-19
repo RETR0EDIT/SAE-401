@@ -11,7 +11,14 @@ class Acheter
 
     public function read()
     {
-        $query = "SELECT * FROM " . $this->table_name;
+        $query = "SELECT b.*, a.date, a.quantite, a.id_client, GROUP_CONCAT(DISTINCT s.nom_saveur) as saveurs, GROUP_CONCAT(DISTINCT al.nom_aliment) as aliments
+        FROM " . $this->table_name . " a 
+        JOIN boxes b ON a.id_boxe = b.id_boxe
+        LEFT JOIN posseder p ON b.id_boxe = p.id_boxe
+        LEFT JOIN saveur s ON p.id_saveur = s.id_saveur
+        LEFT JOIN contenir c ON b.id_boxe = c.id_boxe
+        LEFT JOIN aliment al ON c.id_aliment = al.id_aliment
+        GROUP BY b.id_boxe";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -38,17 +45,6 @@ class Acheter
         $stmt->bindParam(1, $id_client);
 
         foreach ($id_boxe as $index => $boxe) {
-            // Vérifiez d'abord si l'entrée existe déjà
-            $checkQuery = "SELECT * FROM " . $this->table_name . " WHERE id_client = ? AND id_boxe = ?";
-            $checkStmt = $this->conn->prepare($checkQuery);
-            $checkStmt->bindParam(1, $id_client);
-            $checkStmt->bindParam(2, $boxe);
-            $checkStmt->execute();
-            if ($checkStmt->rowCount() > 0) {
-                // Si l'entrée existe déjà, passez à la prochaine
-                continue;
-            }
-
             $stmt->bindParam(2, $boxe);
             $stmt->bindParam(3, $quantite[$index]);
             $stmt->bindParam(4, $date);
