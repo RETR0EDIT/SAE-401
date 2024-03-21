@@ -7,7 +7,7 @@
 - **Nom du projet** : Hako Shi
 
 ## Ressources
-- **Liens du site héberger** : [Site](http://nolan-dm.000.pe)
+- **Liens du site héberger** : [http://nolan-dm.000.pe](http://nolan-dm.000.pe)
 - **Dépôt distant** : [GitHub](https://github.com/RETR0EDIT/SAE-401.git)
 - **Gestion de projet** : [Trello](https://trello.com/b/DEcimwUf/sae401)
 - **Maquette** : [Figma](https://www.figma.com/file/T09ITGulXjBEqKCvg3gFOV/SAE-401?type=design&node-id=0-1&mode=design&t=X9FG0fqKFIAcFnWK-0)
