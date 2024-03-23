@@ -16,6 +16,7 @@ import { AdminSaveurComponent } from './component/admin-saveur/admin-saveur.comp
 import { NavAdminComponent } from './component/nav-admin/nav-admin.component';
 import { AdminGuard } from './admin.guard';
 import { AdminComandeComponent } from './component/admin-comande/admin-comande.component';
+import { PolConfComponent } from './component/pol-conf/pol-conf.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: "details", component: BoxDetailsComponent},
   { path: "profil" , component: ProfilComponent},
   { path: "nav-admin", component: NavAdminComponent},
+  { path: "pol-conf", component: PolConfComponent},
   { path: "admin", component: AdminComponent, canActivate: [AdminGuard]},
   { path: "admin/aliment", component: AdminAlimentComponent, canActivate: [AdminGuard]},
   { path: "admin/box", component: AdminBoxComponent, canActivate: [AdminGuard]},
