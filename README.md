@@ -14,7 +14,7 @@
 
 ## Logo
 
-![logo](src/assets/ressources/logo/logo.png)
+![logo](src/assets/ressources/logo/logo.svg)
 
 ## Diagrammes
 
