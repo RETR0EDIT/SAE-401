@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { AuthService } from '../../auth-service.service'; 
+import { AuthService } from '../../auth-service.service';
 import { Router } from '@angular/router';
 import { CartService } from '../../cart.service';
 import { SharedService } from '../../shared.service';
@@ -9,7 +9,7 @@ import { LocalStorageService } from '../../local-storage.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   isMenuOpen: boolean = false;
@@ -18,29 +18,32 @@ export class HeaderComponent implements OnInit {
   totalItems!: number;
   role: string = '';
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router, private cartService: CartService, private sharedService: SharedService, private localStorageService: LocalStorageService) {
-  }
-  
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router,
+    private cartService: CartService,
+    private sharedService: SharedService,
+    private localStorageService: LocalStorageService
+  ) {}
+
   ngOnInit() {
-    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
-      if (isLoggedIn) {
-        this.getUserRole();
-      }
+      // Supprimez la vérification isLoggedIn ici
+      this.getUserRole();
     });
-  
-    // Récupère totalItems du localStorage
-    const savedTotalItems = this.localStorageService.getItem('totalItems');
-    console.log('Valeur de totalItems récupérée du localStorage :', savedTotalItems); // Ajout d'un log ici
-    if (savedTotalItems) {
-      this.totalItems = Number(savedTotalItems);
-    }
+
+    // ...
 
     // Abonnez-vous à totalItems$ ici
-    this.cartService.totalItems$.subscribe(totalItems => {
+    this.cartService.totalItems$.subscribe((totalItems) => {
       console.log('Nouvelle valeur de totalItems :', totalItems); // Ajout d'un log ici
       this.totalItems = totalItems;
-      this.localStorageService.setItem('totalItems', this.totalItems.toString());
+      this.localStorageService.setItem(
+        'totalItems',
+        this.totalItems.toString()
+      );
     });
   }
 
@@ -50,9 +53,9 @@ export class HeaderComponent implements OnInit {
     if (id_client === null) {
       return;
     }
-    this.authService.getUserRole(id_client).subscribe(role => {
+    this.authService.getUserRole(id_client).subscribe((role) => {
       this.role = role;
-      this.authService.userRole = role; 
+      this.authService.userRole = role;
     });
   }
 
@@ -70,23 +73,21 @@ export class HeaderComponent implements OnInit {
   onLogoutClick(): void {
     this.authService.logout();
     this.role = '';
-    this.router.navigate(['/']).then(success => {
-    });
+    this.router.navigate(['/']).then((success) => {});
   }
 
   navigateToAbout(): void {
     this.router.navigate([''], { fragment: 'about' });
   }
-  
-   toggleDropdown(): void {
+
+  toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
-  
-// toggleDropdown() {
-//   const dropdownMenu = document.getElementById('dropdown-menu');
-//   if (dropdownMenu) {
-//     dropdownMenu.classList.toggle('dropdown-menu1');
-//   }
-// }
-}
 
+  // toggleDropdown() {
+  //   const dropdownMenu = document.getElementById('dropdown-menu');
+  //   if (dropdownMenu) {
+  //     dropdownMenu.classList.toggle('dropdown-menu1');
+  //   }
+  // }
+}

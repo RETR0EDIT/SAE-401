@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $data = json_decode(file_get_contents("php://input"));
 
-    if (!empty($data->id_client) && !empty($data->id_boxe)) {
+    if  (!empty($data->id_boxe)) {
         $result = $acheter->create($data->id_client, $data->id_boxe, $data->quantite, $data->date);
         if ($result === true) {
             http_response_code(201);
