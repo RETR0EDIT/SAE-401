@@ -1,52 +1,63 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { BoxService } from '../../box.service'; 
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { BoxService } from '../../box.service';
+import { environment } from '../../../environment/environment';
+
 @Component({
   selector: 'app-admin-box',
   templateUrl: './admin-box.component.html',
-  styleUrls: ['./admin-box.component.scss']
+  styleUrls: ['./admin-box.component.scss'],
 })
 export class AdminBoxComponent implements OnInit {
   boxes$: Observable<any> = of();
-  id_boxe: string = '';
-  nom: string = '';
-  prix: number = 0;
-  image: string = '';
-  pieces: string[] = [];
   form: FormGroup;
   errorMessage: string = '';
   showInputs: boolean = false;
   editing: { [key: string]: boolean } = {};
   allSaveurs: any[] = [];
   allAliments: any[] = [];
-  saveur: any = this.allSaveurs[0]; 
-  aliment: any = this.allAliments[0];
   nombreDebox: number = 0;
+  fileData!: File;
+  clickCount = 0;
 
-  constructor(private http: HttpClient, private boxService: BoxService, private fb: FormBuilder) {
-    this.form = this.fb.group({});
-    this.getSaveurs().subscribe(saveurs => {
+  constructor(
+    private http: HttpClient,
+    private boxService: BoxService,
+    private fb: FormBuilder
+  ) {
+    this.form = this.fb.group({
+      nom: [''],
+      prix: [''],
+      image: [''],
+      pieces: [''],
+      saveurs: this.fb.array([]),
+      aliments: this.fb.array([]),
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadInitialData();
+  }
+
+  get saveurs(): FormArray {
+    return this.form.controls['saveurs'] as FormArray;
+  }
+
+  get aliments(): FormArray {
+    return this.form.controls['aliments'] as FormArray;
+  }
+
+  loadInitialData() {
+    this.getSaveurs().subscribe((saveurs) => {
       this.allSaveurs = saveurs;
-      this.getAliments().subscribe(aliments => {
+      this.getAliments().subscribe((aliments) => {
         this.allAliments = aliments;
-        this.form = this.fb.group({
-          nom: [''],
-          prix: [''],
-          image: [''],
-          pieces: [''],
-          saveurs: this.fb.array(this.allSaveurs.map(() => new FormControl(false))),
-          aliments: this.fb.array(this.allAliments.map(() => this.fb.group({
-            selected: false,
-            quantite: 0
-          })))
-        });
+        this.createFormControls('saveurs', this.allSaveurs);
+        this.createFormControls('aliments', this.allAliments);
         this.boxes$ = this.getAllBoxes();
-        this.boxes$.subscribe(); // Ajoutez cette ligne
       });
     });
   }
@@ -54,65 +65,17 @@ export class AdminBoxComponent implements OnInit {
   createFormControls(controlName: string, items: any[]) {
     const formArray = this.form.get(controlName) as FormArray;
     items.forEach(() => {
-      formArray.push(this.fb.group({
-        selected: new FormControl(false),
-        quantite: new FormControl(0)
-      }));
+      formArray.push(
+        this.fb.group({
+          selected: new FormControl(false),
+          quantite: new FormControl(0),
+        })
+      );
     });
-  }
-
-  ngOnInit(): void {
-    this.allSaveurs.forEach((saveur, index) => {
-      this.saveurs.push(this.fb.control(saveur.id_saveur));
-    });
-  
-    this.allAliments.forEach((aliment, index) => {
-      this.aliments.push(this.fb.control(aliment.id_aliment));
-    });
-    this.getAllBoxes();
-
-  }
-
-  get saveurs(): FormArray {
-    return this.form.controls['saveurs'] as FormArray;
-  }
-  
-  get aliments(): FormArray {
-    return this.form.controls['aliments'] as FormArray;
-  }
-
-  addSaveur() {
-    this.saveurs.push(this.fb.group({
-      id_saveur: [''],
-      nom_saveur: ['']
-    }));
-  }
-  
-  addAliment() {
-    this.aliments.push(this.fb.group({
-      id_aliment: [''],
-      nom_aliment: [''],
-      quantite: ['']
-    }));
-  }
-  isSaveurSelected(id_saveur: string): boolean {
-    return this.form.value.saveurs.map((s: { id_saveur: string }) => s.id_saveur).includes(id_saveur);
-  }
-  
-  isAlimentSelected(id_aliment: string): boolean {
-    return this.form.value.aliments.map((a: { id_aliment: string }) => a.id_aliment).includes(id_aliment);
-  }
-
-  removeSaveur(i: number) {
-    this.saveurs.removeAt(i);
-  }
-  
-  removeAliment(i: number) {
-    this.aliments.removeAt(i);
   }
 
   getAllBoxes(): Observable<any> {
-    return this.http.get('http://localhost/sae-401/api/box/Read.php').pipe(
+    return this.http.get(`${environment.apiUrl}/box/Read.php`).pipe(
       tap((response: any) => {
         this.nombreDebox = response.length;
       })
@@ -120,120 +83,146 @@ export class AdminBoxComponent implements OnInit {
   }
 
   addBox() {
-    console.log('add box');
-    
     if (!this.showInputs) {
-      console.log('show input');
       this.showInputs = true;
     } else {
-      // Extraire uniquement le nom du fichier de l'image
-      const imageName = this.form.value.image.split('\\').pop();
-  
-      // Filtrer les saveurs et les aliments sélectionnés et renvoyer leurs ID
-      const selectedSaveurs = this.form.value.saveurs
-        .map((selected: boolean, i: number) => selected ? this.allSaveurs[i].id_saveur : null)
-        .filter((id: number) => id !== null);
-        const selectedAliments = this.form.value.aliments
-  .map((aliment: { selected: boolean, quantite: number }, i: number) => aliment.selected ? { id_aliment: this.allAliments[i].id_aliment, quantite: aliment.quantite } : null)
-  .filter((aliment: any) => aliment !== null);
-      
-  const id_aliment = selectedAliments.map((aliment: { id_aliment: number, quantite: number }) => aliment.id_aliment);
-  const quantite = selectedAliments.map((aliment: { id_aliment: number, quantite: number }) => aliment.quantite);
-      
-      const box = { 
-        nom: this.form.value.nom, 
-        prix: +this.form.value.prix, 
-        image: imageName, 
-        pieces: +this.form.value.pieces, 
-        id_saveur: selectedSaveurs.map(Number), 
-        id_aliment: id_aliment,
-        quantite: quantite
-      };
-  
-      console.log('Box à créer :', box); // Ajout du débogage ici
-  
-      this.http.post('http://localhost/sae-401/api/box/Create.php', box).subscribe(response => {
-        console.log('Box créée avec succès :', response);
-        this.boxes$ = this.getAllBoxes();
-        this.form.reset();
-        this.showInputs = false;
-      }, error => {
-        this.errorMessage = 'Erreur lors de la création de la box : ' + JSON.stringify(error);
-        console.log('Erreur lors de la création de la box :', box); // Ajout du débogage ici
-      });
+      const box = this.prepareBoxData();
+      this.postRequest('box/Create.php', box).subscribe(
+        (response) => {
+          console.log('Box créée avec succès :', response);
+          this.boxes$ = this.getAllBoxes();
+          this.form.reset();
+          this.showInputs = false;
+        },
+        (error) => {
+          this.errorMessage =
+            'Erreur lors de la création de la box : ' + JSON.stringify(error);
+        }
+      );
     }
   }
 
-  editBox(id_boxe: string, nom: string, prix: number, image: string, pieces: string[]) {
+  prepareBoxData() {
+    const imageName = this.form.value.image.split('\\').pop();
+    const selectedSaveurs = this.form.value.saveurs
+      .map((selected: boolean, i: number) =>
+        selected ? this.allSaveurs[i].id_saveur : null
+      )
+      .filter((id: number) => id !== null);
+    const selectedAliments = this.form.value.aliments
+      .map((aliment: { selected: boolean; quantite: number }, i: number) =>
+        aliment.selected
+          ? {
+              id_aliment: this.allAliments[i].id_aliment,
+              quantite: aliment.quantite,
+            }
+          : null
+      )
+      .filter((aliment: any) => aliment !== null);
+
+    return {
+      nom: this.form.value.nom,
+      prix: +this.form.value.prix,
+      image: imageName,
+      pieces: +this.form.value.pieces,
+      id_saveur: selectedSaveurs.map(Number),
+      id_aliment: selectedAliments.map((a: any) => a.id_aliment),
+      quantite: selectedAliments.map((a: any) => a.quantite),
+    };
+  }
+
+  isSaveurSelected(id_saveur: string): boolean {
+    return this.form.value.saveurs
+      .map((s: { id_saveur: string }) => s.id_saveur)
+      .includes(id_saveur);
+  }
+
+  editBox(
+    id_boxe: string,
+    nom: string,
+    prix: number,
+    image: string,
+    pieces: string[]
+  ) {
     if (this.editing[id_boxe]) {
-      this.boxService.updateBox(id_boxe, nom, prix, image, pieces).subscribe(response => {
-        console.log('Box mise à jour avec succès :', response);
-        this.boxes$ = this.getAllBoxes();
-        this.errorMessage = ''; 
-      }, error => {
-        console.error('Erreur lors de la mise à jour de la box :', error);
-        this.errorMessage = error.error.message; 
-      });
+      const box = { id_boxe, nom, prix, image, pieces };
+      this.putRequest('box/Update.php', box).subscribe(
+        (response) => {
+          console.log('Box mise à jour avec succès :', response);
+          this.boxes$ = this.getAllBoxes();
+          this.errorMessage = '';
+        },
+        (error) => {
+          this.errorMessage =
+            'Erreur lors de la mise à jour de la box : ' +
+            JSON.stringify(error);
+        }
+      );
     }
     this.editing[id_boxe] = !this.editing[id_boxe];
   }
 
   deleteBox(id_boxe: string) {
     const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-      body: {
-        id_boxe: id_boxe,
-      },
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      body: { id_boxe: id_boxe },
     };
-  
-    this.http.delete('http://localhost/sae-401/api/box/Delete.php', options).subscribe(response => {
-      console.log('Box supprimée avec succès :', response);
-      this.boxes$ = this.getAllBoxes();
-      this.errorMessage = '';
-    }, error => {
-      this.errorMessage = 'Erreur lors de la suppression de la box : ' + JSON.stringify(error);
-    });
+
+    this.http.delete(`${environment.apiUrl}/box/Delete.php`, options).subscribe(
+      (response) => {
+        console.log('Box supprimée avec succès :', response);
+        this.boxes$ = this.getAllBoxes();
+        this.errorMessage = '';
+      },
+      (error) => {
+        this.errorMessage =
+          'Erreur lors de la suppression de la box : ' + JSON.stringify(error);
+      }
+    );
   }
 
   getSaveurs(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost/sae-401/api/saveur/Read.php');
+    return this.http.get<any[]>(`${environment.apiUrl}/saveur/Read.php`);
   }
 
   getAliments(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost/sae-401/api/aliment/Read.php');
+    return this.http.get<any[]>(`${environment.apiUrl}/aliment/Read.php`);
   }
 
-  
-fileData!: File;
-
-fileProcess(event: Event) {
-  const target = event.target as HTMLInputElement;
-  if (target.files) {
-    this.fileData = target.files[0];
+  fileProcess(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (target.files) {
+      this.fileData = target.files[0];
+    }
   }
-}
 
-uploadFile() {
-  const formData = new FormData();
-  formData.append('file', this.fileData);
-  //mettre le file dans SAE-401\src\assets\ressources\images\box-sushi\carée
-  this.http.post('http://localhost/sae-401/api/file/Upload.php', formData).subscribe(response => {
-    console.log('Fichier téléversé avec succès :', response);
-  }, error => {
-    console.error('Erreur lors du téléversement du fichier :', error);
-  });
-}
-
-clickCount = 0;
-
-addBoxAndUploadFile() {
-  this.addBox();
-  this.clickCount++;
-  if (this.clickCount === 2) {
-    this.uploadFile();
-    this.clickCount = 0;
+  uploadFile() {
+    const formData = new FormData();
+    formData.append('file', this.fileData);
+    this.postRequest('file/Upload.php', formData).subscribe(
+      (response) => {
+        console.log('Fichier téléversé avec succès :', response);
+      },
+      (error) => {
+        console.error('Erreur lors du téléversement du fichier :', error);
+      }
+    );
   }
-}
+
+  addBoxAndUploadFile() {
+    this.addBox();
+    this.clickCount++;
+    if (this.clickCount === 2) {
+      this.uploadFile();
+      this.clickCount = 0;
+    }
+  }
+
+  private postRequest(endpoint: string, body: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/${endpoint}`, body);
+  }
+
+  private putRequest(endpoint: string, body: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/${endpoint}`, body);
+  }
 }

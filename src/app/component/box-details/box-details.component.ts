@@ -4,28 +4,35 @@ import { HttpClient } from '@angular/common/http';
 import { CartService } from '../../cart.service';
 import { Box } from '../../box.interface';
 import { Router } from '@angular/router';
+import { environment } from '../../../environment/environment';
+
+const API_URL = `${environment.apiUrl}/details/Read_one.php`;
 
 @Component({
   selector: 'app-box-details',
   templateUrl: './box-details.component.html',
-  styleUrls: ['./box-details.component.scss']
+  styleUrls: ['./box-details.component.scss'],
 })
 export class BoxDetailsComponent implements OnInit {
-  
   box!: Box;
   valeur: number = 1;
   total!: number;
-  totalString!: string ;
+  totalString!: string;
   message: string = '';
-  url = 'http://localhost/SAE-401/api/details/Read_one.php';
+  url = API_URL;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private cartService: CartService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       const id_boxe = params['id'];
       if (id_boxe) {
-        this.http.get<Box[]>(`${this.url}?id=${id_boxe}`).subscribe(boxes => {
+        this.http.get<Box[]>(`${this.url}?id=${id_boxe}`).subscribe((boxes) => {
           if (boxes.length > 0) {
             this.box = boxes[0];
             this.updateTotal();
@@ -38,23 +45,23 @@ export class BoxDetailsComponent implements OnInit {
   increment() {
     if (this.valeur + this.cartService.getTotalBoxes() < 10) {
       if (this.box !== null) {
-        this.cartService.updateQuantity({...this.box}, this.valeur + 1);
+        this.cartService.updateQuantity({ ...this.box }, this.valeur + 1);
       }
       this.valeur = this.valeur + 1;
       this.updateTotal();
     }
   }
-  
+
   decrement() {
     if (this.valeur > 1) {
       if (this.box !== null) {
-        this.cartService.updateQuantity({...this.box}, this.valeur - 1);
+        this.cartService.updateQuantity({ ...this.box }, this.valeur - 1);
       }
       this.valeur = this.valeur - 1;
       this.updateTotal();
     }
   }
-  
+
   updateTotal() {
     if (this.box && this.box.prix && this.valeur) {
       this.total = this.valeur * this.box.prix;
@@ -64,8 +71,6 @@ export class BoxDetailsComponent implements OnInit {
       this.totalString = '0.00';
     }
   }
-
- 
 
   addToCart() {
     if (this.box !== null) {
@@ -83,10 +88,11 @@ export class BoxDetailsComponent implements OnInit {
     }
   }
 
-
   getComposition(): string {
     if (this.box && this.box.aliments) {
-      return this.box.aliments.map(aliment => `${aliment.nom} x${aliment.quantite}`).join('<br>');
+      return this.box.aliments
+        .map((aliment) => `${aliment.nom} x${aliment.quantite}`)
+        .join('<br>');
     }
     return '';
   }
