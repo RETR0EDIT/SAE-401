@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
 import { Box } from './box.interface';
-import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -26,8 +25,6 @@ export class CartService {
     let cart = this.getCart();
     const totalBoxes = this.getTotalBoxes();
     const total = box.prix * quantity;
-    const item = { box, quantity, total };
-    cart.push(item);
 
     if (totalBoxes + quantity > 10) {
       throw new Error(
@@ -35,24 +32,23 @@ export class CartService {
       );
     }
 
-    // Utilisez toujours 'cart-anonymous' comme clé de stockage local
-    const storageKey = 'cart-anonymous';
+    const existingItem = cart.find(
+      (item: { box: Box; quantity: number; total: number }) =>
+        item.box.id_boxe === box.id_boxe
+    );
 
-    this.localStorageService.setItem(storageKey, JSON.stringify(cart));
-    this.cartSubject.next(cart);
+    if (existingItem) {
+      existingItem.quantity += quantity;
+      existingItem.total = existingItem.box.prix * existingItem.quantity;
+    } else {
+      cart.push({ box, quantity, total });
+    }
 
-    // Mettre à jour totalItems
-    const totalItems = this.totalItemsSubject.getValue() + quantity;
-    this.totalItemsSubject.next(totalItems);
-    this.localStorageService.setItem('totalItems', totalItems.toString());
-    this.updateTotalItems(this.getCart());
+    this.updateCart(cart);
   }
 
   getCart() {
-    // Utilisez toujours 'cart-anonymous' comme clé de stockage local
-    const storageKey = 'cart-anonymous';
-
-    const cart = this.localStorageService.getItem(storageKey);
+    const cart = this.localStorageService.getItem('cart-anonymous');
     return cart ? JSON.parse(cart) : [];
   }
 
@@ -63,38 +59,23 @@ export class CartService {
       if (cart[index].quantity === 0) {
         cart.splice(index, 1);
       }
-      this.localStorageService.setItem('cart-anonymous', JSON.stringify(cart));
-      this.cartSubject.next(cart);
+      this.updateCart(cart);
     }
-    this.updateTotalItems(cart);
   }
 
   clearCart() {
-    // Utilisez toujours 'cart-anonymous' comme clé de stockage local
-    const storageKey = 'cart-anonymous';
-
-    this.cartSubject.next([]); // Réinitialise le sujet avec un tableau vide
-    this.totalItemsSubject.next(0); // Réinitialise le nombre total d'articles
-    this.localStorageService.removeItem(storageKey); // Supprime le panier du stockage local
-    this.localStorageService.removeItem('totalItems'); // Supprime le nombre total d'articles du stockage local
+    this.cartSubject.next([]);
+    this.totalItemsSubject.next(0);
+    this.localStorageService.removeItem('cart-anonymous');
+    this.localStorageService.removeItem('totalItems');
   }
 
   getTotalItems(cart: { box: Box; quantity: number; total: number }[]) {
-    let total = 0;
-    for (let item of cart) {
-      total += item.quantity;
-    }
-    return total;
+    return cart.reduce((total, item) => (total += item.quantity), 0);
   }
 
   getTotalBoxes(): number {
-    let total = 0;
-    this.cart$.pipe(take(1)).subscribe((cart) => {
-      for (let item of cart) {
-        total += item.quantity;
-      }
-    });
-    return total;
+    return this.getTotalItems(this.getCart());
   }
 
   updateTotalItems(cart: { box: Box; quantity: number; total: number }[]) {
@@ -116,19 +97,25 @@ export class CartService {
     if (item) {
       item.quantity = quantity;
       item.total = box.prix * quantity;
-      this.localStorageService.setItem('cart-anonymous', JSON.stringify(cart));
-      this.cartSubject.next(cart);
-      this.updateTotalItems(cart);
+      this.updateCart(cart);
     }
   }
 
   getBoxCommander(): number[] {
     return this.getCart().map(
-      (item: { box: { id_boxe: number } }) => item.box.id_boxe
+      (item: { box: Box; quantity: number; total: number }) => item.box.id_boxe
     );
   }
 
   getQuantiteCommander(): number[] {
-    return this.getCart().map((item: { quantity: number }) => item.quantity);
+    return this.getCart().map(
+      (item: { box: Box; quantity: number; total: number }) => item.quantity
+    );
+  }
+
+  private updateCart(cart: { box: Box; quantity: number; total: number }[]) {
+    this.localStorageService.setItem('cart-anonymous', JSON.stringify(cart));
+    this.cartSubject.next(cart);
+    this.updateTotalItems(cart);
   }
 }

@@ -7,12 +7,12 @@ import { SharedService } from '../../shared.service';
 import { Box, Aliment } from '../../box.interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../auth-service.service';
-interface LoginResponse {
-  message: string;
-}
+import { environment } from '../../../environment/environment';
+
 interface ServerResponse {
   message: string;
 }
+
 @Component({
   selector: 'app-panier',
   templateUrl: './panier.component.html',
@@ -38,11 +38,8 @@ export class PanierComponent implements OnInit {
     this.cartService.cart$.subscribe((cart) => {
       setTimeout(() => {
         this.cart = cart;
-        // Convertir le tableau d'objets Aliment en une seule chaîne de caractères
         this.alimentStrings = this.cart.map((item) =>
-          item.box.aliments
-            .map((aliment) => `${aliment.nom}: ${aliment.quantite}`)
-            .join(', ')
+          this.formatAliments(item.box.aliments)
         );
         this.totalPrix = this.cart.reduce(
           (sum, item) => sum + item.box.prix * item.quantity,
@@ -61,78 +58,83 @@ export class PanierComponent implements OnInit {
     this.cartService.removeFromCart(index);
   }
 
-  someFunction() {
-    this.totalItems = this.cartService.getTotalItems(this.cart);
-  }
   formatAliments(aliments: Aliment[]): string {
     return aliments
       .map((aliment) => `${aliment.nom}: ${aliment.quantite}`)
       .join(', ');
   }
 
-  modifier() {
-    //debloque acces au option de la box voir panier.component.html ligne 40
-  }
-
-  // modal pour finlaiser la comande
   finaliserCommande() {
-    const modal = document.createElement('div');
-    modal.classList.add('modal');
-    modal.innerHTML = `
-    <div class="modal-content">
-      <h2>Finalisation de la commande...</h2>
-    </div>
-  `;
-
-    document.body.appendChild(modal);
+    const modal = this.createModal('Finalisation de la commande...');
 
     setTimeout(() => {
       this.http
-        .post<ServerResponse>(
-          'http://localhost/sae-401/api/acheter/Create.php',
-          {
-            id_client: this.authService.getIdClient(),
-            id_boxe: this.cartService.getBoxCommander(),
-            quantite: this.cartService.getQuantiteCommander(),
-            date: new Date().toISOString(),
+        .post<ServerResponse>(`${environment.apiUrl}/acheter/Create.php`, {
+          id_client: this.authService.getIdClient(),
+          id_boxe: this.cartService.getBoxCommander(),
+          quantite: this.cartService.getQuantiteCommander(),
+          date: new Date().toISOString(),
+        })
+        .subscribe(
+          (response: ServerResponse) => {
+            if (response && response.message === 'Achat créé.') {
+              this.updateModal(modal, 'Commande validée', true);
+            } else {
+              this.updateModal(
+                modal,
+                'Erreur lors de la validation de la commande',
+                false
+              );
+            }
+          },
+          (error) => {
+            console.error(
+              'Erreur lors de la finalisation de la commande :',
+              error
+            );
+            this.updateModal(
+              modal,
+              'Erreur lors de la validation de la commande',
+              false
+            );
           }
-        )
-        .subscribe((response: ServerResponse) => {
-          if (response && response.message === 'Achat créé.') {
-            modal.innerHTML = `
-          <div class="modal-content">
-            <h2>Commande validée</h2>
-            <button id="closeModalBtn">OK</button>
-          </div>
-        `;
-            const closeModalBtn = modal.querySelector('#closeModalBtn');
-            closeModalBtn?.addEventListener('click', () => {
-              modal.remove();
-              this.cartService.clearCart(); // Vide le panier
-            });
-          } else {
-            modal.innerHTML = `
-          <div class="modal-content">
-            <h2>Erreur lors de la validation de la commande</h2>
-            <button id="closeModalBtn">OK</button>
-          </div>
-        `;
-            const closeModalBtn = modal.querySelector('#closeModalBtn');
-            closeModalBtn?.addEventListener('click', () => {
-              modal.remove();
-            });
-          }
-        });
+        );
     }, 2000);
+  }
+
+  createModal(message: string): HTMLElement {
+    const modal = document.createElement('div');
+    modal.classList.add('modal');
+    modal.innerHTML = `
+      <div class="modal-content">
+        <h2>${message}</h2>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  updateModal(modal: HTMLElement, message: string, success: boolean) {
+    modal.innerHTML = `
+      <div class="modal-content">
+        <h2>${message}</h2>
+        <button id="closeModalBtn">OK</button>
+      </div>
+    `;
+    const closeModalBtn = modal.querySelector('#closeModalBtn');
+    closeModalBtn?.addEventListener('click', () => {
+      modal.remove();
+      if (success) {
+        this.cartService.clearCart();
+      }
+    });
   }
 
   onAddQuantity(item: { box: Box; quantity: number; total: number }) {
     const totalBoxes = this.cartService.getTotalBoxes() + 1;
     if (totalBoxes <= 10) {
-      const clonedItem = { ...item, quantity: Number(item.quantity) + 1 };
-      this.onQuantityChangeWithClone(clonedItem);
+      this.updateQuantity(item, item.quantity + 1);
     } else {
-      // Affichez un message d'erreur ou effectuez une action appropriée si le maximum est atteint
       console.log(
         'Vous ne pouvez pas ajouter plus de 10 boîtes dans votre panier.'
       );
@@ -141,8 +143,21 @@ export class PanierComponent implements OnInit {
 
   onLessQuantity(item: { box: Box; quantity: number; total: number }) {
     if (item.quantity > 1) {
-      const clonedItem = { ...item, quantity: Number(item.quantity) - 1 };
-      this.onQuantityChangeWithClone(clonedItem);
+      this.updateQuantity(item, item.quantity - 1);
+    }
+  }
+
+  updateQuantity(
+    item: { box: Box; quantity: number; total: number },
+    quantity: number
+  ) {
+    const existingItem = this.cart.find((cartItem) =>
+      this.areBoxesEqual(cartItem.box, item.box)
+    );
+    if (existingItem) {
+      existingItem.quantity += quantity - item.quantity;
+    } else {
+      this.cartService.updateQuantity(item.box, quantity);
     }
   }
 
@@ -150,9 +165,6 @@ export class PanierComponent implements OnInit {
     const totalBoxes = this.cartService.getTotalBoxes();
     const maxOptions = Math.min(10 - totalBoxes + quantity, 10);
     return Array.from({ length: maxOptions }, (_, i) => i + 1);
-  }
-  onQuantityChange(item: { box: Box; quantity: number; total: number }) {
-    this.cartService.updateQuantity(item.box, Number(item.quantity));
   }
 
   onQuantityChangeWithClone(item: {
@@ -162,5 +174,40 @@ export class PanierComponent implements OnInit {
   }) {
     const clonedItem = { ...item, quantity: Number(item.quantity) };
     this.onQuantityChange(clonedItem);
+  }
+
+  onQuantityChange(item: { box: Box; quantity: number; total: number }) {
+    this.updateQuantity(item, Number(item.quantity));
+  }
+
+  modifier() {
+    // Débloque l'accès aux options de la box
+    console.log('Modification de la box');
+  }
+
+  private areBoxesEqual(box1: Box, box2: Box): boolean {
+    return (
+      box1.nom === box2.nom &&
+      box1.prix === box2.prix &&
+      this.areAlimentsEqual(box1.aliments, box2.aliments)
+    );
+  }
+
+  private areAlimentsEqual(
+    aliments1: Aliment[],
+    aliments2: Aliment[]
+  ): boolean {
+    if (aliments1.length !== aliments2.length) {
+      return false;
+    }
+    for (let i = 0; i < aliments1.length; i++) {
+      if (
+        aliments1[i].nom !== aliments2[i].nom ||
+        aliments1[i].quantite !== aliments2[i].quantite
+      ) {
+        return false;
+      }
+    }
+    return true;
   }
 }
